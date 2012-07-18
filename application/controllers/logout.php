@@ -2,7 +2,9 @@
 class Logout extends CI_Controller{
 	
 	function index(){
-		delete_cookie('cinefilos', 'localhost');
+		$coo = delete_cookie('cinefilos');
+
+		
 		$this->session->sess_destroy();
 		redirect('login');
 	}	

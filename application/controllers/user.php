@@ -24,6 +24,31 @@ class User extends CI_Controller {
 		$this->load->view('includes/template',$data);
 	}
 	
+	function search_friends(){
+		if($this->input->get('s')!=NULL){
+			$data['query'] = $this->input->get('s');
+			$this->session->set_userdata(array('last_query' => $data['query']));
+		}
+		else
+			$data['query'] = $this->session->userdata('last_query');
+
+		$data['title'] = 'Search friends';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'user/search_friends';
+		$this->load->view('includes/template',$data);
+	}
+	
+	function delete_friendship($id){
+		$this->User_model->delete_friendship($id);
+		$this->search_friends();
+	}
+	
+	function add_friendship($id){
+		$this->User_model->add_friendship($id);
+		$this->search_friends();
+	}
+	
 	function activation($error = ''){
 		if($error){$data['activation_error']=$error;}else{$data['activation_error']='';}
 		$data['title'] = 'Activation';
@@ -146,35 +171,7 @@ class User extends CI_Controller {
 		$sql = " DELETE FROM captcha WHERE captcha_time < ? ";
 		$binds = array($expiration);
 		$query = $this->db->query($sql, $binds);
-		/*
-		//checking input
-	    $sql = "SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?";
-	    $binds = array($_POST['captcha'], $this->input->ip_address(), $expiration);
-	    $query = $this->db->query($sql, $binds);
-	    $row = $query->row();
-		
-		if ( $row -> count > 0 )
-		    {
-		      $form_error = '';
-			  
-		    }else{
-		    	$this->form_validation->set_message('username_check','The text you enter did not match');
-		// $this->registration();
-		  }
-		//vemos si existen captchas
-		$sql = "SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? ";
-		//$binds = array('captcha', $this->input->ip_address(), $expiration);
-		$binds = array($_POST['captcha'], $this->input->ip_address(), $expiration);
-		//$binds = array($this->input->ip_address(), $expiration);
-		$query = $this->db->query($sql, $binds);
-		$row = $query->row();
-		if($row->count == 0){
-			//$this->form_validation->set_message('captcha_check','The text you enter did not match');
-			$this->registration();
-		}else{
-			$form_error = '';
-		}
-		*/
+
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
 		$this->form_validation->set_rules('email_address', 'Email Address', 'trim|required|valid_email|unique[user.email_address]');

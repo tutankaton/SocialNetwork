@@ -61,7 +61,8 @@ class User_model extends CI_Model{
 		$this->db->where('username', $_POST['username']);
 		$this->db->where('password', md5($_POST['password']));
 		
-		$check_box = $_POST['rember_me'];
+		if(isset( $_POST['rember_me']))
+			$check_box = $_POST['rember_me'];
 		
 		$query = $this->db->get('user');
 		if($query->num_rows == 1){
@@ -72,34 +73,37 @@ class User_model extends CI_Model{
 				$id = $row->id;	
 				$first_name = $row->user_level;	
 				$last_name = $row->last_name;	
-				$data = $arrayName = array(
-										'username' => $username,
-										'id' => $id,
-										'name' => $first_name.' '.$last_name,
-										'user_level' => $user_level,
-										'is_logged_in' => true											
-										);
+				$data = array(
+							'username' => $username,
+							'id' => $id,
+							'name' => $first_name.' '.$last_name,
+							'user_level' => $user_level,
+							'is_logged_in' => true											
+							);
 				$this->session->set_userdata($data);		
 			}
 			
 			if($check_box == "accept"){
+
 				$value = array (
 								'id' => $id,
 								'username' => $username
 								);
 				$value = serialize($value);
+
 				$cookie = array(
-								'name' => 'cinefilos',
-								'value' => $value,
-								'expire' => '2410000',
-								'domain' => 'localhost',
-								'path' => '/socialNetwork/',
-								'prefix' => '',
-								'secure' => FALSE
-								);
-				set_cookie($cookie);
+				    'name'   => 'cinefilos',
+				    'value'  => 'The Value',
+				    'expire' => '86500',
+				    'domain' => 'localhost',
+				    'path'   => '/',
+				    'prefix' => 'myprefix_',
+				    'secure' => TRUE
+				);
+				
+				setcookie('cinefilos', 'Value', time()+450000);
 			}
-			
+							
 			return true;
 		}else{
 			return false;
@@ -127,6 +131,24 @@ class User_model extends CI_Model{
 		}
 		return array ($id, $name, $username);
 	}
+	
+	function search_friends($query){
+		$this->db->like('username',$query);
+		$this->db->where('id !=',$this->session->userdata('id'));
+		$result = array();
+		$i = 0;
+		$query = $this->db->get('user');
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$username = $row->username;
+				$id = $row->id;
+				$photo = $row->photo;
+				$result[$i] = array ('id' => $id, 'username' => $username, 'photo' => $photo);
+				$i++;
+			}
+        }
+		return $result;		
+	}
 
 	function get_resend_email($id){
 		$query = $this->db->where('id', $id)->get('user');
@@ -135,6 +157,30 @@ class User_model extends CI_Model{
 			$to = $row->email_address;
 		}
 		return array ($activationkey, $to);
+	}
+	
+	function is_friend($id){
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$this->db->where('id_friend',$id);
+		$query = $this->db->get('friendship');
+		if($query->num_rows > 0){
+			return TRUE;
+	    }
+		return FALSE;		
+	}
+	
+	function delete_friendship($id){
+		$myid = $this->session->userdata('id');
+		$sql = " DELETE FROM friendship WHERE id_user = $myid AND id_friend = ?";
+		$binds = array($id);
+		$query = $this->db->query($sql, $binds);		
+	}
+	
+	function add_friendship($id){
+		$myid = $this->session->userdata('id');
+		$sql = "INSERT INTO friendship(id_user,id_friend,created_on)VALUES ($myid,?,CURDATE());";
+		$binds = array($id);
+		$query = $this->db->query($sql, $binds);		
 	}
 
 	function is_email_in_DB($email){

@@ -11,6 +11,10 @@
 	height:1px;
 }
 
+.cuadrada{
+	height:60px;
+}
+
 .inv{ display:none; }
 
 .alignleft{
@@ -265,6 +269,7 @@ h6{ font-size: 20px; }
 }
 
 #searchform #searchsubmit{
+	cursor:pointer;
 	position: absolute; 
 	top: 0px;
 	right: 0px;
@@ -280,7 +285,7 @@ h6{ font-size: 20px; }
 #nav{
 	display: block;
 	position: relative;
-	top: -8px;
+	top: -4px;
 	left: 30px;
 	height: 46px;
 	width: 906px;
@@ -1243,9 +1248,27 @@ h6{ font-size: 20px; }
 	background: url(../img/to-top.png) no-repeat;
 	cursor: pointer;
 }
+.add-friend{
+	border:none;
+	float:right;
+	width:32px;
+	height:32px;
+	padding-right:20px;
+	background: url(../img/mono-icons/userplus32.png) no-repeat;
+	cursor: pointer;
+}
+.del-friend{
+	border:none;
+	float:right;
+	width:32px;
+	height:32px;
+	padding-right:20px;
+	background: url(../img/mono-icons/userminus32.png) no-repeat;
+	cursor: pointer;
+}
 #botonLogin{
 	cursor: pointer;
-background: url(../img/to-top.png) no-repeat;
+	background: url(../img/to-top.png) no-repeat;
 	font-size:14px;
 	height: 22px;  
 
