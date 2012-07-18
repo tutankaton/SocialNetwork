@@ -778,14 +778,15 @@ h6{ font-size: 20px; }
 }
 
 .post .thumb-shadow{
-	background: url(../img/shadow-blog.png) no-repeat 0px 270px;
+
+	background: url(../img/shadow-blog2.png) no-repeat 0px 600px;
 }
 
 #posts .post .post-thumbnail{
 	position: relative;
 	overflow: hidden;
-	width: 596px;
-	height: 270px;
+	width: 400px;
+	height: 600px;
 	margin-bottom: 30px;
 	background: #f1f1f1;
 	border-radius: 10px;

@@ -203,7 +203,18 @@ class User_model extends CI_Model{
 			return TRUE;
 		}
 	}
-
+		
+	function get_photo(){
+		$id = $this->session->userdata('id');
+		$this->db->where('id',$id);
+		$query = $this->db->get('user');
+		if($query->num_rows == 1){
+			foreach($query->result() as $row){
+				return $row->photo;
+			}
+		}		
+	}
+		
 	function get_sess_from_cookie(){
 		$cookie = get_cookie('cinefilos');
 		$value = unserialize($cookie);
@@ -240,6 +251,13 @@ class User_model extends CI_Model{
 		$this->load->helper('date');
 		$data = array(
 					'last_active' => now()
+					);
+		$this->db->where('id', $id)->update('user', $data);
+	}
+	function update_photo($photo){
+		$id = $this->session->userdata('id');
+		$data = array(
+					'photo' => $photo
 					);
 		$this->db->where('id', $id)->update('user', $data);
 	}

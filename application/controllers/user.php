@@ -7,7 +7,7 @@ class User extends CI_Controller {
 		$this->load->library('session'); 
 		$this->load->model('User_model');
 		if(($this->User_model->is_logged_in() == TRUE) && ($this->User_model->check_user_level() == TRUE)){
-			redirect('home');	
+			
 		}
 		if(get_cookie('cinefilos')){
 			$this->User_model->get_sess_from_cookie();
@@ -30,6 +30,14 @@ class User extends CI_Controller {
 		$data['discription'] = '';
 		$data['keyword'] = '';
 		$data['main_content'] = 'user/activation';
+		$this->load->view('includes/template',$data);
+	}
+	
+	function account(){
+		$data['title'] = 'Account';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'user/account';
 		$this->load->view('includes/template',$data);
 	}
 	
@@ -99,6 +107,16 @@ class User extends CI_Controller {
 		$data['discription'] = '';
 		$data['keyword'] = '';
 		$data['main_content'] = 'user/signup_success';
+		$data['robot'] = 'NOINDEX, NOFOLLOW';
+		$this->load->view('includes/template', $data);
+	}
+	
+	function change_photo(){
+		$data['error'] = ' ';
+		$data['title'] = 'Chage profile image';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'upload_form';
 		$data['robot'] = 'NOINDEX, NOFOLLOW';
 		$this->load->view('includes/template', $data);
 	}

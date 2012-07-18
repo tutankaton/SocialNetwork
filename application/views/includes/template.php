@@ -120,6 +120,10 @@
 								$this->User_model->update_online_status();
 								echo 'Welcome <div style="color:green; display:inline; font-size:16px;">'.$this->session->userdata('username').'</div>, ';
 								echo anchor('logout', 'Logout', array('class' => 'loginoptions'));
+								if($this->User_model->get_photo()==NULL)
+									echo '<div style="padding-left:60%"><img width="60px" src="/socialNetwork/img/dummies/avatar.jpg"></img></div>';
+								else 
+									echo '<div style="padding-left:60%"><img width="60px" src="'.$this->User_model->get_photo().'"></img></div>';
 							}
 						}
 						  ?>
@@ -152,15 +156,28 @@
 						</ul>
 					</li>
 					<li><a href="http://luiszuno.com/blog/downloads/shinra-html-template">DOWNLOAD</a></li>
+					<?php 
+						$this->load->model('User_model');
+						if(get_cookie('cinefilos') && !$this->User_model->is_logged_in()){
+							$this->User_model->get_sess_from_cookie();
+						}
+						if($this->User_model->is_logged_in()){
+							if(!$this->User_model->check_user_level()){
+								redirect('verify');
+							}else{
+								echo '<li><a href="/socialNetwork/index.php/user/account">MY ACCOUNT</a></li>';
+								}
+						}
+						  ?>
 				</ul>
 				<!-- Navigation -->	
 				
 				
 				<!-- search -->
 				<div class="top-search">
-					<form  method="get" id="searchform" action="#">
+					<form  method="get" id="searchform" action="/socialNetwork/index.php/user/search_friends">
 						<div>
-							<input type="text" value="Search..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
+							<input type="text" value="Search friends..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
 							<input type="submit" id="searchsubmit" value=" " />
 						</div>
 					</form>

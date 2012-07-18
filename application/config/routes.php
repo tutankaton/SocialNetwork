@@ -46,6 +46,7 @@ $route['registration'] = 'user/registration';
 
 $route['home'] = 'user/site';
 $route['verify'] = 'user/message_low_level';
+
 $route['logout'] = 'logout';
 
 
