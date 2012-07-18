@@ -19,6 +19,27 @@ class Movie_model extends CI_Model{
 		}
 		return array ($title, $sinopsis, $year, $calification, $image, $thumbnail);
 	}
+	
+	function search_movies($query){
+		$this->db->like('title',$query);
+		$result = array();
+		$i = 0;
+		$query = $this->db->get('movie');
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$title = $row->title;
+				$id = $row->id;
+				$image = $row->image;
+				$thumbnail = $row->thumbnail;
+				$year = $row->year;
+				$calification = $row->calification;
+				$sinopsis = $row->sinopsis;
+				$result[$i] = array ('id' => $id, 'title' => $title, 'image' => $image, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification, 'sinopsis' => $sinopsis);
+				$i++;
+			}
+        }
+		return $result;		
+	}
 		
 }
 ?>

@@ -173,17 +173,38 @@
 				<!-- Navigation -->	
 				
 				
-				<!-- search -->
+				<!-- search movies-->
 				<div class="top-search">
-					<form  method="get" id="searchform" action="/socialNetwork/index.php/user/search_friends">
+					<form  method="get" id="searchform" action="/socialNetwork/index.php/movie/search_movies">
 						<div>
-							<input type="text" value="Search friends..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
+							<input type="text" value="Search movies..." name="s" id="s" onfocus="defaultInputm(this)" onblur="clearInputm(this)" />
 							<input type="submit" id="searchsubmit" value=" " />
 						</div>
 					</form>
 				</div>
-				<!-- ENDS search -->
-				
+				<!-- ENDS search movies-->
+				<!-- search friends-->
+				<?php 
+					$this->load->model('User_model');
+					if(get_cookie('cinefilos') && !$this->User_model->is_logged_in()){
+						$this->User_model->get_sess_from_cookie();
+					}
+					if($this->User_model->is_logged_in()){
+						if(!$this->User_model->check_user_level()){
+							redirect('verify');
+						}else{
+							echo '<div class="search-friends">
+									<form  method="get" id="searchformfriends" action="/socialNetwork/index.php/user/search_friends">
+										<div>
+											<input type="text" value="Search friends..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
+											<input type="submit" id="searchsubmit" value=" " />
+										</div>
+									</form>
+								</div>';
+							}
+					}
+				?>
+				<!-- ENDS search friends-->
 				<!-- headline 
 				<div id="headline">
 					Shinra is a free template with more than 5 page layouts, jQuery functionality and its fully documented. <a href="http://luiszuno.com/blog/downloads/shinra-html-template">Download it now</a>

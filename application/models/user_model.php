@@ -101,7 +101,7 @@ class User_model extends CI_Model{
 				    'secure' => TRUE
 				);
 				
-				setcookie('cinefilos', 'Value', time()+450000);
+				//setcookie('cinefilos', 'Value', time()+450000);
 			}
 							
 			return true;

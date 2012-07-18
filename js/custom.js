@@ -313,5 +313,15 @@ function clearInput(target){
 	if((target).value == ''){(target).value='Search friends...'}
 }
 
+// search clearance	
+function defaultInputm(target){
+	if((target).value == 'Search movies...'){(target).value=''}
+}
+
+function clearInputm(target){
+	if((target).value == ''){(target).value='Search movies...'}
+}
+
+
 
 

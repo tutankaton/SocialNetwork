@@ -14,7 +14,9 @@
 .cuadrada{
 	height:60px;
 }
-
+.redtangular{
+	height:120px;
+}
 .inv{ display:none; }
 
 .alignleft{
@@ -254,7 +256,26 @@ h6{ font-size: 20px; }
 	left: 30px;
 }
 
+.search-friends{
+	position: absolute;
+	top:178px;
+	right: 48px;
+}
+
 #searchform #s{
+	color: #49494b;
+	font-size: 12px;
+	width: 160px;
+	height: 21px;
+	margin: 0px 0px 5px 0px;
+	padding: 2px 35px 2px 8px;
+	border: 0;
+	background: #f0efeb;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#searchformfriends #s{
 	color: #49494b;
 	font-size: 12px;
 	width: 160px;
@@ -277,6 +298,17 @@ h6{ font-size: 20px; }
 	height: 25px;
 	border: 0px;
 	background: url(../img/search-submit.png) no-repeat  transparent -3px 2px;
+}
+
+#searchformfriends #searchsubmit{
+	cursor:pointer;
+	position: absolute; 
+	top: 0px;
+	right: 0px;
+	width: 25px;
+	height: 25px;
+	border: 0px;
+	background: url(../img/mono-icons/usersplus32t.png) no-repeat transparent -1px -1px;
 }
 
 /* NAVIGATION --------------------------------------------------------*/
