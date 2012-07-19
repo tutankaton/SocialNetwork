@@ -41,6 +41,20 @@ class User_model extends CI_Model{
 		$insert = $this->db->insert('user', $new_member_insert_data);
 		return $insert;
 	}
+	
+	function edit_profile(){
+		$new_data = array (
+			'username' => $this->input->post('username'),
+			'from' => $this->input->post('from'),
+			'ocupation' => $this->input->post('ocupation'),
+			'language' => $this->input->post('language'),
+			'relationship_status' => $this->input->post('relationship_status'),
+			'about' => $this->input->post('about')
+		);
+		$this->db->where('id', $this->session->userdata('id'));
+		$insert = $this->db->update('user', $new_data);		
+		return $insert;
+	}
 
 	function get_member_activationkey($activationkey){
 		$query = $this->db->where('activationkey',$activationkey)->get('user');
@@ -116,6 +130,81 @@ class User_model extends CI_Model{
 		}else{
 			return false;
 		}
+	}
+	
+	function info_profile($id_profile){
+		$this->db->where('id',$id_profile);
+		$query = $this->db->get('user');
+		if($query->num_rows == 1){
+			foreach($query->result() as $row){
+				$username = $row->username;
+				$id = $row->id;
+				$sex = $row->sex;
+				$month = $row->month;
+				$day = $row->day;
+				$year = $row->year;
+				$created_on = $row->created_on;
+				$last_active = $row->last_active;
+				$photo = $row->photo;
+				$ocupation = $row->ocupation;
+				$about = $row->about;
+				$from = $row->from;
+				$language = $row->language;
+				$relationship_status = $row->relationship_status;
+			}
+		}else{
+			redirect('user');
+		}
+		return array ('id' => $id, 'username' => $username,'sex' => $sex,'month' => $month,'day' =>  $day,'year' =>  $year,'created_on' =>  $created_on,'last_active' =>  $last_active,	'photo' => $photo,'ocupation' => $ocupation,
+					'about' => $about,'from' => $from,'language' => $language,'relationship_status' => $relationship_status);
+	}
+	
+	function movies_to_view($id_profile){
+		$list[0] = "";$list[1] = "";$list[2] = "";$list[3] = "";$list[4] = "";
+		$this->db->where('id_user',$id_profile);
+		$query = $this->db->get('to_view');
+		$i = 0;
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$list[$i] = $row->id_movie;
+				$i++;
+				if($i>4)
+					return $list;
+			}
+		}
+		return $list;
+	}
+	
+	function change_order($id1, $id2){
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$this->db->where('id_movie',$id1);
+		$query = $this->db->get('to_view');
+		foreach($query->result() as $row){
+			$id_aux = $row->id;
+			$id_movie_aux = $row->id_movie;
+			$id_user_aux = $row->id_user;
+		}
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$this->db->where('id_movie',$id2);
+		$query = $this->db->get('to_view');
+		foreach($query->result() as $row){
+			$id_aux2 = $row->id;
+			$id_movie_aux2 = $row->id_movie;
+			$id_user_aux2 = $row->id_user;
+		}
+		$new_data1 = array (
+			'id_movie' => $id_movie_aux2,
+			'id_user' => $id_user_aux2
+		);
+		$new_data2 = array (
+			'id_movie' => $id_movie_aux,
+			'id_user' => $id_user_aux
+		);
+		$this->db->where('id', $id_aux);
+		$this->db->update('to_view', $new_data1);	
+		$this->db->where('id', $id_aux2);
+		$this->db->update('to_view', $new_data2);	
+		return true;
 	}
 	
 	function get_user_info($username){

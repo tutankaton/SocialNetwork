@@ -38,10 +38,32 @@ class User extends CI_Controller {
 		$data['main_content'] = 'user/search_friends';
 		$this->load->view('includes/template',$data);
 	}
+
+	function profile($id){
+		$data['id_profile'] = $id;
+		$data['title'] = 'View Profile';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'user/profile';
+		$this->load->view('includes/template',$data);
+	}
+	
+	function edit_profile(){
+		$data['title'] = 'Edit Profile';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'user/edit_profile';
+		$this->load->view('includes/template',$data);
+	}
 	
 	function delete_friendship($id){
 		$this->User_model->delete_friendship($id);
 		$this->search_friends();
+	}
+	
+	function edit_account(){
+		$this->User_model->edit_profile();
+		$this->account();
 	}
 	
 	function add_friendship($id){
@@ -144,6 +166,11 @@ class User extends CI_Controller {
 		$data['main_content'] = 'upload_form';
 		$data['robot'] = 'NOINDEX, NOFOLLOW';
 		$this->load->view('includes/template', $data);
+	}
+	
+	function change_order($id1, $id2){
+		$this->load->model('User_model');
+		$this->User_model->change_order($id1, $id2);
 	}
 	
 	function account_activation(){
