@@ -531,57 +531,71 @@ h6{ font-size: 20px; }
 /* PORTFOLIO --------------------------------------------------------*/
 
 #projects-list{
-	overflow: hidden;
+	
 }
 
 #projects-list .project{
-	position: relative;
-	float: left;
 	overflow: hidden;
-	width: 438px;
-	height: 495px;
-	margin-left: 30px;
-	margin-bottom: 30px;
+	width: 180px;
+	height: 266px;
+	  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 #projects-list .project h1 a{
-	display: block;
-	text-decoration: none;
-	margin-bottom: 30px;
-	color: #696969;
+
 }
 
 .project-shadow{
-	background: url(../img/shadow-project.png) no-repeat 0px 267px;
+		overflow: hidden;
+	width: 180px;
+	height: 266px;
+	  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 #projects-list .project .project-thumbnail{
 	position: relative;
 	overflow: hidden;
-	width: 438px;
-	height: 267px;
+	width: 180px;
+	height: 266px;
 	margin-bottom: 30px;
 	background: #f1f1f1;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 
 #projects-list .project .project-thumbnail .cover{
 	position: absolute;
 	top:0px;
 	left: 0px;
+		border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	
+}
+#projects-list .project .project-thumbnail .cover img{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 #projects-list .project .project-thumbnail .meta{
 	display: block;
-	width: 252px;
-	height: 207px;
+	width: 170px;
+	height: 130px;
 	font-size: 12px;
 	line-height: 2em;
 	position: absolute;
-	top:30px;
-	left: 30px;
+	top:5px;
+	left: 5px;
+	
 }
 
 #projects-list .project .read-more{
@@ -1376,8 +1390,8 @@ overflow: auto;
   user-select: none;
 }
 .column {
-  height: 254px;
-  width: 150px;
+  height: 266px;
+  width: 180px;
   float: left;
   border: 2px solid #666666;
   background-color: #ccc;
@@ -1392,6 +1406,11 @@ overflow: auto;
   text-align: center;
   cursor: move;
 }
+.first {
+  height: 366px!important;
+  width: 280px!important;
+}
+
 .column header {
   color: #fff;
   text-shadow: #000 0 1px;
@@ -1444,3 +1463,207 @@ overflow: auto;
   border-bottom-right-radius: 10px;
   
 }
+
+
+
+
+
+
+
+.photo {
+	top: -24px;
+	margin: 30px;
+	position: relative;
+	width: 180px;
+	height: 130px;
+	float: left;
+}
+.photo img {
+	background: #fff;
+	border: solid 1px #ccc;
+	padding: 4px;
+}
+.photo span {
+	width: 20px;
+	height: 18px;
+	display: block;
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	background: url(images/digg-style.gif) no-repeat;
+}
+.photo a {
+	text-decoration: none;
+}
+
+.sample1 span {
+	width: 28px;
+	height: 21px;
+	display: block;
+	position: absolute;
+	top: -12px;
+	left: 90px;
+	background: url(images/pin.png) no-repeat;
+}
+
+.sample2 span {
+	width: 77px;
+	height: 27px;
+	display: block;
+	position: absolute;
+	top: -12px;
+	left: 50px;
+	background: url(images/tape.png) no-repeat;
+}
+
+.sample3 span {
+	width: 30px;
+	height: 60px;
+	display: block;
+	position: absolute;
+	top: -5px;
+	left: -2px;
+	background: url(images/paper-clip.png) no-repeat;
+}
+
+.sample4 span {
+	width: 115px;
+	height: 32px;
+	display: block;
+	position: absolute;
+	top: -13px;
+	left: 30px;
+	background: url(images/tape2.png) no-repeat;
+}
+
+.sample5 span {
+	width: 216px;
+	height: 166px;
+	display: block;
+	position: absolute;
+	top: -17px;
+	left: -18px;
+	background: url(images/gold-frame.png) no-repeat;
+}
+
+.sample6 span {
+	width: 189px;
+	height: 137px;
+	display: block;
+	position: absolute;
+	top: -5px;
+	left: -5px;
+	background: url(images/cut-corner.png) no-repeat;
+}
+
+.sample7 span {
+	width: 170px;
+	height: 120px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(images/round-corner.png) no-repeat;
+}
+.sample7 img {
+	border: none;
+	padding: 0;
+}
+
+.sample8 span {
+	width: 170px;
+	height: 120px;
+	display: block;
+	position: absolute;
+	top: 5px;
+	left: 6px;
+	background: url(images/round-corner.png) no-repeat;
+}
+.sample8 img {
+	border: none;
+	padding: 5px 6px 6px;
+	background: url(images/round-bg.gif) no-repeat;
+}
+
+.sample9 span {
+	width: 170px;
+	height: 120px;
+	display: block;
+	position: absolute;
+	top: 6px;
+	left: 7px;
+	background: url(images/stamp-pattern.png) no-repeat;
+}
+.sample9 img {
+	border: none;
+	padding: 6px 7px 7px;
+	background: url(images/stamp-bg.gif) no-repeat;
+}
+
+.sample10 span {
+	width: 181px;
+	height: 134px;
+	display: block;
+	position: absolute;
+	top: -6px;
+	left: -6px;
+	background: url(images/brush-border.png) no-repeat;
+}
+.sample10 img {
+	border: none;
+	padding: 0;
+}
+
+.sample11 span {
+	width: 122px;
+	height: 72px;
+	display: block;
+	position: absolute;
+	top: -22px;
+	left: -15px;
+	background: url(images/floral-corner.png) no-repeat;
+}
+
+.sample12 span {
+	width: 186px;
+	height: 137px;
+	display: block;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	background: url(images/watercolor-top.png) no-repeat;
+}
+.sample12 img {
+	border: none;
+	padding: 9px 12px 12px 11px;
+	background: url(images/watercolor-bg.png) no-repeat;
+}
+
+.sample13 span {
+	width: 170px;
+	height: 120px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(images/mask.png) no-repeat;
+}
+.sample13 img {
+	border: none;
+	padding: 0;
+}
+
+.sample14 span {
+	width: 170px;
+	height: 84px;
+	display: block;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	background: url(images/glossy-gradient.png);
+}
+
+#columns-full .column header {
+	display:none;
+}
+
