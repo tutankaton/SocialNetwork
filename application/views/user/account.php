@@ -35,30 +35,13 @@ if($this->User_model->is_logged_in()){
 		</div>
 <?php	}
 }
-?>
-	
-<!-- sidebar 
-<ul id="sidebar">
-	<!-- init sidebar 
-	<li>
-		<h6>Categories</h6>		
-		<ul>
-			<li class="cat-item"><a href="#" title="View all posts">Pellentesque habitant morbi</a></li>
-			<li class="cat-item"><a href="#" title="View all posts">Pellentesque habitant morbi</a></li>
-			<li class="cat-item"><a href="#" title="View all posts">Pellentesque habitant morbi</a></li>
-			<li class="cat-item"><a href="#" title="View all posts">Pellentesque habitant morbi</a></li>
-		</ul>
-	</li>	
-	
-	<li>
-		<h6>Archives</h6>		
-		<ul>
-			<li class="cat-item"><a href="#" title="View all posts">Pellentesque habitant morbi</a></li>
-			<li class="cat-item"><a href="#" title="View all posts">Pellentesque habitant morbi</a></li>
-			<li class="cat-item"><a href="#" title="View all posts">Pellentesque habitant morbi</a></li>
-			<li class="cat-item"><a href="#" title="View all posts">Pellentesque habitant morbi</a></li>
-		</ul>
-	</li>
-	<!-- ENDS init sidebar 
-</ul>
-<!-- ENDS sidebar -->
+$list_to_view = $this->User_model->movies_to_view($this->session->userdata('id'));	?>
+
+  <div id="columns-full">
+    <div class="column"><header><?php echo $list_to_view[0]['id'];?></header><img class="listado" width="150px" height="222px" src="<?php echo $list_to_view[0]['thumbnail']?>"></img></div>
+    <div class="column"><header><?php echo $list_to_view[1]['id'];?></header><img  class="listado" width="150px" height="222px" src="<?php echo $list_to_view[1]['thumbnail']?>"></img></div>
+    <div class="column"><header><?php echo $list_to_view[2]['id'];?></header><img  class="listado" width="150px" height="222px" src="<?php echo $list_to_view[2]['thumbnail']?>"></img></div>
+    <div class="column"><header><?php echo $list_to_view[3]['id'];?></header><img  class="listado" width="150px" height="222px" src="<?php echo $list_to_view[3]['thumbnail']?>"></img></div>
+    <div class="column"><header><?php echo $list_to_view[4]['id'];?></header><img  class="listado" width="150px" height="222px" src="<?php echo $list_to_view[4]['thumbnail']?>"></img></div>
+  </div>
+<script type="text/javascript" src="/socialNetwork/js/DnD.js"></script>

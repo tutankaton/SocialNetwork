@@ -1368,8 +1368,6 @@ line-height: 1.5em;
 overflow: auto;
 }
 
-
-<style>
 /* Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
   -moz-user-select: none;
@@ -1378,7 +1376,7 @@ overflow: auto;
   user-select: none;
 }
 .column {
-  height: 150px;
+  height: 254px;
   width: 150px;
   float: left;
   border: 2px solid #666666;
@@ -1425,22 +1423,24 @@ overflow: auto;
   -o-transition: -o-transform 0.2s ease-out;
   -ms-transition: -ms-transform 0.2s ease-out;
 }
-#columns-full .column.over,
-#columns-dragOver .column.over,
-#columns-dragEnd .column.over,
-#columns-almostFinal .column.over {
+#columns-full .column.over{
   border: 2px dashed #000;
 }
-#columns-full .column.moving {
+#columns-full .moving {
   opacity: 0.25;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
   -o-transform: scale(0.8);
 }
-#columns-full .column .count {
-  padding-top: 15px;
-  font-weight: bold;
-  text-shadow: #fff 0 1px;
+.listado{
+	-webkit-border-bottom-left-radius: 10px;
+  -ms-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-left-radius: 10px;
+  	-webkit-border-bottom-right-radius: 10px;
+  -ms-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-bottom-right-radius: 10px;
+  
 }
-</style>

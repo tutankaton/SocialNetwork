@@ -166,7 +166,11 @@ class User_model extends CI_Model{
 		$i = 0;
 		if($query->num_rows > 0){
 			foreach($query->result() as $row){
-				$list[$i] = $row->id_movie;
+				$this->db->where('id',$row->id_movie);
+				$q = $this->db->get('movie');
+				foreach($q->result() as $row){
+					$list[$i] = array('id' => $row->id, 'title' => $row->title, 'year' => $row->year, 'thumbnail' => $row->thumbnail, 'calification' => $row->calification);
+				}
 				$i++;
 				if($i>4)
 					return $list;

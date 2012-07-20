@@ -39,4 +39,4 @@
     <div class="column"><header><?php echo $list_to_view[3]?></header></div>
     <div class="column"><header><?php echo $list_to_view[4]?></header></div>
   </div>
-<script type="text/javascript" src="/socialNetwork/js/DnD.js"></script>
+<!--<script type="text/javascript" src="/socialNetwork/js/DnD.js"></script>-->

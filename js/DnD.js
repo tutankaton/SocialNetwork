@@ -16,7 +16,9 @@ function handleDragOver(e) {
   if (e.preventDefault) {
     e.preventDefault(); // Necessary. Allows us to drop.
   }
-
+  if (e.stopPropagation) {
+    e.stopPropagation(); // Stops some browsers from redirecting.
+  }
   e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
 
   return false;
@@ -37,13 +39,15 @@ function handleDrop(e) {
   if (e.stopPropagation) {
     e.stopPropagation(); // Stops some browsers from redirecting.
   }
-var str = this.innerHTML;
-var id1 = str.substring(str.indexOf(">")+1, str.lastIndexOf("<"));
-var str = dragSrcEl.innerHTML;
-var id2 = str.substring(str.indexOf(">")+1, str.lastIndexOf("<"));
-
+  if (e.preventDefault) {
+    e.preventDefault(); // Necessary. Allows us to drop.
+  }
   // Don't do anything if dropping the same column we're dragging.
   if (dragSrcEl != this) {
+  	var str = this.innerHTML;
+var id1 = str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"));
+var str = dragSrcEl.innerHTML;
+var id2 = str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"));
   	$.ajax({
 	  type: "POST",
 	  url: "/socialNetwork/index.php/user/change_order/"+id1+"/"+id2,
@@ -54,7 +58,12 @@ var id2 = str.substring(str.indexOf(">")+1, str.lastIndexOf("<"));
     dragSrcEl.innerHTML = this.innerHTML;
     this.innerHTML = e.dataTransfer.getData('text/html');
   }
-
+  dragSrcEl.style.opacity = '1';
+  this.style.opacity = '1';
+  [].forEach.call(cols, function (col) {
+    col.classList.remove('over');
+    col.classList.remove('moving');
+  });
   return false;
 }
 
