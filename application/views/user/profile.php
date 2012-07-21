@@ -3,9 +3,9 @@
 	
 	$info = $this->User_model->info_profile($id_profile);
 	if($info['photo']==NULL)
-		echo '<div style="float:left; height:300px;"><img max-width="120px" max-height="120px" style="padding-left:20px;" src="/socialNetwork/img/dummies/avatar.jpg"></img></div>';
+		echo '<div  class="photo sample3" style="float:left; height:300px;"><span></span><img max-width="120px" max-height="120px" src="/socialNetwork/img/dummies/avatar.jpg"></img></div>';
 	else 
-		echo '<div style="float:left; height:300px;"><img max-width="120px"  max-height="120px" style="padding-left:20px;" src="'.$info['photo'].'"></img></div>';
+		echo '<div  class="photo sample3" style="float:left; height:300px;"><span></span><img max-width="120px"  max-height="120px"  src="'.$info['photo'].'"></img></div>';
 	
 	?>
 	<div style="float:left;padding-left:20px; display:inline; max-width: 375px; "><h1 style="color:#333333;"><?php echo $info['username']; ?>

@@ -536,8 +536,8 @@ h6{ font-size: 20px; }
 
 #projects-list .project{
 	overflow: hidden;
-	width: 180px;
-	height: 266px;
+	width: 120px;
+	height: 178px;
 	  -webkit-border-radius: 10px;
   -ms-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -550,8 +550,8 @@ h6{ font-size: 20px; }
 
 .project-shadow{
 		overflow: hidden;
-	width: 180px;
-	height: 266px;
+	width: 120px;
+	height: 178px;
 	  -webkit-border-radius: 10px;
   -ms-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -561,8 +561,8 @@ h6{ font-size: 20px; }
 #projects-list .project .project-thumbnail{
 	position: relative;
 	overflow: hidden;
-	width: 180px;
-	height: 266px;
+	width: 120px;
+	height: 178px;
 	margin-bottom: 30px;
 	background: #f1f1f1;
   -webkit-border-radius: 10px;
@@ -588,9 +588,9 @@ h6{ font-size: 20px; }
 
 #projects-list .project .project-thumbnail .meta{
 	display: block;
-	width: 170px;
-	height: 130px;
-	font-size: 12px;
+	width: 110px;
+	height: 90px;
+	font-size: 8px;
 	line-height: 2em;
 	position: absolute;
 	top:5px;
@@ -1390,11 +1390,9 @@ overflow: auto;
   user-select: none;
 }
 .column {
-  height: 266px;
-  width: 180px;
-  float: left;
+  height: 178px;
+  width: 120px;
   border: 2px solid #666666;
-  background-color: #ccc;
   margin-right: 5px;
   -webkit-border-radius: 10px;
   -ms-border-radius: 10px;
@@ -1666,4 +1664,88 @@ overflow: auto;
 #columns-full .column header {
 	display:none;
 }
-
+.queue_movies{
+	float:left;
+	background: #f1f1f1 url(../img/bg/patterns/sqr-2x2.png);
+	width: 100%;
+	height: 500px;
+}
+.top{
+	position:absolute;
+	top:580px;
+	left:140px;
+}
+.gold{
+	position:absolute;
+	top:700px;
+	left:70px;
+}
+.one{
+	position:absolute;
+	top:490px;
+}
+.text-first{
+	width: 130px;
+	position:absolute;
+	top:500px;
+	left:180px;
+	font-family: 'Luckiest Guy', arial, serif;
+	font-size: 16px;
+	color:black;
+}
+.text-second{
+	width: 130px;
+	position:absolute;
+	top:510px;
+	left:380px;
+	font-family: 'Luckiest Guy', arial, serif;
+	font-size: 16px;
+	color:black;
+}
+.two{
+	position:absolute;
+	top:490px;
+	left:500px;
+}
+.three{
+	position:absolute;
+	top:720px;
+	left:230px;
+}
+.four{
+	position:absolute;
+	top:730px;
+	left:430px;
+}
+.five{
+	position:absolute;
+	top:730px;
+	left:630px;
+}
+.text-others{
+	width: 130px;
+	position:absolute;
+	top:750px;
+	left:10px;
+	font-family: 'Luckiest Guy', arial, serif;
+	font-size: 16px;
+	color:black;
+}
+.text-trash{
+	width: 120px;
+	position:absolute;
+	top:750px;
+	left:700px;
+	font-family: 'Luckiest Guy', arial, serif;
+	font-size: 16px;
+	color:black;
+}
+.text-file{
+	width: 120px;
+	position:absolute;
+	top:560px;
+	left:640px;
+	font-family: 'Luckiest Guy', arial, serif;
+	font-size: 16px;
+	color:black;
+}

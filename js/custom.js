@@ -163,7 +163,7 @@ jQuery(document).ready(function($) {
 	$('#projects-list .project').hover(function(){
 		// on rollover
 		$(this).children('.project-shadow').children('.project-thumbnail').children(".cover").stop().animate({ 
-			top: "133"
+			top: "90"
 		}, "fast");
 	} , function() { 
 		// on out
