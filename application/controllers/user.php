@@ -366,6 +366,14 @@ class User extends CI_Controller {
             return FALSE;
 		  }
     }
+	
+	function rating()
+    {
+        $rating_value = $this->input->post("rate_val", true);
+        $id_movie_rating = $this->input->post("id", true);
+        $this->User_model->set_rating($id_movie_rating, $rating_value);
+
+    }
 
 }
 

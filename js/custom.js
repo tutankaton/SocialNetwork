@@ -1,7 +1,27 @@
 // Jquery with no conflict
 jQuery(document).ready(function($) {
 	
-	
+	$('.auto-submit-star').rating({
+               required: true,
+               callback: function(value, link) {
+
+                $.ajax({
+                         type: "post",
+                         url: "/socialNetwork/index.php/user/rating",
+                         dataType: "json",
+                         data: { id: $("#hidden_design_id").val(), rate_val: value } ,
+
+                  success: function(e) {
+                       //$.jGrowl(e.code + "" + e.msg);
+                        	 //alert(e.code + "" + e.msg);
+                        	 $('#msg_rate').html(e.msg);
+                        	 $('#msg_rate').fadeIn();
+                        	 $('#msg_rate').fadeOut(5000);
+                        	 window.location.reload();
+                   }
+             });
+         }
+    });
 	// nivo slider ------------------------------------------------------ //
 	
 	$('#slider').nivoSlider({

@@ -30,6 +30,7 @@
 		<script type="text/javascript" src="/socialNetwork/js/jquery.cycle.all.js"></script>
 		<script type="text/javascript" src="/socialNetwork/js/custom.js"></script>
 		<script type="text/javascript" src="/socialNetwork/js/jquery.confirm/jquery.confirm.js"></script>
+		<script type="text/javascript" src="/socialNetwork/js/jquery.rating.js"></script>
 		<!--[if IE]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -43,6 +44,7 @@
 		<![endif]-->
 		<!-- ENDS JS -->
 		
+		<link rel="stylesheet" href="/socialNetwork/css/jquery.rating.css" type="text/css" media="screen" />
 		
 		<!-- Nivo slider -->
 		<link rel="stylesheet" href="/socialNetwork/css/nivo-slider.css" type="text/css" media="screen" />

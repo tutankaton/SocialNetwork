@@ -93,6 +93,42 @@ class User_model extends CI_Model{
 		}
 		return $critica;
 	}
+	
+	function get_rating($id_movie){
+		$rating = "0";
+		$this->db->where('id_movie',$id_movie);
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$query = $this->db->get('calification_movie');
+		if($query->num_rows == 1){
+			foreach($query->result() as $row){
+				$rating = $row->calification;
+			}
+		}
+		return $rating;
+	}
+	
+	function set_rating($id_movie_rating, $rating_value){		
+		$new_data = array (
+			'id_user' => $this->session->userdata('id'),
+			'id_movie' => $id_movie_rating,
+			'calification' => $rating_value,
+			'created_on' => date('y-m-d')
+		);
+		$this->db->where('id_user', $this->session->userdata('id'));
+		$this->db->where('id_movie', $id_movie_rating);
+		$query = $this->db->get('calification_movie');
+		if($query->num_rows == 0){
+			$this->db->where('id_user', $this->session->userdata('id'));
+			$this->db->where('id_movie', $id_movie_rating);
+			$insert = $this->db->insert('calification_movie', $new_data);		
+			return $insert;
+		}else{
+			$this->db->where('id_user', $this->session->userdata('id'));
+			$this->db->where('id_movie', $id_movie_rating);
+			$insert = $this->db->update('calification_movie', $new_data);		
+			return $insert;
+		}
+	}
 
 	function get_member_activationkey($activationkey){
 		$query = $this->db->where('activationkey',$activationkey)->get('user');

@@ -1549,16 +1549,16 @@ overflow: auto;
 
 	width: 234px;
 	height: 337px;
-	display: block;
 	position: absolute;
 	top: -5px;
 	left: -5px;
 	background: url(images/cut-corner.png) no-repeat;
 }
 .sample6{
-	right:50px!important;
+	right:-150px!important;
 	top:-80px!important;
-	float:right!important;
+	margin-left:80px;
+	width:40%;
 }
 
 	
@@ -1760,4 +1760,10 @@ overflow: auto;
 .titulo{
 	color: #555555;
 	padding-left: 20px;
+}
+.calificacion{
+	height: 40px!important;
+	float:right;
+	margin-right:120px!important;
+	margin-top:-90px!important;
 }
