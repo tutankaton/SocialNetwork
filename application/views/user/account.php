@@ -112,18 +112,13 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 		I have also enqueue:
 	</div>
 	<div class="text-trash">
-		drop here if you no longer interested in a movie ->
+		drop here if you are no longer interested in a movie ->
 	</div>
 	<div class="text-file">
-		Drop here if you already saw it ->
+		Drop here if you have already seen it ->
 	</div>
 </div>
    
-   
-
-
-
-
 
 
 

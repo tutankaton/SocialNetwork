@@ -40,6 +40,26 @@ class Movie_model extends CI_Model{
         }
 		return $result;		
 	}
+	
+	function delete_toview($id_movie){
+		$this->db->where('id_movie',$id_movie);
+		$this->db->where('id_user', $this->session->userdata('id'));
+		$this->db->delete('to_view'); 
+	}
+	
+	function already_saw($id_movie){
+		$this->db->where('id_movie',$id_movie);
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$query = $this->db->get('already_view');
+		if($query->num_rows == 0){
+			$new_already_saw = array (
+				'id_user' => $this->session->userdata('id'),
+				'id_movie' => $id_movie
+			);		
+			$this->db->insert('already_view', $new_already_saw);
+		}
+		
+	}
 		
 }
 ?>

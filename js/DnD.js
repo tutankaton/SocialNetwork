@@ -68,10 +68,28 @@ function handleDrop(e) {
     this.innerHTML = e.dataTransfer.getData('text/html');
   }else if ((dragSrcEl != this)&&(str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"))=="trash")) {
   	var str = dragSrcEl.innerHTML;
-  	alert("eliminar "+str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>")));
+			var elem = $(this).closest('.item');
+
+		$.confirm({
+			'title'		: 'Delete Confirmation',
+			'message'	: 'Are you sure to delete this movie from the list? <br />Either way, you can always add it back! Continue?',
+			'buttons'	: {
+				'Yes'	: {
+					'class'	: 'blue',
+					'action': function(){
+						top.location.href = '/socialNetwork/index.php/movie/delete_toview/'+indice2;
+					}
+				},
+				'No'	: {
+					'class'	: 'gray',
+					'action': function(){}
+				}
+			}
+		});
+
+  	//alert("eliminar "+str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>")));
   }else if ((dragSrcEl != this)&&(str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"))=="file")) {
-  	var str = dragSrcEl.innerHTML;
-  	alert("archivar "+str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>")));
+  	top.location.href = '/socialNetwork/index.php/user/already_saw/'+indice2;
   }
   
   dragSrcEl.style.opacity = '1';

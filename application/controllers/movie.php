@@ -39,6 +39,18 @@ class Movie extends CI_Controller {
 		$data['main_content'] = 'movie/search_movies';
 		$this->load->view('includes/template',$data);
 	}	
+	
+	function delete_toview($id_movie){
+		$this->load->model('User_model');
+		$this->load->model('Movie_model');
+		$this->Movie_model->delete_toview($id_movie);
+
+		$data['title'] = 'Account';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'user/account';
+		$this->load->view('includes/template',$data);
+	}
 
 }
 

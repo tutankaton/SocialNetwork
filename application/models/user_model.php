@@ -56,6 +56,44 @@ class User_model extends CI_Model{
 		return $insert;
 	}
 
+	function review($id_movie){
+		if($this->input->post('review')!=""){
+				$new_data = array (
+					'id_user' => $this->session->userdata('id'),
+					'id_movie' => $id_movie,
+					'critica' => $this->input->post('review')
+				);
+				$this->db->where('id_user', $this->session->userdata('id'));
+				$this->db->where('id_movie', $id_movie);
+				$query = $this->db->get('critica_movie');
+				if($query->num_rows == 0){
+					$this->db->where('id_user', $this->session->userdata('id'));
+					$this->db->where('id_movie', $id_movie);
+					$insert = $this->db->insert('critica_movie', $new_data);		
+					return $insert;
+				}else{
+					$this->db->where('id_user', $this->session->userdata('id'));
+					$this->db->where('id_movie', $id_movie);
+					$insert = $this->db->update('critica_movie', $new_data);		
+					return $insert;
+				}
+			}
+		}
+
+
+	function get_review($id_movie){
+		$critica = "";
+		$this->db->where('id_movie',$id_movie);
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$query = $this->db->get('critica_movie');
+		if($query->num_rows == 1){
+			foreach($query->result() as $row){
+				$critica = $row->critica;
+			}
+		}
+		return $critica;
+	}
+
 	function get_member_activationkey($activationkey){
 		$query = $this->db->where('activationkey',$activationkey)->get('user');
 		return $query;

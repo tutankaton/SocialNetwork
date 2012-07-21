@@ -1535,6 +1535,7 @@ overflow: auto;
 }
 
 .sample5 span {
+	
 	width: 216px;
 	height: 166px;
 	display: block;
@@ -1545,15 +1546,22 @@ overflow: auto;
 }
 
 .sample6 span {
-	width: 189px;
-	height: 137px;
+
+	width: 234px;
+	height: 337px;
 	display: block;
 	position: absolute;
 	top: -5px;
 	left: -5px;
 	background: url(images/cut-corner.png) no-repeat;
 }
+.sample6{
+	right:50px!important;
+	top:-80px!important;
+	float:right!important;
+}
 
+	
 .sample7 span {
 	width: 170px;
 	height: 120px;
@@ -1599,8 +1607,8 @@ overflow: auto;
 }
 
 .sample10 span {
-	width: 181px;
-	height: 134px;
+	width: 214px;
+	height: 317px;
 	display: block;
 	position: absolute;
 	top: -6px;
@@ -1652,8 +1660,8 @@ overflow: auto;
 }
 
 .sample14 span {
-	width: 170px;
-	height: 84px;
+	width: 214px;
+	height: 105px;
 	display: block;
 	position: absolute;
 	top: 5px;
@@ -1748,4 +1756,8 @@ overflow: auto;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
 	color:black;
+}
+.titulo{
+	color: #555555;
+	padding-left: 20px;
 }

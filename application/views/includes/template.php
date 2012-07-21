@@ -29,6 +29,7 @@
 		<script type="text/javascript" src="/socialNetwork/js/quicksand.js"></script>
 		<script type="text/javascript" src="/socialNetwork/js/jquery.cycle.all.js"></script>
 		<script type="text/javascript" src="/socialNetwork/js/custom.js"></script>
+		<script type="text/javascript" src="/socialNetwork/js/jquery.confirm/jquery.confirm.js"></script>
 		<!--[if IE]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -82,6 +83,10 @@
 		
 		<!-- SKIN -->
 		<link rel="stylesheet" href="/socialNetwork/skins/plastic/style.css" type="text/css" media="screen" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Cuprum&subset=latin' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="/socialNetwork/css/jquery.confirm/jquery.confirm.css" />
+
 
 	</head>
 	

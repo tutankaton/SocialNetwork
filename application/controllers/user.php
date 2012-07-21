@@ -55,6 +55,11 @@ class User extends CI_Controller {
 		$data['main_content'] = 'user/edit_profile';
 		$this->load->view('includes/template',$data);
 	}
+
+	function review($id_movie){
+		$this->User_model->review($id_movie);		
+		$this->already_saw($id_movie);
+	}
 	
 	function delete_friendship($id){
 		$this->User_model->delete_friendship($id);
@@ -85,6 +90,17 @@ class User extends CI_Controller {
 		$data['discription'] = '';
 		$data['keyword'] = '';
 		$data['main_content'] = 'user/account';
+		$this->load->view('includes/template',$data);
+	}
+
+	function already_saw($id_movie){
+		$this->load->model('Movie_model');
+		$this->Movie_model->already_saw($id_movie);
+		$data['id_movie_saw'] = $id_movie;
+		$data['title'] = 'Already saw';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'user/already_saw';
 		$this->load->view('includes/template',$data);
 	}
 	

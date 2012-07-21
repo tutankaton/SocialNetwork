@@ -1,6 +1,7 @@
 // Jquery with no conflict
 jQuery(document).ready(function($) {
 	
+	
 	// nivo slider ------------------------------------------------------ //
 	
 	$('#slider').nivoSlider({
