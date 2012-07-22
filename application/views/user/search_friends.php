@@ -5,7 +5,7 @@
 
 	foreach ($results as $result):
 		echo '<div class="line-divider" style="padding-left:10px;">';
-		echo '<img style="display:inline;" width="60px" class="cuadrada" src="'.$result['photo'].'"></img>';
+		echo '<img style="display:inline; margin-top:30px;" width="60px" class="cuadrada" src="'.$result['photo'].'"></img>';
 		echo '<h4 style="display:inline;">  '.$result['username'].'</h4>';		
 		if($this->User_model->is_friend($result['id']))
 			echo '<a href="/socialNetwork/index.php/user/delete_friendship/'.$result['id'].'" title="Delete friendship"><div class="del-friend"></div></a>';

@@ -63,7 +63,7 @@ class User extends CI_Controller {
 	
 	function delete_friendship($id){
 		$this->User_model->delete_friendship($id);
-		$this->search_friends();
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 	
 	function edit_account(){
@@ -73,7 +73,7 @@ class User extends CI_Controller {
 	
 	function add_friendship($id){
 		$this->User_model->add_friendship($id);
-		$this->search_friends();
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 	
 	function activation($error = ''){
@@ -373,6 +373,45 @@ class User extends CI_Controller {
         $id_movie_rating = $this->input->post("id", true);
         $this->User_model->set_rating($id_movie_rating, $rating_value);
 
+    }
+	
+	function friends()
+    {
+    	//paginado
+        $config = array();
+        $config["base_url"] = base_url() . "/index.php/user/friends";
+        $config["total_rows"] = $this->User_model->friends_count();
+		$config['use_page_numbers'] = TRUE;
+        $config["per_page"] = 3;
+        $config["uri_segment"] = 3;
+		$config['full_tag_open'] = '<ul class="pager">';
+		$config['full_tag_close'] = '</ul>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last Link';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = '&raquo;';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = '&laquo;';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '<a></li>';
+        $this->pagination->initialize($config);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+ 		$data["results"] = $this->User_model->friends($config["per_page"], $page);
+        $data["links"] = $this->pagination->create_links();
+
+        $data['title'] = 'Friends';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'user/friends';
+		$data['robot'] = 'NOINDEX, NOFOLLOW';
+		$this->load->view('includes/template', $data);
     }
 
 }

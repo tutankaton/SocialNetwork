@@ -162,8 +162,7 @@
 							<li><a href="gallery-2.html"><span> Two columns </span></a></li>
 							<li><a href="video-gallery.html"><span> Video gallery </span></a></li>
 						</ul>
-					</li>
-					<li><a href="http://luiszuno.com/blog/downloads/shinra-html-template">DOWNLOAD</a></li>
+					</li>					
 					<?php 
 						$this->load->model('User_model');
 						if(get_cookie('cinefilos') && !$this->User_model->is_logged_in()){
@@ -173,6 +172,7 @@
 							if(!$this->User_model->check_user_level()){
 								redirect('verify');
 							}else{
+								echo '<li><a href="/socialNetwork/index.php/user/friends">MY FRIENDS</a></li>';
 								echo '<li><a href="/socialNetwork/index.php/user/account">MY ACCOUNT</a></li>';
 								}
 						}
