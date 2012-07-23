@@ -779,7 +779,7 @@ h6{ font-size: 20px; }
 
 #posts{
 	float: left;
-	width: 98%;
+	width: 100%;
 }
 
 #posts .post{
@@ -1771,4 +1771,16 @@ overflow: auto;
 	float:right;
 	margin-right:120px!important;
 	margin-top:-90px!important;
+}
+.friend_taste{
+	float:right;
+	height: 170px!important;
+	margin-top:-16px!important;
+	margin-right:32px!important;
+}
+.taste{
+	float:right;
+	padding-top: 0px;
+	padding-right: 40px;
+}
 }

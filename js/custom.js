@@ -1,6 +1,9 @@
 // Jquery with no conflict
 jQuery(document).ready(function($) {
-	
+
+
+
+
 	$('.auto-submit-star').rating({
                required: true,
                callback: function(value, link) {
@@ -23,7 +26,7 @@ jQuery(document).ready(function($) {
          }
     });
 	// nivo slider ------------------------------------------------------ //
-	
+	/*
 	$('#slider').nivoSlider({
 		effect:'random', //Specify sets like: 'fold,fade,sliceDown'
         slices:15,
@@ -41,7 +44,7 @@ jQuery(document).ready(function($) {
         pauseOnHover:true, //Stop animation while hovering
         manualAdvance: false, //Force manual transitions
         captionOpacity:0.7 //Universal caption opacity
-	});
+	});*/
 	
 	// Poshytips ------------------------------------------------------ //
 	

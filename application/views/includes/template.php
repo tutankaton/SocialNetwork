@@ -12,6 +12,8 @@
 		<!-- CSS -->
 		<link rel="stylesheet" href="/socialNetwork/css/style.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/socialNetwork/css/social-icons.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/socialNetwork/jquery-ui-1.8.21.custom/css/ui-lightness/jquery-ui-1.8.21.custom.css">
+		
 		<!--[if IE 8]>
 			<link rel="stylesheet" type="text/css" media="screen" href="/css/ie8-hacks.css" />
 		<![endif]-->

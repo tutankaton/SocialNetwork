@@ -375,13 +375,19 @@ class User extends CI_Controller {
 
     }
 	
+	function set_agreement($degree, $id_friend)
+    {
+        $this->User_model->set_agreement($id_friend, $degree);
+
+    }
+	
 	function friends()
     {
     	//paginado
         $config = array();
         $config["base_url"] = base_url() . "/index.php/user/friends";
         $config["total_rows"] = $this->User_model->friends_count();
-		$config['use_page_numbers'] = TRUE;
+		$config['use_page_numbers'] = FALSE;
         $config["per_page"] = 3;
         $config["uri_segment"] = 3;
 		$config['full_tag_open'] = '<ul class="pager">';

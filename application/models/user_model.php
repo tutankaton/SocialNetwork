@@ -107,6 +107,18 @@ class User_model extends CI_Model{
 		return $rating;
 	}
 	
+	function get_agreement($id_friend){
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$this->db->where('id_friend',$id_friend);
+		$query = $this->db->get('friendship');
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				return $row->agreement;
+			}
+	    }
+		return 0;
+	}
+	
 	function set_rating($id_movie_rating, $rating_value){		
 		$new_data = array (
 			'id_user' => $this->session->userdata('id'),
@@ -126,6 +138,29 @@ class User_model extends CI_Model{
 			$this->db->where('id_user', $this->session->userdata('id'));
 			$this->db->where('id_movie', $id_movie_rating);
 			$insert = $this->db->update('calification_movie', $new_data);		
+			return $insert;
+		}
+	}
+	
+	function set_agreement($id_friend, $degree){		
+		$new_data = array (
+			'id_user' => $this->session->userdata('id'),
+			'id_friend' => $id_friend,
+			'created_on' => date('y-m-d'),
+			'agreement' => $degree+1
+		);
+		$this->db->where('id_user', $this->session->userdata('id'));
+		$this->db->where('id_friend', $id_friend);
+		$query = $this->db->get('friendship');
+		if($query->num_rows == 0){
+			$this->db->where('id_user', $this->session->userdata('id'));
+			$this->db->where('id_friend', $id_friend);
+			$insert = $this->db->insert('friendship', $new_data);		
+			return $insert;
+		}else{
+			$this->db->where('id_user', $this->session->userdata('id'));
+			$this->db->where('id_friend', $id_friend);
+			$insert = $this->db->update('friendship', $new_data);		
 			return $insert;
 		}
 	}
@@ -249,6 +284,10 @@ class User_model extends CI_Model{
 				if($i>4)
 					return $list;
 			}
+		}
+		while ($i<5){
+			$list[$i] = array('id' => '-1', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
+			$i++;
 		}
 		return $list;
 	}

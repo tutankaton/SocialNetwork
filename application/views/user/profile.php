@@ -29,14 +29,112 @@
 
 	</div>
 		<?php $list_to_view = $this->User_model->movies_to_view($id_profile);	?>
-	
-	
-</div>
+		<?php if($this->User_model->is_friend($info['id'])){
+			echo '<div  class="taste">';
+				echo '<div><img width="80x" src="/socialNetwork/img/handshake.png" title="agreement" style="margin-left:50px;"></img></div>';
+				echo '<div id="slid"  class="friend_taste" value="'.$this->User_model->get_agreement($info['id']).'"> </div>';
+				echo '<div><img width="80x" src="/socialNetwork/img/vomito.png" title="disagreement" style="margin-left:50px;"></img></div>';
+			echo '</div>';
+			echo '<div style="width:250px;float:left;margin-top:30px;margin-left:25px;display:inline;"><i><hr><span  id="degree">select the degree of agreement with the slide</span></hr></i></div>';
+		}
+		?>
+
+
+
+
   <div id="columns-full">
-    <div class="column"><header><?php echo $list_to_view[0]?></header></div>
-    <div class="column"><header><?php echo $list_to_view[1]?></header></div>
-    <div class="column"><header><?php echo $list_to_view[2]?></header></div>
-    <div class="column"><header><?php echo $list_to_view[3]?></header></div>
-    <div class="column"><header><?php echo $list_to_view[4]?></header></div>
-  </div>
+  	<div class="column" style="position:absolute!important; top:500px; left:40px;"><header><?php echo $list_to_view[0]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+								<ul class="meta"><li><strong><?php echo $list_to_view[0]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[0]['year'];?></li> 
+									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[0]['id'];?>">View more</a></li>								</ul>
+								<div  class="cover"><img width="120px"  height="178px"src="<?php echo $list_to_view[0]['thumbnail']?>"  alt="Feature image" /></div>
+							</div></div></div></div>
+	</div>
+	<div class="column"style="position:absolute!important; top:530px; left:430px;"><header><?php echo $list_to_view[1]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+								<ul class="meta"><li><strong><?php echo $list_to_view[1]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[1]['year'];?></li> 
+									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[1]['id'];?>">View more</a></li>								</ul>
+								<div class="cover"><img width="120px"  height="178px"src="<?php echo $list_to_view[1]['thumbnail']?>"  alt="Feature image" /></div>
+							</div></div></div></div>
+	</div>
+	<div class="column"style="position:absolute!important; top:750px; left:130px;"><header><?php echo $list_to_view[2]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+								<ul class="meta"><li><strong><?php echo $list_to_view[2]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[2]['year'];?></li> 
+									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[2]['id'];?>">View more</a></li>								</ul>
+								<div  class="cover"><img width="120px"  height="178px"src="<?php echo $list_to_view[2]['thumbnail']?>"  alt="Feature image" /></div>
+							</div></div></div></div>
+	</div>
+	<div class="column"style="position:absolute!important; top:750px; left:330px;"><header><?php echo $list_to_view[3]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+								<ul class="meta"><li><strong><?php echo $list_to_view[3]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[3]['year'];?></li> 
+									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[3]['id'];?>">View more</a></li>								</ul>
+								<div  class="cover"><img width="120px" height="178px"src="<?php echo $list_to_view[3]['thumbnail']?>"  alt="Feature image" /></div>
+							</div></div></div></div>
+	</div>
+	<div class="column"style="position:absolute!important; top:750px; left:530px;"><header><?php echo $list_to_view[4]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+								<ul class="meta"><li><strong><?php echo $list_to_view[4]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[4]['year'];?></li> 
+									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[4]['id'];?>">View more</a></li>								</ul>
+								<div  class="cover"><img width="120px" height="178px"src="<?php echo $list_to_view[4]['thumbnail']?>"  alt="Feature image" /></div>
+							</div></div></div></div>
+	</div> 
+	 <div class="column" style="position:absolute!important; top:820px; left:770px;height: 150px; width: 150px;  border: 0px solid #666666;  -webkit-border-radius: 0px;  -ms-border-radius: 0px;  -moz-border-radius:0px;  border-radius: 0px;  -webkit-box-shadow: inset 0 0 0px #000;  -ms-box-shadow: inset 0 0 0px #000;  box-shadow: inset 0 0 0px #000;cursor:default;"><header>trash</header><img width="150" src="/socialNetwork/img/trash.png"  alt="Drop here to delete" />
+	</div> 	
+	 <div class="column" style="position:absolute!important; top:540px; left:750px;height: 150px; width: 150px;  border: 0px solid #666666;  -webkit-border-radius: 0px;  -ms-border-radius: 0px;  -moz-border-radius:0px;  border-radius: 0px;  -webkit-box-shadow: inset 0 0 0px #000;  -ms-box-shadow: inset 0 0 0px #000;  box-shadow: inset 0 0 0px #000;cursor:default;"><header>file</header><img width="150" src="/socialNetwork/img/vhs.png"  alt="Drop here if you saw it " />
+	</div> 	
+   </div>
+   
+<div class="queue_movies">
+	<div class="top">
+		<img src="/socialNetwork/img/top.png" width="160px"></img>
+	</div>
+	<div class="one">
+		<img src="/socialNetwork/img/one.png" width="60px"></img>
+	</div>
+	<div class="two">
+		<img src="/socialNetwork/img/two.png" width="100px"></img>
+	</div>
+	<div class="three">
+		<img src="/socialNetwork/img/three.png" width="40px"></img>
+	</div>
+	<div class="four">
+		<img src="/socialNetwork/img/four.png" width="30px"></img>
+	</div>
+	<div class="five">
+		<img src="/socialNetwork/img/five.png" width="30px"></img>
+	</div>
+	<div class="text-first">
+		-> The first movie I want to see
+	</div>
+	<div class="text-second">
+		then I'd like to see ->
+	</div>
+	<div class="text-others">
+		I have also enqueue:
+	</div>
+	<div class="text-trash">
+		drop here if you are no longer interested in a movie ->
+	</div>
+	<div class="text-file">
+		Drop here if you have already seen it ->
+	</div>
+</div>
+
+</div>
+
+<script>
+var degrees = ["select the degree of agreement with the slide","makes me vomit", "not deserve to have an internet connection", "not worthy to be called cinephile", "Chaplin must be rolling in his grave","indifferent", "I think he has good taste", "we have much in common", "we are like brothers", "we are soul mates", "is as if we were the same person"];
+$("#degree").text(degrees[$( "#slid" ).attr('value')]);
+$( "#slid" ).slider({ orientation: "vertical",
+ max: 9 ,
+  value: $("#slid").attr("value")-1,
+  slide: function (event, ui){
+  	$("#degree").text(degrees[ui.value+1]);
+  },
+  change: function (event, ui){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/set_agreement/"+ui.value+"/"+<?php echo $info['id'];?>,
+	}).done(function( msg ) {
+
+	});
+  }
+  });
+</script>
+
 <!--<script type="text/javascript" src="/socialNetwork/js/DnD.js"></script>-->
