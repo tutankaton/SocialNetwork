@@ -41,6 +41,32 @@ class Movie_model extends CI_Model{
 		return $result;		
 	}
 	
+	function search_recommend_movies($query){
+		$this->db->like('title',$query);
+		$result = array();
+		$i = 0;
+		$query = $this->db->get('movie');
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$title = $row->title;
+				$id = $row->id;
+				$thumbnail = $row->thumbnail;
+				$year = $row->year;
+				$calification = $row->calification;
+				$result[$i] = array ('id' => $id, 'title' => $title, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification);
+				$i++;
+				if ($i==7){
+					return $result;
+				}
+			}
+        }
+		while ($i<7){
+			$result[$i] = array('id' => '-1', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
+			$i++;
+		}
+		return $result;		
+	}
+	
 	function delete_toview($id_movie){
 		$this->db->where('id_movie',$id_movie);
 		$this->db->where('id_user', $this->session->userdata('id'));
@@ -58,6 +84,7 @@ class Movie_model extends CI_Model{
 			);		
 			$this->db->insert('already_view', $new_already_saw);
 		}
+		$this->delete_toview($id_movie);
 		
 	}
 		

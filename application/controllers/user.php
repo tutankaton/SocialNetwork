@@ -189,6 +189,18 @@ class User extends CI_Controller {
 		$this->User_model->change_order($id1, $id2);
 	}
 	
+	function add_to_view($id){
+		$this->load->model('User_model');
+		$this->User_model->add_to_view($id);
+	}	
+	
+	function replace_to_view($idnew, $id){
+		$this->load->model('User_model');
+		$reload = $this->User_model->replace_to_view($idnew, $id);
+		if($reload)
+			redirect($_SERVER['HTTP_REFERER']);
+	}	
+	
 	function account_activation(){
 		$this->load->model('User_model');
 		$activationkey = $this->uri->segment(3);

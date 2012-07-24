@@ -1445,10 +1445,26 @@ overflow: auto;
   -o-transition: -o-transform 0.2s ease-out;
   -ms-transition: -ms-transform 0.2s ease-out;
 }
+#busqueda .column {
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  -moz-transition: -moz-transform 0.2s ease-out;
+  -o-transition: -o-transform 0.2s ease-out;
+  -ms-transition: -ms-transform 0.2s ease-out;
+}
 #columns-full .column.over{
   border: 2px dashed #000;
 }
+#busqueda .column.over{
+  border: 2px dashed #000;
+}
 #columns-full .moving {
+  opacity: 0.25;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+}
+#busqueda .moving {
   opacity: 0.25;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
@@ -1674,7 +1690,7 @@ overflow: auto;
 	background: url(images/glossy-gradient.png);
 }
 
-#columns-full .column header {
+.column header {
 	display:none;
 }
 .queue_movies{
@@ -1683,24 +1699,30 @@ overflow: auto;
 	width: 100%;
 	height: 500px;
 }
+#busqueda{
+	float:left;
+	background: #f1f1f1 url(../img/bg/patterns/sqr-1x1.png);
+	width: 100%;
+	height: 200px;
+}
 .top{
 	position:absolute;
-	top:580px;
+	top:780px;
 	left:140px;
 }
 .gold{
 	position:absolute;
-	top:700px;
+	top:900px;
 	left:70px;
 }
 .one{
 	position:absolute;
-	top:490px;
+	top:690px;
 }
 .text-first{
 	width: 130px;
 	position:absolute;
-	top:500px;
+	top:700px;
 	left:180px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
@@ -1709,7 +1731,7 @@ overflow: auto;
 .text-second{
 	width: 130px;
 	position:absolute;
-	top:510px;
+	top:710px;
 	left:380px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
@@ -1717,28 +1739,28 @@ overflow: auto;
 }
 .two{
 	position:absolute;
-	top:490px;
+	top:690px;
 	left:500px;
 }
 .three{
 	position:absolute;
-	top:720px;
+	top:920px;
 	left:230px;
 }
 .four{
 	position:absolute;
-	top:730px;
+	top:930px;
 	left:430px;
 }
 .five{
 	position:absolute;
-	top:730px;
+	top:930px;
 	left:630px;
 }
 .text-others{
 	width: 130px;
 	position:absolute;
-	top:750px;
+	top:950px;
 	left:10px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
@@ -1747,7 +1769,7 @@ overflow: auto;
 .text-trash{
 	width: 120px;
 	position:absolute;
-	top:750px;
+	top:950px;
 	left:700px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
@@ -1756,7 +1778,7 @@ overflow: auto;
 .text-file{
 	width: 120px;
 	position:absolute;
-	top:560px;
+	top:760px;
 	left:640px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
@@ -1783,4 +1805,18 @@ overflow: auto;
 	padding-top: 0px;
 	padding-right: 40px;
 }
+.search{
+	float:left;
+	position: absolute;
+}
+.search-back{
+	float:left;
+	width:100%;
+	height:26px;
+}
+#busqueda .column{
+	float:left;
+}
+#columns-full.column{
+	float:left;
 }

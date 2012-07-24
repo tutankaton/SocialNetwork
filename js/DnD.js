@@ -51,8 +51,7 @@ function handleDrop(e) {
   var indice = str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"));
   var indice2 = str2.substring(str2.indexOf("<header>")+8, str2.lastIndexOf("</header>"));
   // Don't do anything if dropping the same column we're dragging.
-
-  if ((dragSrcEl != this)&&(indice!="trash")&&(indice!="file")&&(parseInt(indice)==indice)&&(parseInt(indice2)==indice2)) {
+  if ((dragSrcEl != this)&&(indice!="trash")&&(indice!="file")&&(parseInt(indice)==indice)&&(parseInt(indice2)==indice2)&&(indice2>0)&&(indice>0)) {
   	var str = this.innerHTML;
 	var id1 = str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"));
 	var str = dragSrcEl.innerHTML;
@@ -66,7 +65,7 @@ function handleDrop(e) {
     // Set the source column's HTML to the HTML of the columnwe dropped on.
     dragSrcEl.innerHTML = this.innerHTML;
     this.innerHTML = e.dataTransfer.getData('text/html');
-  }else if ((dragSrcEl != this)&&(str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"))=="trash")) {
+  }else if ((dragSrcEl != this)&&(str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"))=="trash")&&(indice2>0)) {
   	var str = dragSrcEl.innerHTML;
 			var elem = $(this).closest('.item');
 
@@ -88,8 +87,30 @@ function handleDrop(e) {
 		});
 
   	//alert("eliminar "+str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>")));
-  }else if ((dragSrcEl != this)&&(str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"))=="file")) {
+  }else if ((dragSrcEl != this)&&(str.substring(str.indexOf("<header>")+8, str.lastIndexOf("</header>"))=="file")&&(indice2>0)) {
   	top.location.href = '/socialNetwork/index.php/user/already_saw/'+indice2;
+  }else if ((dragSrcEl != this)&&(indice!="trash")&&(indice!="file")&&(parseInt(indice)==indice)&&(parseInt(indice2)==indice2)&&(indice2<0)&&(indice>=0)){
+  	if(indice==0){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/add_to_view/"+indice2*-1,
+	}).done(function( msg ) {
+		location.reload();
+	});
+    // Set the source column's HTML to the HTML of the columnwe dropped on.
+    dragSrcEl.innerHTML = this.innerHTML;
+    this.innerHTML = e.dataTransfer.getData('text/html');
+  	}
+  	else if(indice>0){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/replace_to_view/"+indice2*-1+"/"+indice,
+	}).done(function( msg ) {
+	});
+    // Set the source column's HTML to the HTML of the columnwe dropped on.
+    dragSrcEl.innerHTML = this.innerHTML;
+    this.innerHTML = e.dataTransfer.getData('text/html');
+  	}
   }
   
   dragSrcEl.style.opacity = '1';
@@ -123,7 +144,7 @@ function handleDragEnd(e) {
   
 }
 
-var cols = document.querySelectorAll('#columns-full .column');
+var cols = document.querySelectorAll('#columns-full .column, #busqueda .column');
 [].forEach.call(cols, function(col) {
   col.setAttribute('draggable', 'true');
   col.addEventListener('dragstart', handleDragStart, false);

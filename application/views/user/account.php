@@ -41,45 +41,65 @@ if($this->User_model->is_logged_in()){
 }
 $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id'));	?>
 
-
-
+<div id="busqueda">
+	<div class="search-back">
+		<div class="search">
+			<form  method="get" id="searchform" action="/socialNetwork/index.php/movie/search_recommend_movies">
+				<div>
+					<input type="text" value="Search movies..." name="s" id="s" onfocus="defaultInputm(this)" onblur="clearInputm(this)" />
+					<input type="submit" id="searchsubmit" value=" " />
+				</div>
+			</form>
+		</div>
+	</div>
+	<?php 
+	if(isset($recommends))
+	foreach($recommends as $reco){
+		echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
+		echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
+		echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
+		echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
+		echo '</div></div></div></div>';
+		echo '</div>';	
+	}?>
+</div>
 
 
 
   <div id="columns-full">
-  	<div class="column" style="position:absolute!important; top:500px; left:40px;"><header><?php echo $list_to_view[0]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+  	<div class="column" style="position:absolute!important; top:700px; left:40px;"><header><?php echo $list_to_view[0]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
 								<ul class="meta"><li><strong><?php echo $list_to_view[0]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[0]['year'];?></li> 
 									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[0]['id'];?>">View more</a></li>								</ul>
 								<div  class="cover"><img width="120px"  height="178px"src="<?php echo $list_to_view[0]['thumbnail']?>"  alt="Feature image" /></div>
 							</div></div></div></div>
 	</div>
-	<div class="column"style="position:absolute!important; top:530px; left:430px;"><header><?php echo $list_to_view[1]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+	<div class="column"style="position:absolute!important; top:730px; left:430px;"><header><?php echo $list_to_view[1]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
 								<ul class="meta"><li><strong><?php echo $list_to_view[1]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[1]['year'];?></li> 
 									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[1]['id'];?>">View more</a></li>								</ul>
 								<div class="cover"><img width="120px"  height="178px"src="<?php echo $list_to_view[1]['thumbnail']?>"  alt="Feature image" /></div>
 							</div></div></div></div>
 	</div>
-	<div class="column"style="position:absolute!important; top:750px; left:130px;"><header><?php echo $list_to_view[2]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+	<div class="column"style="position:absolute!important; top:950px; left:130px;"><header><?php echo $list_to_view[2]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
 								<ul class="meta"><li><strong><?php echo $list_to_view[2]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[2]['year'];?></li> 
 									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[2]['id'];?>">View more</a></li>								</ul>
 								<div  class="cover"><img width="120px"  height="178px"src="<?php echo $list_to_view[2]['thumbnail']?>"  alt="Feature image" /></div>
 							</div></div></div></div>
 	</div>
-	<div class="column"style="position:absolute!important; top:750px; left:330px;"><header><?php echo $list_to_view[3]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+	<div class="column"style="position:absolute!important; top:950px; left:330px;"><header><?php echo $list_to_view[3]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
 								<ul class="meta"><li><strong><?php echo $list_to_view[3]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[3]['year'];?></li> 
 									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[3]['id'];?>">View more</a></li>								</ul>
 								<div  class="cover"><img width="120px" height="178px"src="<?php echo $list_to_view[3]['thumbnail']?>"  alt="Feature image" /></div>
 							</div></div></div></div>
 	</div>
-	<div class="column"style="position:absolute!important; top:750px; left:530px;"><header><?php echo $list_to_view[4]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+	<div class="column"style="position:absolute!important; top:950px; left:530px;"><header><?php echo $list_to_view[4]['id'];?></header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
 								<ul class="meta"><li><strong><?php echo $list_to_view[4]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $list_to_view[4]['year'];?></li> 
 									<li><a href="/socialNetwork/index.php/movie/view/<?php echo $list_to_view[4]['id'];?>">View more</a></li>								</ul>
 								<div  class="cover"><img width="120px" height="178px"src="<?php echo $list_to_view[4]['thumbnail']?>"  alt="Feature image" /></div>
 							</div></div></div></div>
 	</div> 
-	 <div class="column" style="position:absolute!important; top:820px; left:770px;height: 150px; width: 150px;  border: 0px solid #666666;  -webkit-border-radius: 0px;  -ms-border-radius: 0px;  -moz-border-radius:0px;  border-radius: 0px;  -webkit-box-shadow: inset 0 0 0px #000;  -ms-box-shadow: inset 0 0 0px #000;  box-shadow: inset 0 0 0px #000;cursor:default;"><header>trash</header><img width="150" src="/socialNetwork/img/trash.png"  alt="Drop here to delete" />
+	 <div class="column" style="position:absolute!important; top:1020px; left:770px;height: 150px; width: 150px;  border: 0px solid #666666;  -webkit-border-radius: 0px;  -ms-border-radius: 0px;  -moz-border-radius:0px;  border-radius: 0px;  -webkit-box-shadow: inset 0 0 0px #000;  -ms-box-shadow: inset 0 0 0px #000;  box-shadow: inset 0 0 0px #000;cursor:default;"><header>trash</header><img width="150" src="/socialNetwork/img/trash.png"  alt="Drop here to delete" />
 	</div> 	
-	 <div class="column" style="position:absolute!important; top:540px; left:750px;height: 150px; width: 150px;  border: 0px solid #666666;  -webkit-border-radius: 0px;  -ms-border-radius: 0px;  -moz-border-radius:0px;  border-radius: 0px;  -webkit-box-shadow: inset 0 0 0px #000;  -ms-box-shadow: inset 0 0 0px #000;  box-shadow: inset 0 0 0px #000;cursor:default;"><header>file</header><img width="150" src="/socialNetwork/img/vhs.png"  alt="Drop here if you saw it " />
+	 <div class="column" style="position:absolute!important; top:740px; left:750px;height: 150px; width: 150px;  border: 0px solid #666666;  -webkit-border-radius: 0px;  -ms-border-radius: 0px;  -moz-border-radius:0px;  border-radius: 0px;  -webkit-box-shadow: inset 0 0 0px #000;  -ms-box-shadow: inset 0 0 0px #000;  box-shadow: inset 0 0 0px #000;cursor:default;"><header>file</header><img width="150" src="/socialNetwork/img/vhs.png"  alt="Drop here if you saw it " />
 	</div> 	
    </div>
    

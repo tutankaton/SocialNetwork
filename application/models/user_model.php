@@ -286,10 +286,32 @@ class User_model extends CI_Model{
 			}
 		}
 		while ($i<5){
-			$list[$i] = array('id' => '-1', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
+			$list[$i] = array('id' => '0', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
 			$i++;
 		}
 		return $list;
+	}
+	
+	function add_to_view($id1){
+		$new_data = array (
+			'id_user' => $this->session->userdata('id'),
+			'id_movie' => $id1
+		);
+		
+		$insert = $this->db->insert('to_view', $new_data);
+		return $insert;
+	}
+	
+	function replace_to_view($idnew, $id){
+		$this->add_to_view($idnew);
+		$this->change_order($idnew, $id);
+		
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$query = $this->db->get('to_view');
+		if($query->num_rows <4)
+			return true;
+		else 
+			return false;
 	}
 	
 	function change_order($id1, $id2){
