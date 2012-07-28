@@ -93,6 +93,18 @@ class User extends CI_Controller {
 		$this->load->view('includes/template',$data);
 	}
 
+	function set_top($top, $id){
+		$this->User_model->set_top($top,$id);
+	}
+	
+	function change_order_top($type){
+		$this->User_model->change_order_top($type);
+	}
+	
+	function del_top($top){
+		$this->User_model->del_top($top);
+	}
+
 	function already_saw($id_movie){
 		$this->load->model('Movie_model');
 		$this->Movie_model->already_saw($id_movie);

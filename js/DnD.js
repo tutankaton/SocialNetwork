@@ -111,7 +111,71 @@ function handleDrop(e) {
     dragSrcEl.innerHTML = this.innerHTML;
     this.innerHTML = e.dataTransfer.getData('text/html');
   	}
+  }else if ((dragSrcEl != this)&&(parseInt(indice2)==indice2)&&(indice2<0)&&(indice=="first")){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/set_top/1/"+indice2*-1,
+	}).done(function( msg ) {
+		location.reload();
+	});
+  }else if ((dragSrcEl != this)&&(parseInt(indice2)==indice2)&&(indice2<0)&&(indice=="second")){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/set_top/2/"+indice2*-1,
+	}).done(function( msg ) {
+		location.reload();
+	});
+  }else if ((dragSrcEl != this)&&(parseInt(indice2)==indice2)&&(indice2<0)&&(indice=="third")){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/set_top/3/"+indice2*-1,
+	}).done(function( msg ) {
+		location.reload();
+	});
+  }else if ((dragSrcEl != this)&&(indice2=="first")&&(indice=="trash")){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/del_top/1",
+	}).done(function( msg ) {
+		location.reload();
+	});
+  }else if ((dragSrcEl != this)&&(indice2=="second")&&(indice=="trash")){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/del_top/2",
+	}).done(function( msg ) {
+		location.reload();
+	});
+  }else if ((dragSrcEl != this)&&(indice2=="third")&&(indice=="trash")){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/del_top/3",
+	}).done(function( msg ) {
+		location.reload();
+	});
+  }else if (((indice2=="third")&&(indice=="second"))||((indice=="third")&&(indice2=="second"))){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/change_order_top/2",
+	}).done(function( msg ) {
+		location.reload();
+	});
+  }else if (((indice2=="third")&&(indice=="first"))||((indice=="third")&&(indice2=="first"))){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/change_order_top/1",
+	}).done(function( msg ) {
+		location.reload();
+	});
+  }else if (((indice2=="second")&&(indice=="first"))||((indice=="second")&&(indice2=="first"))){
+  	$.ajax({
+	  type: "POST",
+	  url: "/socialNetwork/index.php/user/change_order_top/0",
+	}).done(function( msg ) {
+		location.reload();
+	});
   }
+  
   
   dragSrcEl.style.opacity = '1';
   this.style.opacity = '1';
@@ -144,7 +208,7 @@ function handleDragEnd(e) {
   
 }
 
-var cols = document.querySelectorAll('#columns-full .column, #busqueda .column');
+var cols = document.querySelectorAll('#columns-full .column, #busqueda .column,#columns-top .column');
 [].forEach.call(cols, function(col) {
   col.setAttribute('draggable', 'true');
   col.addEventListener('dragstart', handleDragStart, false);

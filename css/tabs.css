@@ -47,14 +47,16 @@ ul.tabs a {
 #content ul.tabs a{
 	color: #c8c8c8;
 }
-
+#pestanas ul.tabs a{
+	color: #c8c8c8;
+}
 ul.tabs a:active {
 	outline:none;		
 }
 
 /* when mouse enters the tab move the background image */
 #content ul.tabs a:hover { background: #000000;  color: #fff; }
-
+#pestanas ul.tabs a:hover { background: #000000;  color: #fff; }
 /* active tab uses a class name "current". its highlight is also done by moving the background image. */
 ul.tabs a.current,
 #content ul.tabs a.current:hover,
@@ -64,7 +66,13 @@ ul.tabs li.current a {
 	display: block;
 	background: #ffd800;
 }
-
+#pestanas ul.tabs a.current:hover,
+ul.tabs li.current a {	
+	cursor:default !important; 
+	color:#363636 !important;
+	display: block;
+	background: #ffd800;
+}
 /* initially all panes are hidden */ 
 .panes .pane {
 	display:none;	
@@ -94,6 +102,12 @@ ul.tabs li.current a {
 }
 
 #content .panes .blocks-thumbs li .header{
+	font-size: 20px;
+	margin-bottom: 20px;
+	text-decoration: none;
+	color: #696969;
+}
+#pestanas .panes .blocks-thumbs li .header{
 	font-size: 20px;
 	margin-bottom: 20px;
 	text-decoration: none;

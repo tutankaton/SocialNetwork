@@ -80,7 +80,6 @@ class User_model extends CI_Model{
 			}
 		}
 
-
 	function get_review($id_movie){
 		$critica = "";
 		$this->db->where('id_movie',$id_movie);
@@ -269,7 +268,6 @@ class User_model extends CI_Model{
 	}
 	
 	function movies_to_view($id_profile){
-		$list[0] = "";$list[1] = "";$list[2] = "";$list[3] = "";$list[4] = "";
 		$this->db->where('id_user',$id_profile);
 		$query = $this->db->get('to_view');
 		$i = 0;
@@ -288,6 +286,43 @@ class User_model extends CI_Model{
 		while ($i<5){
 			$list[$i] = array('id' => '0', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
 			$i++;
+		}
+		return $list;
+	}
+
+	function get_top($id_profile){
+		$this->db->where('id',$id_profile);
+		$query = $this->db->get('user');
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				if($row->top1 != NULL){
+					$this->db->where('id',$row->top1);
+					$q = $this->db->get('movie');
+					foreach($q->result() as $auxrow){
+						$list[0] = array('id' => $auxrow->id, 'title' => $auxrow->title, 'year' => $auxrow->year, 'thumbnail' => $auxrow->thumbnail, 'calification' => $auxrow->calification);
+					}
+				}else{
+					$list[0] = array('id' => '0', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
+				}
+				if($row->top2 != NULL){
+					$this->db->where('id',$row->top2);
+					$q = $this->db->get('movie');
+					foreach($q->result() as $auxrow){
+						$list[1] = array('id' => $auxrow->id, 'title' => $auxrow->title, 'year' => $auxrow->year, 'thumbnail' => $auxrow->thumbnail, 'calification' => $auxrow->calification);
+					}
+				}else{
+					$list[1] = array('id' => '0', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
+				}
+				if($row->top3 != NULL){
+					$this->db->where('id',$row->top3);
+					$q = $this->db->get('movie');
+					foreach($q->result() as $auxrow){
+						$list[2] = array('id' => $auxrow->id, 'title' => $auxrow->title, 'year' => $auxrow->year, 'thumbnail' => $auxrow->thumbnail, 'calification' => $auxrow->calification);
+					}
+				}else{
+					$list[2] = array('id' => '0', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
+				}
+			}
 		}
 		return $list;
 	}
@@ -343,6 +378,94 @@ class User_model extends CI_Model{
 		$this->db->update('to_view', $new_data1);	
 		$this->db->where('id', $id_aux2);
 		$this->db->update('to_view', $new_data2);	
+		return true;
+	}
+	
+	function set_top($top, $id){
+		if($top==1){
+			$new_data = array (
+				'top1' => $id
+			);
+			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->update('user', $new_data);	
+		}else if ($top==2){
+			$new_data = array (
+				'top2' => $id
+			);
+			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->update('user', $new_data);	
+		}	
+		else if ($top==3){
+			$new_data = array (
+				'top3' => $id
+			);
+			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->update('user', $new_data);	
+		}		
+		return true;
+	}
+	
+	function del_top($top){
+		if($top==1){
+			$new_data = array (
+				'top1' => NULL
+			);
+			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->update('user', $new_data);	
+		}else if ($top==2){
+			$new_data = array (
+				'top2' => NULL
+			);
+			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->update('user', $new_data);	
+		}	
+		else if ($top==3){
+			$new_data = array (
+				'top3' => NULL
+			);
+			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->update('user', $new_data);	
+		}		
+		return true;
+	}
+	
+	function change_order_top($type){ 
+		$this->db->where('id',$this->session->userdata('id'));
+		$query = $this->db->get('user');
+		if($type==0){
+			foreach($query->result() as $row){
+			$id_top1 = $row->top2;
+			$id_top2 = $row->top1;
+			$new_data = array (
+				'top1' => $id_top1,
+				'top2' => $id_top2
+				);
+			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->update('user', $new_data);	
+			}
+		}else if ($type==1){
+			foreach($query->result() as $row){
+			$id_top1 = $row->top3;
+			$id_top3 = $row->top1;
+			$new_data = array (
+				'top1' => $id_top1,
+				'top3' => $id_top3
+				);
+			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->update('user', $new_data);	
+			}
+		}else if ($type==2){
+			foreach($query->result() as $row){
+			$id_top3 = $row->top2;
+			$id_top2 = $row->top3;
+			$new_data = array (
+				'top3' => $id_top3,
+				'top2' => $id_top2
+				);
+			$this->db->where('id', $this->session->userdata('id'));
+			$this->db->update('user', $new_data);	
+			}
+		}	
 		return true;
 	}
 	
@@ -528,6 +651,7 @@ class User_model extends CI_Model{
 					);
 		$this->db->where('id', $id)->update('user', $data);
 	}
+	
 	function update_photo($photo){
 		$id = $this->session->userdata('id');
 		$data = array(
@@ -568,7 +692,69 @@ class User_model extends CI_Model{
         }
 		return $result;		
 	}
+
+	function recomends_movies_to_view(){
+		$id_user = $this->session->userdata('id');
 		
+		//recupero amigos
+		$this->db->where('id_user',$id_user);
+		$query = $this->db->get('friendship');
+		$i = 0;
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				if($row->agreement == NULL)
+					$friends[$i] = array('agreement' => "5", 'id_friend' => $row->id_friend);
+				else 
+					$friends[$i] = array('agreement' => $row->agreement, 'id_friend' => $row->id_friend);
+				$i++;
+			}
+		}		
+		
+		$movies = array();
+		$movies_info = array();
+		$indice = 1;
+		foreach ($friends as $friend) {
+			$this->db->where('id_user',$friend['id_friend']);
+			$query = $this->db->get('calification_movie');
+			foreach($query->result() as $row){
+				$aux = array_search($row->id_movie, $movies); //false si no existe
+				if(!$aux){
+					$movies[$indice] = $row->id_movie;
+					$movies_info[$indice] = array('id_movie' => $row->id_movie, 'calification' => $row->calification * $friend['agreement'],'factor' => $friend['agreement']);
+					$indice++;
+				}else{
+					$calification_aux = $movies_info[$aux]['calification'];
+					$factor_aux = $movies_info[$aux]['factor'];
+					$movies_info[$aux] = array('id_movie' => $row->id_movie, 'calification' => $calification_aux + $row->calification * $friend['agreement'],'factor' => $factor_aux + $friend['agreement']);
+				}
+			}
+		}
+
+		//recupero ya vistas
+		$this->db->where('id_user',$id_user);
+		$query = $this->db->get('already_view');
+		$i = 0;
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$already_view[$i] = $row->id_movie;
+				$i++;
+			}			
+		}
+		
+		$definitive_list = array();
+		$i = 0;
+		foreach ($movies_info as $possible_movie) {
+			$la_vi = array_search($possible_movie['id_movie'], $already_view);
+			if(!$la_vi){
+				$definitive_list[$i] = array('rank' => $possible_movie['calification']/$possible_movie['factor'], 'id_movie' => $possible_movie['id_movie']);
+				$i++;
+			}
+		}
+		array_multisort($definitive_list, SORT_DESC);
+		var_dump($definitive_list);
+		delay();
+
+	}
 }
 
 ?>

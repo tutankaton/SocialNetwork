@@ -1445,17 +1445,33 @@ overflow: auto;
   -o-transition: -o-transform 0.2s ease-out;
   -ms-transition: -ms-transform 0.2s ease-out;
 }
+#columns-top .column {
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  -moz-transition: -moz-transform 0.2s ease-out;
+  -o-transition: -o-transform 0.2s ease-out;
+  -ms-transition: -ms-transform 0.2s ease-out;
+}
 #busqueda .column {
   -webkit-transition: -webkit-transform 0.2s ease-out;
   -moz-transition: -moz-transform 0.2s ease-out;
   -o-transition: -o-transform 0.2s ease-out;
   -ms-transition: -ms-transform 0.2s ease-out;
 }
+#columns-top .column.over{
+  border: 2px dashed #000;
+}
 #columns-full .column.over{
   border: 2px dashed #000;
 }
 #busqueda .column.over{
   border: 2px dashed #000;
+}
+#columns-top .moving {
+  opacity: 0.25;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
 }
 #columns-full .moving {
   opacity: 0.25;
@@ -1701,28 +1717,33 @@ overflow: auto;
 }
 #busqueda{
 	float:left;
-	background: #f1f1f1 url(../img/bg/patterns/sqr-1x1.png);
+	background: #333333;
 	width: 100%;
-	height: 200px;
+	height: 220px;
 }
 .top{
 	position:absolute;
-	top:780px;
+	top:850px;
 	left:140px;
+}
+.podio{
+	position:absolute;
+	top:780px;
+	left:100px;
 }
 .gold{
 	position:absolute;
-	top:900px;
+	top:970px;
 	left:70px;
 }
 .one{
 	position:absolute;
-	top:690px;
+	top:760px;
 }
 .text-first{
 	width: 130px;
 	position:absolute;
-	top:700px;
+	top:770px;
 	left:180px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
@@ -1731,7 +1752,7 @@ overflow: auto;
 .text-second{
 	width: 130px;
 	position:absolute;
-	top:710px;
+	top:780px;
 	left:380px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
@@ -1739,28 +1760,28 @@ overflow: auto;
 }
 .two{
 	position:absolute;
-	top:690px;
+	top:760px;
 	left:500px;
 }
 .three{
 	position:absolute;
-	top:920px;
+	top:990px;
 	left:230px;
 }
 .four{
 	position:absolute;
-	top:930px;
+	top:1000px;
 	left:430px;
 }
 .five{
 	position:absolute;
-	top:930px;
+	top:1000px;
 	left:630px;
 }
 .text-others{
 	width: 130px;
 	position:absolute;
-	top:950px;
+	top:1020px;
 	left:10px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
@@ -1769,7 +1790,7 @@ overflow: auto;
 .text-trash{
 	width: 120px;
 	position:absolute;
-	top:950px;
+	top:1020px;
 	left:700px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
@@ -1778,10 +1799,19 @@ overflow: auto;
 .text-file{
 	width: 120px;
 	position:absolute;
-	top:760px;
+	top:830px;
 	left:640px;
 	font-family: 'Luckiest Guy', arial, serif;
 	font-size: 16px;
+	color:black;
+}
+.fav{
+	width: 120px;
+	position:absolute;
+	top:770px;
+	left:40px;
+	font-family: 'Luckiest Guy', arial, serif;
+	font-size: 20px;
 	color:black;
 }
 .titulo{
@@ -1813,10 +1843,14 @@ overflow: auto;
 	float:left;
 	width:100%;
 	height:26px;
+	margin-bottom:5px;
 }
 #busqueda .column{
 	float:left;
 }
 #columns-full.column{
+	float:left;
+}
+#columns-top.column{
 	float:left;
 }
