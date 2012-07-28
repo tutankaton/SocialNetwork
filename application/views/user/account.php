@@ -62,7 +62,7 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 									</div>
 									<div style="width: 30px; float:left; height:50px;"></div>
 									<?php 
-									$this->User_model->recomends_movies_to_view();
+									$this->User_model->recomends_movies_to_top();
 									if(isset($recommends))
 									foreach($recommends as $reco){
 										echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
@@ -207,5 +207,5 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 							<!-- fin 2| pestaña -->							
 						</div>
 						<!-- ENDS TABS -->
-<?php $this->User_model->recomends_movies_to_view();?>
+<?php $this->User_model->recomends_movies_to_top();?>
 <script type="text/javascript" src="/socialNetwork/js/DnD.js"></script>

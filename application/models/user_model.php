@@ -750,10 +750,36 @@ class User_model extends CI_Model{
 				$i++;
 			}
 		}
+		//ordeno por ranking
 		array_multisort($definitive_list, SORT_DESC);
-		var_dump($definitive_list);
-		delay();
+		return $definitive_list;
+	}
 
+	function recomends_movies_to_top(){
+		$id_user = $this->session->userdata('id');
+		
+		//recupero ya vistas
+		$this->db->where('id_user',$id_user);
+		$query = $this->db->get('already_view');
+		$i = 0;
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$this->db->where('id_user',$id_user);
+				$this->db->where('id_movie',$row->id_movie);
+				$q = $this->db->get('calification_movie');
+				if($q->num_rows > 0){
+					foreach($q->result() as $r){
+						$recomends_movies_to_top[$i] = array('calification' => $r->calification, 'id_movie' => $row->id_movie);
+					}			
+				}else{
+					$recomends_movies_to_top[$i] = array('calification' => 2.5, 'id_movie' => $row->id_movie);
+				}
+				$i++;
+			}
+		}
+
+		array_multisort($recomends_movies_to_top, SORT_DESC);
+		return $recomends_movies_to_top;
 	}
 }
 
