@@ -56,7 +56,19 @@ class Movie extends CI_Controller {
 		$this->load->model('User_model');
 		$this->load->model('Movie_model');
 		$query = $this->input->get('s');
-		$data['recommends'] = $this->Movie_model->search_recommend_movies($query);
+		$data['recommends_searchs'] = $this->Movie_model->search_recommend_movies($query);
+		$data['title'] = 'Account';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'user/account';
+		$this->load->view('includes/template',$data);
+	}
+	
+	function search_recommend_movies_to_top(){
+		$this->load->model('User_model');
+		$this->load->model('Movie_model');
+		$query = $this->input->get('s');
+		$data['top_searchs'] = $this->Movie_model->search_recommend_movies($query);
 		$data['title'] = 'Account';
 		$data['discription'] = '';
 		$data['keyword'] = '';

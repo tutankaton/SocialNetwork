@@ -16,12 +16,13 @@ class User extends CI_Controller {
 	}
 	
 	function index($error = ''){
+		$this->load->model('Movie_model');
 		if($error){$data['login_error']=$error;}else{$data['login_error']='';}
-		$data['title'] = 'Site';
+		$data['title'] = 'Comunidad cinéfila';
 		$data['discription'] = '';
 		$data['keyword'] = '';
-		$data['main_content'] = '';
-		$this->load->view('includes/template',$data);
+		$data['main_content'] = 'site/index';
+		$this->load->view('includes/site_temp',$data);
 	}
 	
 	function search_friends(){

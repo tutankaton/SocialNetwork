@@ -59,11 +59,7 @@ class Movie_model extends CI_Model{
 					return $result;
 				}
 			}
-        }
-		while ($i<7){
-			$result[$i] = array('id' => '-1', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
-			$i++;
-		}
+        }		
 		return $result;		
 	}
 	
@@ -143,7 +139,25 @@ class Movie_model extends CI_Model{
 		}
 		array_multisort($rank, SORT_DESC, $timestamp, SORT_DESC, $definitive_list);
 		
-		return $definitive_list;
+		$i = 0;
+		foreach ($definitive_list as $reco) {
+			$this->db->where('id',$reco['id_movie']);
+			$query = $this->db->get('movie');
+			if($query->num_rows > 0){
+				foreach($query->result() as $row){
+						$title = $row->title;
+						$id = $row->id;
+						$image = $row->image;
+						$thumbnail = $row->thumbnail;
+						$year = $row->year;
+						$calification = $row->calification;
+						$sinopsis = $row->sinopsis;
+						$result[$i] = array ('id' => $id, 'title' => $title, 'image' => $image, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification, 'sinopsis' => $sinopsis);
+						$i++;
+				}
+	        }
+		}
+		return $result;
 	}
 		
 }

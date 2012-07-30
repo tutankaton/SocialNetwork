@@ -62,18 +62,34 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 									</div>
 									<div style="width: 30px; float:left; height:50px;"></div>
 									<?php 
-									$recommends_to_view = $this->User_model->recomends_movies_to_view();
-									$j = 0;
-									foreach($recommends_to_view as $reco){
-										if($j < 7){
-											echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
-											echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
-											echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
-											echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
-											echo '</div></div></div></div>';
-											echo '</div>';
-											$j++;
-										}	
+									if(isset($recommends_searchs)){
+										$j = 0;
+										foreach($recommends_searchs as $reco){
+											if($j < 7){
+												echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
+												echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
+												echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
+												echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
+												echo '</div></div></div></div>';
+												echo '</div>';
+												$j++;
+											}																					
+										}
+									}
+									else{
+										$recommends_to_view = $this->User_model->recomends_movies_to_view();
+										$j = 0;
+										foreach($recommends_to_view as $reco){
+											if($j < 7){
+												echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
+												echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
+												echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
+												echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
+												echo '</div></div></div></div>';
+												echo '</div>';
+												$j++;
+											}																					
+										}
 									}?>
 								</div>
 								<div id="columns-full">
@@ -156,7 +172,7 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 								<div id="busqueda">
 									<div class="search-back">
 										<div class="search">
-											<form  method="get" id="searchform" action="/socialNetwork/index.php/movie/search_recommend_movies">
+											<form  method="get" id="searchform" action="/socialNetwork/index.php/movie/search_recommend_movies_to_top">
 												<div>
 													<input type="text" value="Search movies..." name="s" id="s" onfocus="defaultInputm(this)" onblur="clearInputm(this)" />
 													<input type="submit" id="searchsubmit" value=" " />
@@ -165,18 +181,35 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 										</div>
 									</div>
 									<div style="width: 30px; float:left; height:50px;"></div>
-									<?php $recommends_to_top = $this->User_model->recomends_movies_to_top();
-									$j = 0;
-									foreach($recommends_to_top as $reco){
-										if($j < 7){
-											echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
-											echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
-											echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
-											echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
-											echo '</div></div></div></div>';
-											echo '</div>';
-											$j++;
-										}	
+									<?php
+									if (isset($top_searchs)){
+										$j = 0;
+										foreach($top_searchs as $reco){
+											if($j < 7){
+												echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
+												echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
+												echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
+												echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
+												echo '</div></div></div></div>';
+												echo '</div>';
+												$j++;
+											}	
+										}
+									}
+									else{
+										$recommends_to_top = $this->User_model->recomends_movies_to_top();
+										$j = 0;
+										foreach($recommends_to_top as $reco){
+											if($j < 7){
+												echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
+												echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
+												echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
+												echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
+												echo '</div></div></div></div>';
+												echo '</div>';
+												$j++;
+											}	
+										}
 									}?>
 								</div>
 								<?php 

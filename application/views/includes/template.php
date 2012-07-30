@@ -103,17 +103,7 @@
 			<!-- HEADER -->
 			<div id="header">
 				<a href="index.html"><img id="logo" src="/socialNetwork/img/logo.png" alt="Nova" /></a>
-				<!-- Social 
-				<div id="social-holder">
-					<ul class="social">
-						<li><a href="http://www.facebook.com" class="poshytip facebook" title="Become a fan"></a></li>
-						<li><a href="http://www.twitter.com" class="poshytip twitter" title="Follow our tweets"></a></li>
-						<li><a href="http://www.dribbble.com" class="poshytip dribbble" title="View our work"></a></li>
-						<li><a href="http://www.addthis.com" class="poshytip addthis" title="Tell everybody"></a></li>
-						<li><a href="http://www.vimeo.com" class="poshytip vimeo" title="View our videos"></a></li>
-						<li><a href="http://www.youtube.com" class="poshytip youtube" title="View our videos"></a></li>
-					</ul>
-				</div>-->
+
 				<div id="social-holder">
 					<ul class="social">
 						<?php 
@@ -214,23 +204,6 @@
 							}
 					}
 				?>
-				<!-- ENDS search friends-->
-				<!-- headline 
-				<div id="headline">
-					Shinra is a free template with more than 5 page layouts, jQuery functionality and its fully documented. <a href="http://luiszuno.com/blog/downloads/shinra-html-template">Download it now</a>
-				</div>
-				<!-- ENDS headline -->
-				
-				<!-- Slider 
-			<div id="slider-block">
-				<div id="slider-holder">
-					<div id="slider">
-						<a href="http://www.luiszuno.com"><img src="images/01.jpg" title="Visit my web site regularly and get freebies each week!" alt="" /></a>
-						<a href="http://themeforest.net/user/Ansimuz/portfolio?ref=ansimuz"><img src="images/02.jpg" title="Support the freebies buying high quality premium themes from my portfolio at themeforest" alt="" /></a>
-					</div>
-				</div>
-			</div>
-			<!-- ENDS Slider -->
 				
 			</div>
 			<!-- ENDS HEADER -->
@@ -245,219 +218,16 @@
 							<span class="title"><?php echo $title; ?></span>
 						</div>
 						<!-- ENDS title -->
-					<?php $this->load->view($main_content); ?>
-						<!-- TABS -->
-						<!-- the tabs 
-						<ul class="tabs">
-							<li><a href="#">Featured Pages</a></li>
-							<li><a href="#">Recent posts</a></li>
-							<li><a href="#">Information</a></li>
-							<li><a href="#">Tab four</a></li>
-							<li><a href="#">Last tab</a></li>
-						</ul>
-						
-						<!-- tab "panes" 
-						<div class="panes">
-						
-							<!-- Posts 
-							<div>
-								<ul class="blocks-thumbs thumbs-rollover">
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-								</ul>
-							</div>
-							<!-- ENDS posts -->
-							
-							<!-- Posts 
-							<div>
-								<ul class="blocks-thumbs thumbs-rollover">
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-									<li>
-										<a href="#" class="thumb" title="An image"><img src="img/dummies/282x150.gif" alt="Post" /></a>
-										<div>
-											<a href="#" class="header">Lorem ipsum dolor</a>
-											Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.
-										</div>
-										<a href="single.html">Read more &#8594;</a>
-									</li>
-								</ul>
-							</div>
-							<!-- ENDS posts -->
-							
-							<!-- Information  
-							<div>
-								<div class="plain-text">
-									<h6>Pellentesque habitant morbi tristique senectus et netus et malesuada.</h6> 
-									<p>Fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. <a href="#">This is a link</a></p>
-									<p>Fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.Fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
-								</div>
-							</div>
-							<!-- ENDS Information -->
-							
-							<!-- Information  
-							<div>
-								<div class="plain-text">
-									<h6>Pellentesque habitant morbi tristique senectus et netus et malesuada.</h6> 
-									<p>Fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. <a href="#">This is a link</a></p>
-									<p>Fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.Fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
-								</div>
-							</div>
-							<!-- ENDS Information 
-							
-							<!-- Information 
-							<div>
-								<div class="plain-text">
-									<h6>Pellentesque habitant morbi tristique senectus et netus et malesuada.</h6> 
-									<p>Fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. <a href="#">This is a link</a></p>
-									<p>Fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.Fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
-								</div>
-							</div>
-							<!-- ENDS Information 
-							
-						</div>
-						<!-- ENDS TABS -->
-	
-	
+					<?php $this->load->view($main_content); ?>	
 	
 				</div>
 				<!-- ENDS content -->
-				
-				<!-- Twitter 
-				<div id="twitter">
-					<a href="#" id="prev-tweet"></a>
-					<a href="#" id="next-tweet"></a>
-					<div id="tweets">
-						<ul class="tweet_list"></ul>
-					</div>
-				</div>
-				<!-- ENDS Twitter -->
-	
 	
 			</div>
 			<!-- ENDS MAIN -->
 			
 			<!-- FOOTER -->
 			<div id="footer">
-				
-				<!-- footer-cols 
-				<ul id="footer-cols">
-					<li class="col">
-						<h6>About the theme</h6>
-						Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.
-					</li>
-					<li class="col">
-						<h6>Categories</h6>
-						<ul>
-							<li><a href="#">Webdesign</a></li>
-							<li><a href="#/">Wordpress</a></li>
-							<li><a href="#">Photo</a></li>
-							<li><a href="#">Code</a></li>
-							<li><a href="#">Web design</a></li>
-							<li><a href="#/">Marketplace</a></li>
-							<li><a href="#">Writting</a></li>
-							<li><a href="#">Drawings</a></li>
-						</ul>
-					</li>
-					<li class="col">
-						<h6>Categories</h6>
-						<ul>
-							<li><a href="#">Webdesign</a></li>
-							<li><a href="#/">Wordpress</a></li>
-							<li><a href="#">Photo</a></li>
-							<li><a href="#">Code</a></li>
-							<li><a href="#">Web design</a></li>
-							<li><a href="#/">Marketplace</a></li>
-							<li><a href="#">Writting</a></li>
-							<li><a href="#">Drawings</a></li>
-						</ul>
-					</li>
-				</ul>
-				<!-- ENDS footer-cols -->
 				
 				<!-- Bottom -->
 				<div id="bottom">
