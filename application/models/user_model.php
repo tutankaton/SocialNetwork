@@ -695,7 +695,7 @@ class User_model extends CI_Model{
 
 	function recomends_movies_to_view(){
 		$id_user = $this->session->userdata('id');
-		
+		$this->load->model('Movie_model'); $this->Movie_model->recomends_movies_general(NULL);
 		//recupero amigos
 		$this->db->where('id_user',$id_user);
 		$query = $this->db->get('friendship');
@@ -713,23 +713,24 @@ class User_model extends CI_Model{
 		$movies = array();
 		$movies_info = array();
 		$indice = 1;
-		foreach ($friends as $friend) {
-			$this->db->where('id_user',$friend['id_friend']);
-			$query = $this->db->get('calification_movie');
-			foreach($query->result() as $row){
-				$aux = array_search($row->id_movie, $movies); //false si no existe
-				if(!$aux){
-					$movies[$indice] = $row->id_movie;
-					$movies_info[$indice] = array('id_movie' => $row->id_movie, 'calification' => $row->calification * $friend['agreement'],'factor' => $friend['agreement']);
-					$indice++;
-				}else{
-					$calification_aux = $movies_info[$aux]['calification'];
-					$factor_aux = $movies_info[$aux]['factor'];
-					$movies_info[$aux] = array('id_movie' => $row->id_movie, 'calification' => $calification_aux + $row->calification * $friend['agreement'],'factor' => $factor_aux + $friend['agreement']);
+		if(isset($friends)){
+			foreach ($friends as $friend) {
+				$this->db->where('id_user',$friend['id_friend']);
+				$query = $this->db->get('calification_movie');
+				foreach($query->result() as $row){
+					$aux = array_search($row->id_movie, $movies); //false si no existe
+					if(!$aux){
+						$movies[$indice] = $row->id_movie;
+						$movies_info[$indice] = array('id_movie' => $row->id_movie, 'calification' => $row->calification * $friend['agreement'],'factor' => $friend['agreement']);
+						$indice++;
+					}else{
+						$calification_aux = $movies_info[$aux]['calification'];
+						$factor_aux = $movies_info[$aux]['factor'];
+						$movies_info[$aux] = array('id_movie' => $row->id_movie, 'calification' => $calification_aux + $row->calification * $friend['agreement'],'factor' => $factor_aux + $friend['agreement']);
+					}
 				}
 			}
 		}
-
 		//recupero ya vistas
 		$this->db->where('id_user',$id_user);
 		$query = $this->db->get('already_view');
@@ -752,7 +753,29 @@ class User_model extends CI_Model{
 		}
 		//ordeno por ranking
 		array_multisort($definitive_list, SORT_DESC);
-		return $definitive_list;
+		
+		$i = 0;
+		if ($definitive_list!=NULL){
+			foreach ($definitive_list as $reco) {
+				$this->db->where('id',$reco['id_movie']);
+				$query = $this->db->get('movie');
+				if($query->num_rows > 0){
+					foreach($query->result() as $row){
+							$title = $row->title;
+							$id = $row->id;
+							$image = $row->image;
+							$thumbnail = $row->thumbnail;
+							$year = $row->year;
+							$calification = $row->calification;
+							$sinopsis = $row->sinopsis;
+							$result[$i] = array ('id' => $id, 'title' => $title, 'image' => $image, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification, 'sinopsis' => $sinopsis);
+							$i++;
+					}
+		        }
+			}
+			return $result;
+		}
+		return array();
 	}
 
 	function recomends_movies_to_top(){
@@ -779,7 +802,25 @@ class User_model extends CI_Model{
 		}
 
 		array_multisort($recomends_movies_to_top, SORT_DESC);
-		return $recomends_movies_to_top;
+		$i = 0;
+		foreach ($recomends_movies_to_top as $reco) {
+			$this->db->where('id',$reco['id_movie']);
+			$query = $this->db->get('movie');
+			if($query->num_rows > 0){
+				foreach($query->result() as $row){
+						$title = $row->title;
+						$id = $row->id;
+						$image = $row->image;
+						$thumbnail = $row->thumbnail;
+						$year = $row->year;
+						$calification = $row->calification;
+						$sinopsis = $row->sinopsis;
+						$result[$i] = array ('id' => $id, 'title' => $title, 'image' => $image, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification, 'sinopsis' => $sinopsis);
+						$i++;
+				}
+	        }
+		}
+		return $result;
 	}
 }
 

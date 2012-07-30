@@ -62,15 +62,18 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 									</div>
 									<div style="width: 30px; float:left; height:50px;"></div>
 									<?php 
-									$this->User_model->recomends_movies_to_top();
-									if(isset($recommends))
-									foreach($recommends as $reco){
-										echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
-										echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
-										echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
-										echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
-										echo '</div></div></div></div>';
-										echo '</div>';	
+									$recommends_to_view = $this->User_model->recomends_movies_to_view();
+									$j = 0;
+									foreach($recommends_to_view as $reco){
+										if($j < 7){
+											echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
+											echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
+											echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
+											echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
+											echo '</div></div></div></div>';
+											echo '</div>';
+											$j++;
+										}	
 									}?>
 								</div>
 								<div id="columns-full">
@@ -162,15 +165,18 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 										</div>
 									</div>
 									<div style="width: 30px; float:left; height:50px;"></div>
-									<?php 
-									if(isset($recommends))
-									foreach($recommends as $reco){
-										echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
-										echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
-										echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
-										echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
-										echo '</div></div></div></div>';
-										echo '</div>';	
+									<?php $recommends_to_top = $this->User_model->recomends_movies_to_top();
+									$j = 0;
+									foreach($recommends_to_top as $reco){
+										if($j < 7){
+											echo '<div class="column"><header>-'.$reco["id"].'</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">';
+											echo '<ul class="meta"><li><strong>'.$reco['title'].'</strong></li><li><strong>Year: </strong> '.$reco['year'].'</li> ';
+											echo '<li><a href="/socialNetwork/index.php/movie/view/'.$reco["id"].'">View more</a></li>								</ul>';
+											echo '<div  class="cover"><img width="120px"  height="178px"src="'.$reco["thumbnail"].'"  alt="Feature image" /></div>';
+											echo '</div></div></div></div>';
+											echo '</div>';
+											$j++;
+										}	
 									}?>
 								</div>
 								<?php 
@@ -207,5 +213,5 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 							<!-- fin 2| pestaña -->							
 						</div>
 						<!-- ENDS TABS -->
-<?php $this->User_model->recomends_movies_to_top();?>
+
 <script type="text/javascript" src="/socialNetwork/js/DnD.js"></script>
