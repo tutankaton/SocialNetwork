@@ -216,19 +216,19 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 									$tops = $this->User_model->get_top($this->session->userdata('id'));
 									?>
 								<div id="columns-top">
-								  	<div class="column" style="position:absolute!important; top:797px; left:335px;"><header>first</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+								  	<div class="column" style="position:absolute!important; top:832px; left:357px;"><header>first</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
 																<ul class="meta"><li><strong><?php echo $tops[0]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $tops[0]['year'];?></li> 
 																	<li><a href="/socialNetwork/index.php/movie/view/<?php echo $tops[0]['id'];?>">View more</a></li>								</ul>
 																<div  class="cover"><img width="120px"  height="178px"src="<?php echo $tops[0]['thumbnail']?>"  alt="Feature image" /></div>
 															</div></div></div></div>
 									</div>
-									<div class="column"style="position:absolute!important; top:850px; left:190px;"><header>second</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+									<div class="column"style="position:absolute!important; top:871px; left:227px;"><header>second</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
 																<ul class="meta"><li><strong><?php echo $tops[1]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $tops[1]['year'];?></li> 
 																	<li><a href="/socialNetwork/index.php/movie/view/<?php echo $tops[1]['id'];?>">View more</a></li>								</ul>
 																<div class="cover"><img width="120px"  height="178px"src="<?php echo $tops[1]['thumbnail']?>"  alt="Feature image" /></div>
 															</div></div></div></div>
 									</div>
-									<div class="column"style="position:absolute!important; top:871px; left:480px;"><header>third</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
+									<div class="column"style="position:absolute!important; top:887px; left:487px;"><header>third</header><div id="projects-list"><div class="project"><div class="project-shadow"><div class="project-thumbnail">
 																<ul class="meta"><li><strong><?php echo $tops[2]['title'];?></strong></li><li><strong>Year: </strong> <?php echo $tops[2]['year'];?></li> 
 																	<li><a href="/socialNetwork/index.php/movie/view/<?php echo $tops[2]['id'];?>">View more</a></li>								</ul>
 																<div  class="cover"><img width="120px"  height="178px"src="<?php echo $tops[2]['thumbnail']?>"  alt="Feature image" /></div>
@@ -240,7 +240,25 @@ $list_to_view = $this->User_model->movies_to_view($this->session->userdata('id')
 								<div class="queue_movies">
 									<div class="fav">
 										my favorite movies:
-									</div>		
+									</div>	
+									<div class="podio1">
+										<img src="/socialNetwork/img/podio1.png"></img>
+									</div>
+									<div class="podio2">
+										<img src="/socialNetwork/img/podio2.png"></img>
+									</div>
+									<div class="podio3">
+										<img src="/socialNetwork/img/podio3.png"></img>
+									</div>
+									<div class="trofeo1">
+										<img src="/socialNetwork/img/trofeo1.png" width="110px"></img>
+									</div>
+									<div class="trofeo2">
+										<img src="/socialNetwork/img/trofeo2.png" width="70px"></img>
+									</div>			
+									<div class="trofeo3">
+										<img src="/socialNetwork/img/trofeo3.png" width="200px"></img>
+									</div>	
 								</div>								
 							</div>								
 							<!-- fin 2| pestaña -->							
