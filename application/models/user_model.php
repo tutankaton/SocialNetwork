@@ -906,6 +906,17 @@ class User_model extends CI_Model{
 				}
 			}
 		}
+		//ordeno por acuerdo
+		foreach ($califications as $key => $row) {
+		    $agreement[$key]  = $row['agreement'];
+		    $critica[$key] = $row['critica'];
+			$calification[$key] = $row['calification'];
+			$id_friend[$key] = $row['id_friend'];
+			$username[$key] = $row['username'];
+			$photo[$key] = $row['photo'];
+			$created_on[$key] = $row['created_on'];
+		}
+		array_multisort($agreement, SORT_DESC,$califications);
 		return $califications;
 	}
 
