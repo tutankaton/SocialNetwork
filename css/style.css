@@ -91,6 +91,11 @@ body {
 	border-bottom: 1px solid #d7d7d7;
 	padding-bottom: 20px;
 }
+#content .line-divid{
+	clear: both;
+	border-bottom: 1px solid #d7d7d7;
+	padding-bottom: 20px;
+}
 #content .line-divider:hover{
 	background-color:#EEEEEE;
 }
@@ -1329,6 +1334,28 @@ h6{ font-size: 20px; }
 	cursor: pointer;
 }
 
+.enqueue{
+	border:none;
+	float:right;
+	width:32px;
+	height:32px;
+	margin-top:20px;
+	padding-right:20px;
+	background: url(../img/mono-icons/star32.png) no-repeat;
+	cursor: pointer;
+}
+
+.dequeue{
+	border:none;
+	float:right;
+	width:32px;
+	height:32px;
+	margin-top:20px;
+	padding-right:20px;
+	background: url(../img/mono-icons/minus32.png) no-repeat;
+	cursor: pointer;
+}
+
 .last_activity{
 	display: inline;
 	border:none;
@@ -1583,6 +1610,15 @@ overflow: auto;
 }
 
 .sample6 span {
+
+	width: 234px;
+	height: 337px;
+	position: absolute;
+	top: -5px;
+	left: -5px;
+	background: url(images/cut-corner.png) no-repeat;
+}
+.sample66 span {
 
 	width: 234px;
 	height: 337px;
@@ -1974,5 +2010,20 @@ overflow: auto;
 	float:left;
 }
 #columns-top.column{
+	float:left;
+}
+.minifoto{
+	float:right;
+	max-height: 70px; 
+	max-width: 50px;
+	overflow: hidden; 
+	margin-top:5px; 
+	margin-right:5px;	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.columna{
+	width:32%;
 	float:left;
 }

@@ -336,6 +336,12 @@ class User_model extends CI_Model{
 		$insert = $this->db->insert('to_view', $new_data);
 		return $insert;
 	}
+
+	function del_to_view($id1){
+		$this->db->where('id_movie',$id1);
+		$this->db->where('id_user', $this->session->userdata('id'));
+		$this->db->delete('to_view'); 
+	}
 	
 	function replace_to_view($idnew, $id){
 		$this->add_to_view($idnew);
@@ -483,7 +489,8 @@ class User_model extends CI_Model{
 		return array ($id, $name, $username);
 	}
 	
-	function search_friends($query){
+	function search_friends($query, $limit, $start){
+		$this->db->limit($limit, $start);	
 		$this->db->like('username',$query);
 		$this->db->where('id !=',$this->session->userdata('id'));
 		$result = array();
@@ -501,6 +508,13 @@ class User_model extends CI_Model{
 		return $result;		
 	}
 
+	function search_friends_count($query){		
+		$this->db->like('username',$query);
+		$this->db->where('id !=',$this->session->userdata('id'));
+		$query = $this->db->get('user');
+		return $query->num_rows;
+	}
+
 	function get_resend_email($id){
 		$query = $this->db->where('id', $id)->get('user');
 		foreach($query->result() as $row){
@@ -514,6 +528,16 @@ class User_model extends CI_Model{
 		$this->db->where('id_user',$this->session->userdata('id'));
 		$this->db->where('id_friend',$id);
 		$query = $this->db->get('friendship');
+		if($query->num_rows > 0){
+			return TRUE;
+	    }
+		return FALSE;		
+	}
+	
+	function is_enqueue($id){
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$this->db->where('id_movie',$id);
+		$query = $this->db->get('to_view');
 		if($query->num_rows > 0){
 			return TRUE;
 	    }
@@ -664,7 +688,18 @@ class User_model extends CI_Model{
 		$this->db->where('id_user',$this->session->userdata('id'));
 		$query = $this->db->get('friendship');
 		return $query->num_rows;
-
+	}
+	
+	function is_already_saw($id){		
+		if($this->is_logged_in()){
+			$this->db->where('id_user',$this->session->userdata('id'));
+			$this->db->where('id_movie',$id);
+			$query = $this->db->get('already_view');			
+			if($query->num_rows > 0){
+				return TRUE;
+	        }
+		}
+		return FALSE;
 	}
 	
 	function friends($limit, $start){
@@ -822,6 +857,59 @@ class User_model extends CI_Model{
 		}
 		return $result;
 	}
+
+	function get_califications($id_movie){
+		$id_user = $this->session->userdata('id');
+
+		//recupero amigos
+		$this->db->where('id_user',$id_user);
+		$query = $this->db->get('friendship');
+		$i = 0;
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				if($row->agreement == NULL)
+					$friends[$i] = array('agreement' => "5", 'id_friend' => $row->id_friend);
+				else 
+					$friends[$i] = array('agreement' => $row->agreement, 'id_friend' => $row->id_friend);
+				$i++;
+			}
+		}
+		$califications = array();
+		$indice = 0;
+		if(isset($friends)){
+			foreach ($friends as $friend) {
+				$this->db->where('id_user',$friend['id_friend']);
+				$this->db->where('id_movie',$id_movie);
+				$query = $this->db->get('critica_movie');
+				if($query->num_rows > 0){
+					foreach($query->result() as $row){
+						$critica = $row->critica;
+						$this->db->where('id_user',$friend['id_friend']);
+						$q = $this->db->get('calification_movie');
+						if($query->num_rows > 0){
+							foreach($q->result() as $r){
+								$calification = $r->calification;
+								$created_on = $r->created_on;
+							}
+						}else{
+							$calification = 0;
+						}
+					}
+					$this->db->where('id',$friend['id_friend']);
+					$q = $this->db->get('user');
+					foreach($q->result() as $r){
+							$califications[$indice] = array('agreement' => $friend['agreement'], 'critica' => $critica, 'calification' => $calification, 'id_friend' => $friend['id_friend'], 'username' => $r->username, 'photo' => $r->photo, 'created_on' => $created_on);
+					}
+					$indice++;					
+				}else{
+					$critica = "";
+				}
+			}
+		}
+		return $califications;
+	}
+
+
 }
 
 ?>

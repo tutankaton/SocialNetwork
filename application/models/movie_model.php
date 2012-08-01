@@ -20,7 +20,14 @@ class Movie_model extends CI_Model{
 		return array ($title, $sinopsis, $year, $calification, $image, $thumbnail);
 	}
 	
-	function search_movies($query){
+	function search_movies_count($query){
+		$this->db->like('title',$query);
+		$query = $this->db->get('movie');
+		return $query->num_rows;		
+	}
+	
+	function search_movies($query, $limit, $start){
+		$this->db->limit($limit, $start);	
 		$this->db->like('title',$query);
 		$result = array();
 		$i = 0;
