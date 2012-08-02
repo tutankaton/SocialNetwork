@@ -91,6 +91,42 @@ class Movie_model extends CI_Model{
 		
 	}
 	
+	function get_cast($id_movie){
+		$result = array();
+		$i = 0;
+		$this->db->where('id_movie',$id_movie);
+		$query = $this->db->get('movie_actor');
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$this->db->where('id',$row->id_actor);
+				$q= $this->db->get('actor');
+				foreach($q->result() as $r){
+					$result[$i] = array('id_actor' => $row->id_actor, 'name' => $r->name);
+				}
+				$i++;
+			}
+        }
+		return $result;		
+	}
+	
+	function get_directors($id_movie){
+		$result = array();
+		$i = 0;
+		$this->db->where('id_movie',$id_movie);
+		$query = $this->db->get('movie_director');
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$this->db->where('id',$row->id_director);
+				$q= $this->db->get('director');
+				foreach($q->result() as $r){
+					$result[$i] = array('id_director' => $row->id_director, 'name' => $r->name);
+				}
+				$i++;
+			}
+        }
+		return $result;		
+	}
+	
 	function recomends_movies_general($id_user){
 
 		$movies = array();
@@ -165,6 +201,70 @@ class Movie_model extends CI_Model{
 	        }
 		}
 		return $result;
+	}
+
+	function search_actor($query, $limit, $start){
+		$this->db->where('id_actor',$query);
+		$result = array();
+		$i = 0;
+		$qu = $this->db->get('movie_actor');
+		
+		if($qu->num_rows > 0){
+			foreach($qu->result() as $row){						
+				$this->db->where('id',$row->id_movie);
+				$q = $this->db->get('movie');
+				foreach($q->result() as $r){					
+					$title = $r->title;
+					$id = $r->id;
+					$image = $r->image;
+					$thumbnail = $r->thumbnail;
+					$year = $r->year;
+					$calification = $r->calification;
+					$sinopsis = $r->sinopsis;
+					$result[$i] = array ('id' => $id, 'title' => $title, 'image' => $image, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification, 'sinopsis' => $sinopsis);
+					$i++;					
+				}
+			}
+        }
+		return $result;		
+	}
+	
+	function search_actor_count($query){
+		$this->db->where('id_actor',$query);
+		$query = $this->db->get('movie_actor');
+		return $query->num_rows;	
+	}
+	
+	function search_director($query, $limit, $start){
+		$this->db->where('id_director',$query);
+		$result = array();
+		$i = 0;
+		$qu = $this->db->get('movie_director');
+		
+		if($qu->num_rows > 0){
+			foreach($qu->result() as $row){						
+				$this->db->where('id',$row->id_movie);
+				$q = $this->db->get('movie');
+				foreach($q->result() as $r){					
+					$title = $r->title;
+					$id = $r->id;
+					$image = $r->image;
+					$thumbnail = $r->thumbnail;
+					$year = $r->year;
+					$calification = $r->calification;
+					$sinopsis = $r->sinopsis;
+					$result[$i] = array ('id' => $id, 'title' => $title, 'image' => $image, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification, 'sinopsis' => $sinopsis);
+					$i++;					
+				}
+			}
+        }
+		return $result;		
+	}
+	
+	function search_director_count($query){
+		$this->db->where('id_director',$query);
+		$query = $this->db->get('movie_director');
+		return $query->num_rows;	
 	}
 		
 }

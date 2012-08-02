@@ -9,7 +9,23 @@
 <?php if(!$this->User_model->is_already_saw($id))
 			echo '<a  style="display:inline; float:right; text-decoration:none;" href="/socialNetwork/index.php/user/already_saw/'.$id.'" title="Already Saw">Have you seen it? <img width="26px" src="/socialNetwork/img/mono-icons/check32.png"></img></a>';
 ?>
-	<h5 style="font-size: 16px; margin-top:30px;margin-left:30px;"><?php echo $sinopsis?></h5>	
+	<h5 style="font-size: 16px; margin-top:30px;margin-left:30px;"><?php echo $sinopsis?></h5>
+	<div class="cast_director">
+		<strong>Cast: </strong> 
+		<?php $cast =  $this->Movie_model->get_cast($id);
+			foreach ($cast as $actor) {
+				echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_actor/'.$actor['id_actor'].'">'.$actor['name'].'</a>, ';
+			}
+		?>
+		<br/><br/>
+		<strong>Director: </strong> 
+		<?php $directors =  $this->Movie_model->get_directors($id);
+			foreach ($directors as $director) {
+				echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_director/'.$director['id_director'].'">'.$director['name'].'</a> ';
+			}
+		?>
+	</div>	
+<!--
 <div id="posts" class="single" style="float:left; width:650px; padding-top: 100px; ">
 	<div class="post">
 		<ul class="meta">
@@ -23,6 +39,7 @@
 		</ul>		
 	</div>
 </div>
+-->
 <?php $califications = $this->User_model->get_califications($id);
 //por cada columna
 for ($i=0; $i < 3; $i++) { 
@@ -42,7 +59,7 @@ for ($i=0; $i < 3; $i++) {
 								if($califications[$indice]['calification']>0)
 									echo '<script>$("[name=star'.$califications[$indice]['id_friend'].'][value='.$califications[$indice]['calification'].']").attr("checked","checked");</script>';
 						echo '<li> <strong>By: </strong><a style="font-weight:bold; color:#AAAAAA;" href="/socialNetwork/index.php/user/profile/'.$califications[$indice]['id_friend'].'">'.$califications[$indice]['username'].'</a></li>	
-							  <li> <strong>Posted on :</strong>'.$califications[$indice]['created_on'].'</li>
+							  <li> <strong>Posted on: </strong>'.$califications[$indice]['created_on'].'</li>
 							  <li> <strong>Review: </strong>'.$califications[$indice]['critica'].'</li>
 						  </ul>
 					  </div>
