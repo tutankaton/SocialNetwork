@@ -1,36 +1,38 @@
 <?php list ($title, $sinopsis, $year, $calification, $image, $thumbnail, $id_genre) = $this->Movie_model->get_movie_info($id);	?>
+<div style="min-height: 400px;margin-left:30px;">
+		<div class="photo sample66" style="float:right; height:300px; padding-right: 50px;">
+		<span></span><img width="214px"  height="317px"  src="<?php echo $thumbnail?>"></img>
+	</div>
+	<h1 style="color:#333333; display:inline;"><?php echo $title?> (<?php echo $year?>)</h1>	
+	
+	
 
-<h1 style="color:#333333; margin-left: 30px;display:inline;"><?php echo $title?> (<?php echo $year?>)</h1>	
-
-
-<div class="photo sample66" style="float:right; height:300px; padding-right: 50px;">
-	<span></span><img width="214px"  height="317px"  src="<?php echo $thumbnail?>"></img>
+	<?php if(!$this->User_model->is_already_saw($id))
+				echo '<a  style="display:inline; float:right; text-decoration:none;" href="/socialNetwork/index.php/user/already_saw/'.$id.'" title="Already Saw">Have you seen it? <img width="26px" src="/socialNetwork/img/mono-icons/check32.png"></img></a>';
+	?>
+		<h5 style="font-size: 16px; margin-top:30px;"><?php echo $sinopsis?></h5>
+		<div class="cast_director">
+					
+			<strong>Genre: </strong> 
+			<?php	
+			$genre_name = $this->Movie_model->get_genre_name($id_genre);
+			echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_genre/'.$id_genre.'">'.$genre_name.'</a> ';
+			?><br/><br/>
+			<strong>Cast: </strong> 
+			<?php $cast =  $this->Movie_model->get_cast($id);
+				foreach ($cast as $actor) {
+					echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_actor/'.$actor['id_actor'].'">'.$actor['name'].'</a>, ';
+				}
+			?>
+			<br/><br/>
+			<strong>Director: </strong> 
+			<?php $directors =  $this->Movie_model->get_directors($id);
+				foreach ($directors as $director) {
+					echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_director/'.$director['id_director'].'">'.$director['name'].'</a> ';
+				}
+			?>
+		</div>	
 </div>
-<?php if(!$this->User_model->is_already_saw($id))
-			echo '<a  style="display:inline; float:right; text-decoration:none;" href="/socialNetwork/index.php/user/already_saw/'.$id.'" title="Already Saw">Have you seen it? <img width="26px" src="/socialNetwork/img/mono-icons/check32.png"></img></a>';
-?>
-	<h5 style="font-size: 16px; margin-top:30px;margin-left:30px;"><?php echo $sinopsis?></h5>
-	<div class="cast_director">
-				
-		<strong>Genre: </strong> 
-		<?php	
-		$genre_name = $this->Movie_model->get_genre_name($id_genre);
-		echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_genre/'.$id_genre.'">'.$genre_name.'</a> ';
-		?><br/><br/>
-		<strong>Cast: </strong> 
-		<?php $cast =  $this->Movie_model->get_cast($id);
-			foreach ($cast as $actor) {
-				echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_actor/'.$actor['id_actor'].'">'.$actor['name'].'</a>, ';
-			}
-		?>
-		<br/><br/>
-		<strong>Director: </strong> 
-		<?php $directors =  $this->Movie_model->get_directors($id);
-			foreach ($directors as $director) {
-				echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_director/'.$director['id_director'].'">'.$director['name'].'</a> ';
-			}
-		?>
-	</div>	
 <!--
 <div id="posts" class="single" style="float:left; width:650px; padding-top: 100px; ">
 	<div class="post">
