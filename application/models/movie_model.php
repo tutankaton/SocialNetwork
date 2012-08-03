@@ -13,11 +13,12 @@ class Movie_model extends CI_Model{
 				$image = $row->image;
 				$thumbnail = $row->thumbnail;
 				$id = $row->id;
+				$id_genre = $row->id_genre;
 			}
 		}else{
 			redirect('user');
 		}
-		return array ($title, $sinopsis, $year, $calification, $image, $thumbnail);
+		return array ($title, $sinopsis, $year, $calification, $image, $thumbnail, $id_genre);
 	}
 	
 	function search_movies_count($query){
@@ -127,6 +128,16 @@ class Movie_model extends CI_Model{
 		return $result;		
 	}
 	
+	function get_genre_name($id_genre){
+		$this->db->where('id',$id_genre);
+		$query = $this->db->get('genre');
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				return $row->name;
+			}
+        }
+	}
+	
 	function recomends_movies_general($id_user){
 
 		$movies = array();
@@ -232,6 +243,35 @@ class Movie_model extends CI_Model{
 	function search_actor_count($query){
 		$this->db->where('id_actor',$query);
 		$query = $this->db->get('movie_actor');
+		return $query->num_rows;	
+	}
+	
+	function search_genre($query, $limit, $start){
+		$this->db->limit($limit, $start);	
+		$this->db->where('id_genre',$query);
+		$result = array();
+		$i = 0;
+		$q = $this->db->get('movie');
+		
+		if($q->num_rows > 0){
+			foreach($q->result() as $r){					
+				$title = $r->title;
+				$id = $r->id;
+				$image = $r->image;
+				$thumbnail = $r->thumbnail;
+				$year = $r->year;
+				$calification = $r->calification;
+				$sinopsis = $r->sinopsis;
+				$result[$i] = array ('id' => $id, 'title' => $title, 'image' => $image, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification, 'sinopsis' => $sinopsis);
+				$i++;					
+			}
+        }
+		return $result;		
+	}
+	
+	function search_genre_count($query){
+		$this->db->where('id_genre',$query);
+		$query = $this->db->get('movie');
 		return $query->num_rows;	
 	}
 	

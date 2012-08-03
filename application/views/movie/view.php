@@ -1,4 +1,4 @@
-<?php list ($title, $sinopsis, $year, $calification, $image, $thumbnail) = $this->Movie_model->get_movie_info($id);	?>
+<?php list ($title, $sinopsis, $year, $calification, $image, $thumbnail, $id_genre) = $this->Movie_model->get_movie_info($id);	?>
 
 <h1 style="color:#333333; margin-left: 30px;display:inline;"><?php echo $title?> (<?php echo $year?>)</h1>	
 
@@ -11,6 +11,12 @@
 ?>
 	<h5 style="font-size: 16px; margin-top:30px;margin-left:30px;"><?php echo $sinopsis?></h5>
 	<div class="cast_director">
+				
+		<strong>Genre: </strong> 
+		<?php	
+		$genre_name = $this->Movie_model->get_genre_name($id_genre);
+		echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_genre/'.$id_genre.'">'.$genre_name.'</a> ';
+		?><br/><br/>
 		<strong>Cast: </strong> 
 		<?php $cast =  $this->Movie_model->get_cast($id);
 			foreach ($cast as $actor) {

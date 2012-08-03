@@ -131,14 +131,93 @@ class User_model extends CI_Model{
 		if($query->num_rows == 0){
 			$this->db->where('id_user', $this->session->userdata('id'));
 			$this->db->where('id_movie', $id_movie_rating);
-			$insert = $this->db->insert('calification_movie', $new_data);		
-			return $insert;
+			$this->db->insert('calification_movie', $new_data);		
 		}else{
 			$this->db->where('id_user', $this->session->userdata('id'));
 			$this->db->where('id_movie', $id_movie_rating);
-			$insert = $this->db->update('calification_movie', $new_data);		
-			return $insert;
+			$this->db->update('calification_movie', $new_data);		
 		}
+
+		//actualizo opinion del usuario sobre el actor
+		$this->db->where('id_movie', $id_movie_rating);
+		$query = $this->db->get('movie_actor');
+		$actores = array();
+		$indice = 0;
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$actores[$indice] = $row->id_actor;
+				$indice++;
+			}
+		}
+		foreach ($actores as $id_actor) {
+			$this->db->where('id_actor', $id_actor);
+			$this->db->where('id_user', $this->session->userdata('id'));
+			$query = $this->db->get('user_actor');
+			if($query->num_rows > 0){
+				foreach($query->result() as $row){
+					$auxProm = (($row->performance_prom * $row->performance_count) + $rating_value)/($row->performance_count + 1);
+					$auxCount = $row->performance_count + 1;
+					$new_data = array (
+						'id_user' => $this->session->userdata('id'),
+						'id_actor' => $id_actor,
+						'performance_prom' => $auxProm,
+						'performance_count' => $auxCount
+					);
+					$this->db->where('id_user', $this->session->userdata('id'));
+					$this->db->where('id_actor', $id_actor);
+					$this->db->update('user_actor', $new_data);		
+				}
+			}else{
+				$new_data = array (
+						'id_user' => $this->session->userdata('id'),
+						'id_actor' => $id_actor,
+						'performance_prom' => $rating_value,
+						'performance_count' => 1
+					);
+				$this->db->insert('user_actor', $new_data);	
+			}
+		}
+		
+		//actualizo opinion del usuario sobre el director
+		$this->db->where('id_movie', $id_movie_rating);
+		$query = $this->db->get('movie_director');
+		$directores = array();
+		$indice = 0;
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$directores[$indice] = $row->id_director;
+				$indice++;
+			}
+		}
+		foreach ($directores as $id_director) {
+			$this->db->where('id_director', $id_director);
+			$this->db->where('id_user', $this->session->userdata('id'));
+			$query = $this->db->get('user_director');
+			if($query->num_rows > 0){
+				foreach($query->result() as $row){
+					$auxProm = (($row->performance_prom * $row->performance_count) + $rating_value)/($row->performance_count + 1);
+					$auxCount = $row->performance_count + 1;
+					$new_data = array (
+						'id_user' => $this->session->userdata('id'),
+						'id_director' => $id_director,
+						'performance_prom' => $auxProm,
+						'performance_count' => $auxCount
+					);
+					$this->db->where('id_user', $this->session->userdata('id'));
+					$this->db->where('id_director', $id_director);
+					$this->db->update('user_director', $new_data);		
+				}
+			}else{
+				$new_data = array (
+						'id_user' => $this->session->userdata('id'),
+						'id_director' => $id_director,
+						'performance_prom' => $rating_value,
+						'performance_count' => 1
+					);
+				$this->db->insert('user_director', $new_data);	
+			}
+		}
+
 	}
 	
 	function set_agreement($id_friend, $degree){		

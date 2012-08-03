@@ -158,6 +158,56 @@ class Movie extends CI_Controller {
 		$this->load->view('includes/template',$data);
 	}	
 
+	function search_genre($id_genre){
+		$this->load->model('User_model');
+		$this->load->model('Movie_model');
+		$query = $id_genre;
+		$data["query"] = $query;
+		
+		//paginado
+        $config = array();
+        $config["base_url"] = base_url() . "/index.php/movie/search_genre/".$query;
+        $config["total_rows"] = $this->Movie_model->search_genre_count($query);
+		$config['use_page_numbers'] = FALSE;
+        $config["per_page"] = 3;
+        $config["uri_segment"] = 4;
+		$config['full_tag_open'] = '<ul class="pager">';
+		$config['full_tag_close'] = '</ul>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['first_link'] = '<<';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = '>>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = '&raquo;';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = '&laquo;';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '<a></li>';
+        $this->pagination->initialize($config);
+		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		
+ 		$data["results"] = $this->Movie_model->search_genre($query, $config["per_page"], $page);
+        $data["links"] = $this->pagination->create_links();
+		
+		$this->db->where('id',$query);
+		$q = $this->db->get('genre');
+		foreach($q->result() as $r){					
+			$data["query"] = 'Genre = '.$r->name;								
+		}
+
+		$data['title'] = 'Search movies';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'movie/search_movies';
+		$this->load->view('includes/template',$data);
+	}	
+
 	function search_director($id_director){
 		$this->load->model('User_model');
 		$this->load->model('Movie_model');
