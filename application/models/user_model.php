@@ -999,6 +999,105 @@ class User_model extends CI_Model{
 		return $califications;
 	}
 
+	function get_last_califications($id_user){
+		
+		if($id_user!=NULL){
+			//recupero amigos
+			$this->db->where('id_user',$id_user);
+			$query = $this->db->get('friendship');
+			$i = 0;
+			if($query->num_rows > 0){
+				foreach($query->result() as $row){
+					if($row->agreement == NULL)
+						$friends[$i] = array('agreement' => "5", 'id_friend' => $row->id_friend);
+					else 
+						$friends[$i] = array('agreement' => $row->agreement, 'id_friend' => $row->id_friend);
+					$i++;
+				}
+			}
+			$califications = array();
+			$indice = 0;
+			if(isset($friends)){
+				foreach ($friends as $friend) {
+					$this->db->where('id_user',$friend['id_friend']);
+					$query = $this->db->get('critica_movie');
+					if($query->num_rows > 0){
+						foreach($query->result() as $row){
+							$critica = $row->critica;
+							$id_movie = $row->id_movie;
+							$this->db->where('id_user',$friend['id_friend']);
+							$q = $this->db->get('calification_movie');
+							if($query->num_rows > 0){
+								foreach($q->result() as $r){
+									$calification = $r->calification;
+									$created_on = $r->created_on;
+								}
+							}else{
+								$calification = 0;
+							}
+							$this->db->where('id',$id_movie);
+							$q = $this->db->get('movie');
+							foreach($q->result() as $r){
+								$title = $r->title;
+								$year = $r->year;
+								$sinopsis = $r->sinopsis;
+								$thumbnail = $r->thumbnail;
+							}
+						}
+						$this->db->where('id',$friend['id_friend']);
+						$q = $this->db->get('user');
+						foreach($q->result() as $r){
+								$califications[$indice] = array('created_on' => $created_on, 'agreement' => $friend['agreement'], 'critica' => $critica, 'calification' => $calification, 'id_friend' => $friend['id_friend'], 'username' => $r->username, 'photo' => $r->photo, 'title' => $title, 'year' => $year, 'sinopsis' => $sinopsis, 'thumbnail' => $thumbnail, 'id_movie' => $id_movie);
+						}
+						$indice++;					
+					}else{
+						$critica = "";
+					}
+				}
+			}
+		}
+		else{
+			$califications = array();
+			$indice = 0;
+			$cant_criticas = $this->db->count_all('critica_movie');
+			$this->db->limit(7, $cant_criticas - 7);
+			$query = $this->db->get('critica_movie');
+			foreach($query->result() as $row){
+				$critica = $row->critica;
+				$id_movie = $row->id_movie;
+				$id_user = $row->id_user;
+				$this->db->where('id_user',$id_user);
+				$this->db->where('id_movie',$id_movie);
+				$q = $this->db->get('calification_movie');
+				if($q->num_rows > 0){
+					foreach($q->result() as $r){
+						$calification = $r->calification;
+						$created_on = $r->created_on;
+					}
+				}else{
+					$calification = 0;
+				}
+				$this->db->where('id',$id_movie);
+				$q = $this->db->get('movie');
+				foreach($q->result() as $r){
+					$title = $r->title;
+					$year = $r->year;
+					$sinopsis = $r->sinopsis;
+					$thumbnail = $r->thumbnail;
+				}
+				$this->db->where('id',$id_user);
+				$q = $this->db->get('user');
+				foreach($q->result() as $r){
+						$califications[$indice] = array('created_on' => $created_on, 'critica' => $critica, 'calification' => $calification, 'id_friend' => $id_user, 'username' => $r->username, 'photo' => $r->photo, 'title' => $title, 'year' => $year, 'sinopsis' => $sinopsis, 'thumbnail' => $thumbnail, 'id_movie' => $id_movie);
+				}
+				$indice++;
+			}
+		}
+		array_multisort($califications, SORT_DESC);
+		
+		return $califications;
+	}
+
 
 }
 

@@ -2033,3 +2033,15 @@ overflow: auto;
 	height: 192px;
 	margin-top: 30px;
 }
+.minifotomovie{
+	margin-bottom:2px;
+	float:right;
+	max-height: 120px; 
+	max-width: 80px;
+	overflow: hidden; 
+	margin-top:5px; 
+	margin-right:5px;	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}

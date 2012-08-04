@@ -206,9 +206,12 @@
 				?>
 				
 			<!-- headline -->
-				<div id="headline" style="margin-top:30px;">
+						<?php if(!$this->User_model->is_logged_in()){
+							echo '<div id="headline" style="margin-top:30px;">
 					Trompoleta is a social community where you can connect with people who share your same taste in films...     <a href="/socialNetwork/index.php/user/registration">  Join us!</a>
-				</div>
+				</div>';
+						}?>
+				
 				<!-- ENDS headline -->
 				
 				<!-- Slider -->
@@ -216,12 +219,21 @@
 			<div id="slider-block">
 				<div id="slider-holder">
 					<div id="slider">
-						<?php 						
-						$list = $this->Movie_model->recomends_movies_general(NULL); 
-						$i = 0;
-						while ($i<5){
-							echo '<a href="/socialNetwork/index.php/movie/view/'.$list[$i]['id'].'"><img src="'.$list[$i]['image'].'" title="'.$list[$i]['title'].'<br /><br />'.$list[$i]['sinopsis'].'" alt="" /></a>';
-							$i++;
+						<?php
+						if($this->User_model->is_logged_in()){
+							$list = $this->Movie_model->recomends_movies_general($this->session->userdata('id')); 
+							$i = 0;
+							while ($i<5){
+								echo '<a href="/socialNetwork/index.php/movie/view/'.$list[$i]['id'].'"><img src="'.$list[$i]['image'].'" title="'.$list[$i]['title'].'<br /><br />'.$list[$i]['sinopsis'].'" alt="" /></a>';
+								$i++;
+							}
+						}else{
+							$list = $this->Movie_model->recomends_movies_general(NULL); 
+							$i = 0;
+							while ($i<5){
+								echo '<a href="/socialNetwork/index.php/movie/view/'.$list[$i]['id'].'"><img src="'.$list[$i]['image'].'" title="'.$list[$i]['title'].'<br /><br />'.$list[$i]['sinopsis'].'" alt="" /></a>';
+								$i++;
+							}
 						}?>
 					</div>
 				</div>
