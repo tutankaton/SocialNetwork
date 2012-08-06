@@ -208,8 +208,8 @@
 			<!-- headline -->
 						<?php if(!$this->User_model->is_logged_in()){
 							echo '<div id="headline" style="margin-top:30px;">
-					Trompoleta is a social community where you can connect with people who share your same taste in films...     <a href="/socialNetwork/index.php/user/registration">  Join us!</a>
-				</div>';
+								Trompoleta is a social community where you can connect with people who share your same taste in films...     <a href="/socialNetwork/index.php/user/registration">  Join us!</a>
+							</div>';
 						}?>
 				
 				<!-- ENDS headline -->

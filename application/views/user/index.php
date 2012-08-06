@@ -10,7 +10,7 @@ for ($i=0; $i < 3; $i++) {
 					<div class="post">
 							
 							<div style="float:right; width: 87px;">
-							<img class="minifotomovie" src="'.$califications[$indice]['thumbnail'].'"></img>
+							<a href="/socialNetwork/index.php/movie/view/'.$califications[$indice]['id_movie'].'" style="cursor:pointer;"><img class="minifotomovie" id='.$califications[$indice]['id_movie'].' src="'.$califications[$indice]['thumbnail'].'"></img></a>
 								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="1" disabled="disabled"/>
 								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="2" disabled="disabled"/>
 								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="3" disabled="disabled"/>
@@ -20,7 +20,7 @@ for ($i=0; $i < 3; $i++) {
 							<ul class="meta" style="padding: 5px;min-height: 145px;">';
 								if($califications[$indice]['calification']>0)
 									echo '<script>$("[name=star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'][value='.$califications[$indice]['calification'].']").attr("checked","checked");</script>';
-						echo '<img class="minifoto"  style="margin-top: -3px; float:left" src="'.$califications[$indice]['photo'].'"></img>';
+						echo '<img class="minifoto" id='.$califications[$indice]['id_friend'].' style="margin-top: -3px; float:left" src="'.$califications[$indice]['photo'].'"></img>';
 						echo '<li> <strong><a style="font-weight:bold; color:#AAAAAA;" href="/socialNetwork/index.php/user/profile/'.$califications[$indice]['id_friend'].'">'.$califications[$indice]['username'].'</a> said: </strong></li>	
 							  <li> '.$califications[$indice]['critica'].'</li>
 						  </ul>
@@ -30,4 +30,51 @@ for ($i=0; $i < 3; $i++) {
 		$indice = $indice + 3;
 	}
 	echo '</div>';
-}
+}?>
+<div id="blob" class="blob r" style="display: none;">
+	<b><div class="name"></div></b>
+	<div class="friends"></div>
+	<div class="sep"></div>
+	<div class="info">
+		<b>Last viewed: </b>
+		<div class="saw"></div>
+	</div>
+	<div class="sep"></div>
+	<div class="info2">
+		<b>To see soon: </b>
+		<div class="to_view"></div>
+	</div>
+</div>
+
+<div id="blobmovie" class="blob r movie" style="display: none;">
+	<div class="tit"></div>
+	<div <span class="cantidad"></span></div>
+	<div class="txt"></div>
+	<div class="sep"></div>
+
+	<b>Stars:</b> 
+	<div class="info">
+		<div class="reparto"></div>
+	</div>
+	<b>Director:</b> 
+	<div class="info2">
+		<div class="director"></div>
+	</div>
+	<div class="sep"></div>
+	<div class="info2">
+		<ul class="box">
+			<li>
+				<span class="genero num"></span>
+				<span class="labl">Genre</span>
+			</li>
+			<li>
+				<span class="calification num"></span>
+				<span class="labl">Calification</span>
+			</li>
+			<li>
+				<span class="ano num"></span>
+				<span class="labl">Year</span>
+			</li>
+		</ul>
+	</div>
+</div>

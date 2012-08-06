@@ -1,6 +1,81 @@
 // Jquery with no conflict
 jQuery(document).ready(function($) {
 
+	//info de amigo
+	$('.minifoto').hover(function(eventObject){
+		$('#blobmovie').attr('style', 'top:0px; left:0px;display:none;');
+		var friend = this.id;
+	    $.ajax({
+                     type: "post",
+                     url: "/socialNetwork/index.php/user/get_info_friend_to_tooltip",
+                     dataType: "json",
+                     data: { id_friend: friend} ,
+
+              success: function(data) {
+                   $('#blob .name').html(data.name_friend);
+                   if(data.cant_amigos_en_comun == 0)
+                   		$('#blob .friends').html("No friends in common");
+                   else
+                   		$('#blob .friends').html(data.cant_amigos_en_comun+" friends in common");
+                   $('#blob .saw').html('');
+                   for (var i=0; i < data.vistas.length; i++) {
+                   		$('#blob .saw').append('<img class="microfotomovie" src="'+data.vistas[i].thumbnail+'" title="'+data.vistas[i].title+'"></img>');
+                   };
+                   if(data.por_ver.length==0)
+                   	$('#blob .to_view').html('No movies enqueue');
+                   else
+                   	$('#blob .to_view').html('');
+                   for (var i=0; i < data.por_ver.length; i++) {
+                   		$('#blob .to_view').append('<img class="microfotomovie" src="'+data.por_ver[i].thumbnail+'" title="'+data.por_ver[i].title+'"></img>');
+                   };                   
+                   $('#blob').attr('style', 'top:'+eventObject.fromElement.offsetParent.offsetTop+'px; left:'+(eventObject.fromElement.offsetParent.offsetLeft+50)+'px;display:block;');
+               }
+        });
+
+               //eventObject.fromElement.offsetParent.offsetLeft
+    },function(eventObject){
+        $('#blob').attr('style', 'top:0px; left:0px;display:none;');
+    });
+   
+    //info de movie
+	$('.minifotomovie').hover(function(eventObject){
+		$('#blob').attr('style', 'top:0px; left:0px;display:none;');
+		var movie = this.id;
+		$.ajax({
+	                 type: "post",
+	                 url: "/socialNetwork/index.php/user/get_info_movie_to_tooltip",
+	                 dataType: "json",
+	                 data: { id_movie: movie} ,
+	
+	          success: function(data) {
+	          		$('#blobmovie .tit').html(data.title);
+	          		$('#blobmovie .ano').html(data.year);
+	          		$('#blobmovie .txt').html(data.sinopsis);
+	          		$('#blobmovie .genero').html(data.genre);
+	          		$('#blobmovie .calification').html(data.calification);
+	          		$('#blobmovie .cantidad').html(data.cant_amigos_vieron+' friends have seen it');
+	          		
+	          		if(data.actores.length==0)
+                   		$('#blobmovie .reparto').html('No data');
+                    else
+                    	$('#blobmovie .reparto').html('');
+                    for (var i=0; i < data.actores.length; i++) {
+                    		$('#blobmovie .reparto').append('<span>'+data.actores[i].name+', </span>');
+                    };    
+                    if(data.directores.length==0)
+                   		$('#blobmovie .director').html('No data');
+                    else
+                    	$('#blobmovie .director').html('');
+                    for (var i=0; i < data.directores.length; i++) {
+                    		$('#blobmovie .director').append('<span>'+data.directores[i].name+' </span>');
+                    };                
+					$('#blobmovie').attr('style', 'top:'+eventObject.fromElement.offsetParent.offsetTop+'px; left:'+(eventObject.fromElement.offsetParent.offsetLeft+270)+'px;display:block;width:290px;');
+	           }
+	    });		
+               //eventObject.fromElement.offsetParent.offsetLeft
+    },function(eventObject){
+        $('#blobmovie').attr('style', 'top:0px; left:0px;display:none;');
+    });
 
 
 

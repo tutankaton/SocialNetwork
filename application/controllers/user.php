@@ -487,6 +487,19 @@ class User extends CI_Controller {
 		$this->load->view('includes/template', $data);
     }
 
+	function get_info_friend_to_tooltip()
+    {
+        $id_friend = $this->input->post("id_friend", true);
+        $this->User_model->get_info_friend_to_tooltip($id_friend);
+    }
+	
+	function get_info_movie_to_tooltip()
+    {
+        $id_movie = $this->input->post("id_movie", true);
+        $this->User_model->get_info_movie_to_tooltip($id_movie);
+    }
+	
+
 }
 
 ?>

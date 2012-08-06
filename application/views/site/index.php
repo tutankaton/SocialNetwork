@@ -10,7 +10,9 @@ for ($i=0; $i < 3; $i++) {
 					<div class="post">
 							
 							<div style="float:right; width: 87px;">
-							<img class="minifotomovie" src="'.$califications[$indice]['thumbnail'].'"></img>
+							<a href="/socialNetwork/index.php/movie/view/'.$califications[$indice]['id_movie'].'" title="'.$califications[$indice]['title'].'" style="cursor:pointer;">
+								<img class="minifotomovie" src="'.$califications[$indice]['thumbnail'].'"></img>
+							</a>
 								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="1" disabled="disabled"/>
 								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="2" disabled="disabled"/>
 								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="3" disabled="disabled"/>

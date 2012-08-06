@@ -1098,7 +1098,130 @@ class User_model extends CI_Model{
 		return $califications;
 	}
 
+	function get_info_friend_to_tooltip($id_friend){
+		//info basica
+		$this->db->where('id',$id_friend);
+		$q = $this->db->get('user');
+		if($q->num_rows > 0){
+			foreach($q->result() as $r){
+				$name_friend = $r->username;
+			}
+		}
+		//ultimas q vio
+		$vistas = array();
+		$indice = 0;
+		$this->db->where('id_user',$id_friend);
+		$this->db->from('already_view');
+		$cant_vistas = $this->db->count_all_results();
+		if($cant_vistas>5){
+			$this->db->limit(5, $cant_vistas - 5);
+		}
+		$this->db->where('id_user',$id_friend);
+		$q = $this->db->get('already_view');			
+		foreach($q->result() as $r){
+			$this->db->where('id',$r->id_movie);
+			$query = $this->db->get('movie');
+			foreach($query->result() as $row){
+				$vistas[$indice] = array('id'=>$row->id, 'title'=>$row->title, 'thumbnail'=>$row->thumbnail);
+			}
+			$indice++;
+		}
 
+		//las q va a ver
+		$por_ver = array();
+		$indice = 0;
+		$this->db->where('id_user',$id_friend);
+		$this->db->from('to_view');
+		$cant_por_ver = $this->db->count_all_results();
+		if($cant_por_ver>5){
+			$this->db->limit(5, $cant_por_ver - 5);
+		}
+		$this->db->where('id_user',$id_friend);
+		$q = $this->db->get('to_view');			
+		foreach($q->result() as $r){
+			$this->db->where('id',$r->id_movie);
+			$query = $this->db->get('movie');
+			foreach($query->result() as $row){
+				$por_ver[$indice] = array('id'=>$row->id, 'title'=>$row->title, 'thumbnail'=>$row->thumbnail);
+			}
+			$indice++;
+		}
+
+		//cant de amigos en común
+		$this->db->select('*');
+		$this->db->from('friendship fs');
+		$this->db->join('friendship fs2', 'fs.id_friend = fs2.id_friend AND  fs.id_user != fs2.id_user AND fs.id_user='.$this->session->userdata('id').' AND fs2.id_user='.$id_friend);
+		$query = $this->db->get();
+		$cant_amigos_en_comun = $query->num_rows;
+		
+		$result = array('name_friend' => $name_friend, 'vistas' => $vistas, 'por_ver' => $por_ver, 'cant_amigos_en_comun' => $cant_amigos_en_comun);
+		
+		print_r(json_encode($result));
+	}
+
+	function get_info_movie_to_tooltip($id_movie){
+		//info basica
+		$this->db->where('id',$id_movie);
+		$q = $this->db->get('movie');
+		if($q->num_rows > 0){
+			foreach($q->result() as $r){
+				$title = $r->title;
+				$id_genre = $r->id_genre;
+				$sinopsis = $r->sinopsis;
+				$year = $r->year;
+				$calification = $r->calification;
+			}
+		}
+		
+		$this->db->where('id',$id_genre);
+		$q = $this->db->get('genre');
+		foreach($q->result() as $r){
+			$genre = $r->name;
+		}
+		
+		//reparto
+		$actores = array();
+		$indice = 0;
+		$this->db->where('id_movie',$id_movie);
+		$q = $this->db->get('movie_actor');	
+		if($q->num_rows > 0){
+			foreach($q->result() as $r){
+				$this->db->where('id',$r->id_actor);
+				$query = $this->db->get('actor');
+				foreach($query->result() as $row){
+					$actores[$indice] = array('id'=>$row->id, 'name'=>$row->name);
+				}
+				$indice++;
+			}
+		}
+
+		//directores
+		$directores = array();
+		$indice = 0;
+		$this->db->where('id_movie',$id_movie);
+		$q = $this->db->get('movie_director');	
+		if($q->num_rows > 0){
+			foreach($q->result() as $r){
+				$this->db->where('id',$r->id_director);
+				$query = $this->db->get('director');
+				foreach($query->result() as $row){
+					$directores[$indice] = array('id'=>$row->id, 'name'=>$row->name);
+				}
+				$indice++;
+			}
+		}
+
+		//cant de amigos que la vieron
+		$this->db->select('*');
+		$this->db->from('friendship fs');
+		$this->db->join('already_view av', 'fs.id_friend = av.id_user AND av.id_movie = '.$id_movie.' AND fs.id_user = '.$this->session->userdata('id'));
+		$query = $this->db->get();
+		$cant_amigos_vieron = $query->num_rows;
+		
+		$result = array('title' => $title,'sinopsis' => $sinopsis,'year' => $year,'calification' => $calification,'genre' => $genre, 'actores'=> $actores, 'directores'=>$directores, 'cant_amigos_vieron' => $cant_amigos_vieron);
+		
+		print_r(json_encode($result));
+	}
 }
 
 ?>
