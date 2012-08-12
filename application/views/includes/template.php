@@ -141,7 +141,7 @@
 							<li><a href="gallery-2.html"><span> Two columns </span></a></li>
 							<li><a href="video-gallery.html"><span> Video gallery </span></a></li>
 						</ul>
-					</li>					
+					</li>
 					<?php 
 						$this->load->model('User_model');
 						if(get_cookie('cinefilos') && !$this->User_model->is_logged_in()){
