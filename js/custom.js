@@ -104,7 +104,7 @@ jQuery(document).ready(function($) {
 	
 	$('#slider').nivoSlider({
 		effect:'random', //Specify sets like: 'fold,fade,sliceDown'
-        slices:15,
+        slices:5,
         animSpeed:500, //Slide transition speed
         pauseTime:3000,
         startSlide:0, //Set starting Slide (0 index)
@@ -121,6 +121,7 @@ jQuery(document).ready(function($) {
         captionOpacity:0.7 //Universal caption opacity
 	});
 	
+
 	// Poshytips ------------------------------------------------------ //
 	
     $('.poshytip').poshytip({

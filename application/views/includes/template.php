@@ -133,20 +133,7 @@
 				
 				<!-- Navigation -->
 				<ul id="nav" class="sf-menu">
-					<li class="current-menu-item"><a href="index.html">HOME</a></li>
-					<li><a href="features.html">FEATURES</a>
-						<ul>
-							<li><a href="features-appearance.html"><span> Appearance</span></a></li>
-							<li><a href="features-columns.html"><span> Columns layout</span></a></li>
-							<li><a href="features-accordion.html"><span> Accordion</span></a></li>
-							<li><a href="features-toggle.html"><span> Toggle box</span></a></li>
-							<li><a href="features-tabs.html"><span> Tabs</span></a></li>
-							<li><a href="features-infobox.html"><span> Text box</span></a></li>
-							<li><a href="features-monobox.html"><span> Icons</span></a></li>
-						</ul>
-					</li>
-					<li><a href="blog.html">BLOG</a></li>
-					<li><a href="portfolio.html">PORTFOLIO</a></li>
+					<li class="current-menu-item"><a href="/socialNetwork/">HOME</a></li>
 					<li><a href="gallery.html">GALLERY</a>
 						<ul>
 							<li><a href="gallery.html"><span> Four columns </span></a></li>
