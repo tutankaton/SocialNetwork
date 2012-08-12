@@ -218,6 +218,38 @@ class User_model extends CI_Model{
 			}
 		}
 
+		//actualizo opinion del usuario sobre el genero
+		$this->db->where('id', $id_movie_rating);
+		$query = $this->db->get('movie');
+		foreach($query->result() as $row){
+			$id_genre = $row->id_genre;
+		}
+		$this->db->where('id_genre', $id_genre);
+		$this->db->where('id_user', $this->session->userdata('id'));
+		$query = $this->db->get('user_genre');
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$auxProm = (($row->prom_calification * $row->cant_calification) + $rating_value)/($row->cant_calification + 1);
+				$auxCount = $row->cant_calification + 1;
+				$new_data = array (
+					'id_user' => $this->session->userdata('id'),
+					'id_genre' => $id_genre,
+					'prom_calification' => $auxProm,
+					'cant_calification' => $auxCount
+				);
+				$this->db->where('id_user', $this->session->userdata('id'));
+				$this->db->where('id_genre', $id_genre);
+				$this->db->update('user_genre', $new_data);		
+			}
+		}else{
+			$new_data = array (
+					'id_user' => $this->session->userdata('id'),
+					'id_genre' => $id_genre,
+					'prom_calification' => $rating_value,
+					'cant_calification' => 1
+				);
+			$this->db->insert('user_genre', $new_data);	
+		}
 	}
 	
 	function set_agreement($id_friend, $degree){		
@@ -809,7 +841,6 @@ class User_model extends CI_Model{
 
 	function recomends_movies_to_view(){
 		$id_user = $this->session->userdata('id');
-		$this->load->model('Movie_model'); $this->Movie_model->recomends_movies_general(NULL);
 		//recupero amigos
 		$this->db->where('id_user',$id_user);
 		$query = $this->db->get('friendship');
