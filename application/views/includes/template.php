@@ -9,6 +9,8 @@
 		<meta name="ROBOTS" content="all" />
 		<title><?php echo $title; ?></title>
 		
+		<link rel="shortcut icon" href="/socialNetwork/img/favicon.png" type="image/x-icon" /> 
+		
 		<!-- CSS -->
 		<link rel="stylesheet" href="/socialNetwork/css/style.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/socialNetwork/css/social-icons.css" type="text/css" media="screen" />
@@ -91,6 +93,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Cuprum&subset=latin' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="/socialNetwork/css/jquery.confirm/jquery.confirm.css" />
 
+				
 
 	</head>
 	
@@ -218,7 +221,7 @@
 				
 				<!-- Bottom -->
 				<div id="bottom">
-					<a href="http://luiszuno.com/blog/downloads/shinra-html-template" >Shinra</a> is a Free Template by <a href="http://www.luiszuno.com"> Luiszuno</a> 
+					developed by <a href="#">Enzo Pecorari</a> for <a href="http://cs.uns.edu.ar/~dcm/iaw/"> IAW 2012</a> 
 					
 					<div id="to-top" class="poshytip" title="To top"></div>
 					

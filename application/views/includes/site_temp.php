@@ -7,6 +7,9 @@
 		<meta name="keywords" content="<?php echo $keyword; ?>" />
 		<meta name="revisit-after" content="7 days" />
 		<meta name="ROBOTS" content="all" />
+		
+		<link rel="shortcut icon" href="/socialNetwork/img/favicon.png" type="image/x-icon" /> 
+				
 		<title><?php echo $title; ?></title>
 		
 		<!-- CSS -->
@@ -90,7 +93,7 @@
 		
 		<link href='http://fonts.googleapis.com/css?family=Cuprum&subset=latin' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="/socialNetwork/css/jquery.confirm/jquery.confirm.css" />
-
+		
 
 	</head>
 	
@@ -195,7 +198,7 @@
 			<!-- headline -->
 						<?php if(!$this->User_model->is_logged_in()){
 							echo '<div id="headline" style="margin-top:30px;">
-								Trompoleta is a social community where you can connect with people who share your same taste in films...     <a href="/socialNetwork/index.php/user/registration">  Join us!</a>
+								Cinephile Comunity is a social network where you can connect with people who share your same taste in films...     <a href="/socialNetwork/index.php/user/registration">  Join us!</a>
 							</div>';
 						}?>
 				
@@ -249,7 +252,7 @@
 				
 				<!-- Bottom -->
 				<div id="bottom">
-					<a href="http://luiszuno.com/blog/downloads/shinra-html-template" >Shinra</a> is a Free Template by <a href="http://www.luiszuno.com"> Luiszuno</a> 
+					developed by <a href="#">Enzo Pecorari</a> for <a href="http://cs.uns.edu.ar/~dcm/iaw/"> IAW 2012</a> 
 					
 					<div id="to-top" class="poshytip" title="To top"></div>
 					

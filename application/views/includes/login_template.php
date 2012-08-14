@@ -393,7 +393,7 @@
 				
 				<!-- Bottom -->
 				<div id="bottom">
-					<a href="http://luiszuno.com/blog/downloads/shinra-html-template" >Shinra</a> is a Free Template by <a href="http://www.luiszuno.com"> Luiszuno</a> 
+					developed by <a href="#">Enzo Pecorari</a> for <a href="http://cs.uns.edu.ar/~dcm/iaw/"> IAW 2012</a> 
 					
 					<div id="to-top" class="poshytip" title="To top"></div>
 					

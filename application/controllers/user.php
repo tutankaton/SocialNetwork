@@ -18,7 +18,7 @@ class User extends CI_Controller {
 	function index($error = ''){
 		$this->load->model('Movie_model');
 		if($error){$data['login_error']=$error;}else{$data['login_error']='';}
-		$data['title'] = 'Comunidad cinéfila';
+		$data['title'] = 'Cinephile Comunity';
 		$data['discription'] = '';
 		$data['keyword'] = '';
 		$data['main_content'] = 'site/index';

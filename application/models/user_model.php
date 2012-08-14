@@ -892,13 +892,87 @@ class User_model extends CI_Model{
 		foreach ($movies_info as $possible_movie) {
 			$la_vi = array_search($possible_movie['id_movie'], $already_view);
 			if(!$la_vi){
+				//ranking (0..5) -> sum(CALIF_AMIGOn * ACUERDO_AMIGOn)/sum(ACUERDO_AMIGOn)
 				$definitive_list[$i] = array('rank' => $possible_movie['calification']/$possible_movie['factor'], 'id_movie' => $possible_movie['id_movie']);
 				$i++;
 			}
 		}
-		//ordeno por ranking
-		array_multisort($definitive_list, SORT_DESC);
 		
+		//sumo bonus al ranking por gusto personal (0..2) :
+		// +1 -> género mas visto   --  +0,5 -> 2° genero mas visto
+		// +(prom_genero/5)  -> 0..1 dependiendo de la calificación del género
+		$list_genero = array();
+		$bonus_list_genero = array();
+		$this->db->where('id_user',$id_user);
+		$this->db->order_by('cant_calification', 'desc'); 
+		$query = $this->db->get('user_genre');
+		$indice = 1;
+		foreach($query->result() as $row){
+			if($indice == 1){
+				$bonus = 1;
+			}
+			else if($indice == 2){
+				$bonus = 0.5;
+			}
+			else {
+				$bonus = 0;
+			}				
+			$list_genero[$indice] = $row->id_genre;
+			$bonus += $row->prom_calification / 5;
+			$bonus_list_genero[$indice] = array('id_genre' => $row->id_genre, 'bonus' => $bonus);
+			$indice++;
+		}
+		
+		//bonus de gusto por el reparto y director -> 0,05..0,25 y 0,1..0,5 respectivamente
+		$bunus_staff = 0;
+		if ($definitive_list!=NULL){
+			foreach ($definitive_list as $reco) {
+				$actores_suma = 0;
+				$actores_count = 0;
+				$directores_suma = 0;
+				$directores_count = 0;
+				//actores
+				$this->db->where('id_movie',$reco['id_movie']);
+				$query = $this->db->get('movie_actor');
+				if($query->num_rows > 0){
+					foreach($query->result() as $row){
+						$this->db->where('id_user',$id_user);
+						$this->db->where('id_actor',$row->id_actor);
+						$q = $this->db->get('user_actor');
+						foreach($q->result() as $r){
+							$actores_suma += $r->performance_prom;
+							$actores_count++;
+						}
+					}
+		        }
+				//directores
+				$this->db->where('id_movie',$reco['id_movie']);
+				$query = $this->db->get('movie_director');
+				if($query->num_rows > 0){
+					foreach($query->result() as $row){
+						$this->db->where('id_user',$id_user);
+						$this->db->where('id_director',$row->id_director);
+						$q = $this->db->get('user_director');
+						foreach($q->result() as $r){
+							$directores_suma += $r->performance_prom;
+							$directores_count++;
+						}
+					}
+		        }
+				if($actores_count > 0)
+					$bonus_actores = ($actores_suma / $actores_count) / 20; //performance_prom 1..5 => bonus 0,05..0,25
+				else
+					$bonus_actores = 0;
+				if($directores_count > 0)
+					$bonus_directores = ($directores_suma / $directores_count) / 10; //performance_prom 1..5 => bonus 0,1..0,5
+				else 
+					$bonus_directores = 0;
+
+				$bunus_staff = $bonus_actores + $bonus_directores;
+				$reco['rank'] += $bunus_staff;
+			}
+		}
+		//armo arreglo con información de cada pelicula seleccionada	
 		$i = 0;
 		if ($definitive_list!=NULL){
 			foreach ($definitive_list as $reco) {
@@ -913,11 +987,18 @@ class User_model extends CI_Model{
 							$year = $row->year;
 							$calification = $row->calification;
 							$sinopsis = $row->sinopsis;
-							$result[$i] = array ('id' => $id, 'title' => $title, 'image' => $image, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification, 'sinopsis' => $sinopsis);
+							$id_genre = $row->id_genre;
+							$rank = $reco['rank'];
+							$indice_rank = array_search($id_genre, $list_genero);
+							if($indice_rank)
+								$rank += $bonus_list_genero[$indice_rank]['bonus'];
+							$result[$i] = array ('rank' => $rank, 'id' => $id, 'title' => $title, 'image' => $image, 'thumbnail' => $thumbnail, 'year' => $year, 'calification' => $calification, 'sinopsis' => $sinopsis, 'id_genre' => $id_genre);
 							$i++;
 					}
 		        }
 			}
+			//ordeno por ranking
+			array_multisort($result, SORT_DESC);
 			return $result;
 		}
 		return array();

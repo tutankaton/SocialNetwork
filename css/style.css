@@ -74,7 +74,7 @@ body {
 
 #logo{
 	position: absolute;
-	top: 40px;
+	top: 30px;
 	left: 30px;
 }
 
@@ -259,7 +259,7 @@ h6{ font-size: 20px; }
 
 .top-search{
 	position: absolute;
-	top:115px;
+	top:138px;
 	left: 30px;
 }
 
@@ -2065,8 +2065,7 @@ background: -webkit-gradient(linear,0% 0,0% 100%,from(#dbe7f5),to(#ebf7ff));
 padding: 8px;
 width: 330px;
 z-index: 1000;
-font-size: 11px;
-text-shadow: 0 1px 0 black;
+font-size: 9px;
 display: none;
 border-radius: 4px;
 -moz-border-radius: 4px;
@@ -2137,4 +2136,7 @@ font: bold;
 }
 #blob .name{
 	font-size: 14px;
+}
+#blobmovie{
+	width: 225px!important;
 }
