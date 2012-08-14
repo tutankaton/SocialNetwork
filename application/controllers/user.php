@@ -57,6 +57,11 @@ class User extends CI_Controller {
 		$this->account();
 	}
 	
+	function recommendation($id_movie){
+		$this->User_model->add_recommendation($id_movie);
+		$this->already_saw($id_movie);
+	}
+	
 	function add_friendship($id){
 		$this->User_model->add_friendship($id);
 		redirect($_SERVER['HTTP_REFERER']);
@@ -499,7 +504,22 @@ class User extends CI_Controller {
         $this->User_model->get_info_movie_to_tooltip($id_movie);
     }
 	
-
+	function autocomplete_friends()
+    {
+        $this->User_model->autocomplete_friends();
+    }
+	
+	function recommend_to_a_friend($id_movie)
+    {
+    	$this->load->model('Movie_model');
+		$data['title'] = 'Recommend to a friend';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['id_movie'] = $id_movie;
+		$data['main_content'] = 'user/recommend';
+		$this->load->view('includes/template',$data);
+    }
+	
 }
 
 ?>

@@ -1,6 +1,7 @@
 <?php 
 list ($title, $sinopsis, $year, $calification, $image, $thumbnail) = $this->Movie_model->get_movie_info($id_movie_saw);
-?>
+echo '<a  style="padding-right:70px; display:inline; float:right; text-decoration:none;" href="/socialNetwork/index.php/user/recommend_to_a_friend/'.$id_movie_saw.'" title="Already Saw">Recommend to a friend <img width="26px" src="/socialNetwork/img/mono-icons/comment32.png"></img></a>';
+	?>
 <h1 class="titulo">Have you seen the movie "<strong><?php echo $title?></strong>"? </h1><br />
 <h2 class="titulo">We want your opinion!!</h2>
 <?php 

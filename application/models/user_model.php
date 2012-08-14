@@ -123,7 +123,7 @@ class User_model extends CI_Model{
 			'id_user' => $this->session->userdata('id'),
 			'id_movie' => $id_movie_rating,
 			'calification' => $rating_value,
-			'created_on' => date('y-m-d')
+			'created_on' => date('y-m-d-h-i-s')
 		);
 		$this->db->where('id_user', $this->session->userdata('id'));
 		$this->db->where('id_movie', $id_movie_rating);
@@ -1334,6 +1334,42 @@ class User_model extends CI_Model{
 		
 		print_r(json_encode($result));
 	}
+
+	function autocomplete_friends(){
+		$result = array();
+		$this->db->select('username, u.id');
+		$this->db->from('user u');
+		$this->db->join('friendship fs', 'fs.id_friend = u.id AND fs.id_user = '.$this->session->userdata('id'));
+		$q = $this->db->get();
+		$indice = 0;
+		foreach($q->result() as $r){
+			$result[$indice] = array('label' => $r->username);
+			$indice++;
+		}
+		print_r(json_encode($result));
+	}
+	
+	function add_recommendation($id_movie){
+		$this->db->where('username', $this->input->post('to'));
+		$q = $this->db->get('user');	
+		foreach($q->result() as $r){
+				$id_friend = $r->id;
+			}
+		if(isset($id_friend)){
+			$new_data = array (
+				'id_user' => $this->session->userdata('id'),
+				'id_friend' => $id_friend,
+				'id_movie' => $id_movie,
+				'message' => $this->input->post('message'),
+				'created_on' => date('y-m-d-h-i-s')
+			);
+			$insert = $this->db->insert('recommendation', $new_data);		
+			return $insert;
+		}
+	}
+	
+	
+
 }
 
 ?>

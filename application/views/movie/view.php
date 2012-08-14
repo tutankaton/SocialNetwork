@@ -9,6 +9,9 @@
 
 	<?php if(!$this->User_model->is_already_saw($id))
 				echo '<a  style="display:inline; float:right; text-decoration:none;" href="/socialNetwork/index.php/user/already_saw/'.$id.'" title="Already Saw">Have you seen it? <img width="26px" src="/socialNetwork/img/mono-icons/check32.png"></img></a>';
+		else {
+			echo '<a  style="padding-right:70px; display:inline; float:right; text-decoration:none;" href="/socialNetwork/index.php/user/recommend_to_a_friend/'.$id.'" title="Already Saw">Recommend to a friend <img width="26px" src="/socialNetwork/img/mono-icons/comment32.png"></img></a>';
+		}
 	?>
 		<h5 style="font-size: 16px; margin-top:30px;"><?php echo $sinopsis?></h5>
 		<div class="cast_director">
