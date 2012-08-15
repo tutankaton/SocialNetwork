@@ -1111,6 +1111,99 @@ class User_model extends CI_Model{
 		return $califications;
 	}
 
+	function get_last_califications_recomendations($id_user){
+		$results = array();
+		$indice = 0;
+	//ultimas calificaciones
+		//recupero amigos
+		$this->db->where('id_user',$id_user);
+		$query = $this->db->get('friendship');
+		$i = 0;
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				if($row->agreement == NULL)
+					$friends[$i] = array('agreement' => "5", 'id_friend' => $row->id_friend);
+				else 
+					$friends[$i] = array('agreement' => $row->agreement, 'id_friend' => $row->id_friend);
+				$i++;
+			}
+		}
+		if(isset($friends)){
+			foreach ($friends as $friend) {
+				$this->db->where('id_user',$friend['id_friend']);
+				$query = $this->db->get('critica_movie');
+				if($query->num_rows > 0){
+					foreach($query->result() as $row){
+						$critica = $row->critica;
+						$id_movie = $row->id_movie;
+						$this->db->where('id_user',$friend['id_friend']);
+						$q = $this->db->get('calification_movie');
+						if($query->num_rows > 0){
+							foreach($q->result() as $r){
+								$calification = $r->calification;
+								$created_on = $r->created_on;
+							}
+						}else{
+							$calification = 0;
+						}
+						$this->db->where('id',$id_movie);
+						$q = $this->db->get('movie');
+						foreach($q->result() as $r){
+							$title = $r->title;
+							$year = $r->year;
+							$sinopsis = $r->sinopsis;
+							$thumbnail = $r->thumbnail;
+						}
+					}
+					$this->db->where('id',$friend['id_friend']);
+					$q = $this->db->get('user');
+					foreach($q->result() as $r){
+							$results[$indice] = array('created_on' => $created_on, 'agreement' => $friend['agreement'], 'critica' => $critica, 'calification' => $calification, 'id_friend' => $friend['id_friend'], 'username' => $r->username, 'photo' => $r->photo, 'title' => $title, 'year' => $year, 'sinopsis' => $sinopsis, 'thumbnail' => $thumbnail, 'id_movie' => $id_movie, 'from' => '', 'to' => '', 'msg' => '', 'type' => 'crit', 'id_from' => '', 'id_to' =>'');
+					}
+					$indice++;					
+				}else{
+					$critica = "";
+				}
+			}
+		}
+	//ultimas recomendaciones	
+		$this->db->select('r.id_movie, r.id_user, r.id_friend, r.created_on, r.message');// cambiar * no muy ineficiente
+		$this->db->from('recommendation r');
+	//	$this->db->join('friendship fs', "r.id_friend = ".$id_user." OR (fs.id_user = ".$id_user." AND r.id_user = fs.id_friend) OR (r.id_user = ".$id_user.") OR  (r.id_friend = fs.id_friend AND fs.id_user = ".$id_user.") OR r.id_user = ".$id_user);
+		$this->db->join('friendship fs', "r.id_friend = r.id_user OR (r.id_friend = fs.id_friend  AND fs.id_user = ".$id_user.")OR (r.id_user = fs.id_friend AND fs.id_user = ".$id_user.")");
+		$query = $this->db->get();
+		$i = 0;
+		if($query->num_rows > 0){
+			foreach($query->result() as $row){
+				$created_on = $row->created_on ;
+				$this->db->where('id',$row->id_movie);
+				$q = $this->db->get('movie');
+				foreach($q->result() as $r){
+					$title = $r->title;
+					$year = $r->year;
+					$sinopsis = $r->sinopsis;
+					$thumbnail = $r->thumbnail;
+				}
+				
+				$this->db->where('id',$row->id_user);
+				$q = $this->db->get('user');
+				foreach($q->result() as $r){
+					$from = $r->username;
+					$photo = $r->photo;
+				}
+				$this->db->where('id',$row->id_friend);
+				$q = $this->db->get('user');
+				foreach($q->result() as $r){
+					$to = $r->username;	
+				}
+				$results[$indice] = array('created_on' => $created_on, 'agreement' => '', 'critica' => '', 'calification' => '', 'id_friend' => '', 'username' => '', 'photo' => $photo, 'title' => $title, 'year' => $year, 'sinopsis' => $sinopsis, 'thumbnail' => $thumbnail, 'id_movie' => $row->id_movie, 'from' => $from, 'to' => $to, 'msg'=> $row->message, 'type' => 'reco', 'id_from' => $row->id_user, 'id_to' => $row->id_friend);
+				$indice++;	
+			}
+		}
+		array_multisort($results, SORT_DESC);
+		return $results;
+	}
+
 	function get_last_califications($id_user){
 		
 		if($id_user!=NULL){

@@ -888,6 +888,19 @@ h6{ font-size: 20px; }
 	-webkit-border-radius: 10px;
 }
 
+#posts.single .post .meta2{
+	display: block;
+	background: #c2ffb8;
+	padding: 20px;
+	border-color: #e7e6e6 #ececec #ececec #ececec;
+	border-width: 3px 1px 1px 1px;
+	border-style: solid;
+	
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
 #posts .post .read-more{
 	display: block;
 	position: absolute;
@@ -917,6 +930,9 @@ h6{ font-size: 20px; }
 }
 
 #posts .post .meta a{
+	text-decoration: none;
+}
+#posts .post .meta2 a{
 	text-decoration: none;
 }
 
@@ -2013,6 +2029,17 @@ overflow: auto;
 	float:left;
 }
 .minifoto{
+	float:right;
+	max-height: 70px; 
+	max-width: 50px;
+	overflow: hidden; 
+	margin-top:5px; 
+	margin-right:5px;	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.minifotoreco{
 	float:right;
 	max-height: 70px; 
 	max-width: 50px;
