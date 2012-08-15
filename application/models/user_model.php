@@ -1461,7 +1461,122 @@ class User_model extends CI_Model{
 		}
 	}
 	
+	function search_recommendations_count(){
+		$id_user = $this->session->userdata('id');
+		$this->db->where('id_friend',$id_user);
+		$query = $this->db->get('recommendation');	
+		return $query->num_rows;
+	}
+
+	function search_new_recommendations_count(){
+		$id_user = $this->session->userdata('id');
+		$this->db->where('id_friend',$id_user);
+		$this->db->where('new',1);
+		$query = $this->db->get('recommendation');	
+		return $query->num_rows;
+	}
 	
+	function search_recommendations(){
+		$results = array();
+		$indice = 0;
+		$id_user = $this->session->userdata('id');
+		$this->db->where('id_friend',$id_user);
+		$query = $this->db->get('recommendation');
+		foreach($query->result() as $row){
+			$id_friend = $row->id_user;
+			$id_movie = $row->id_movie;
+			$message = $row->message;
+			$new = $row->new;
+			$created_on = $row->created_on;
+			$id = $row->id;
+			if($new==1){
+			//	$new_data = array ('new' => 0);
+			//	$this->db->where('id', $id);
+			//	$this->db->update('recommendation', $new_data);	
+			}
+			$this->db->where('id',$id_friend);
+			$q = $this->db->get('user');
+			foreach($q->result() as $r){
+				$username = $r->username;
+				$photo = $r->photo;			
+			}
+			$this->db->where('id',$id_movie);
+			$q = $this->db->get('movie');
+			foreach($q->result() as $r){
+				$title = $r->title;
+				$thumbnail = $r->thumbnail;			
+			}
+			$results[$indice] = array('created_on' => $created_on, 'id_friend' => $id_friend,'id_movie' => $id_movie,'message' => $message,'new' => $new,'id' => $id,'username' => $username,'photo' => $photo,'title' => $title, 'thumbnail' => $thumbnail);
+			$indice++;
+		}
+		return $results;
+	}
+	
+	function delete_reco($id){
+		$this->db->where('id',$id);
+		$this->db->delete('recommendation'); 
+	}
+	
+	function like_reco($id_friend){
+		//actualizo el rank de usuario
+		$this->db->where('id',$id_friend);
+		$query = $this->db->get('user');
+		foreach($query->result() as $row){
+			$likes = $row->likes;
+		}
+		$new_data = array (
+			'likes' => $likes +1
+		);
+		$this->db->where('id', $id_friend);
+		$this->db->update('user', $new_data);
+		
+		//actualizo el acuerdo de la amistad
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$this->db->where('id_friend',$id_friend);
+		$query = $this->db->get('friendship');
+		foreach($query->result() as $row){
+			$agreement = $row->agreement;
+		}
+		if($agreement<10){
+			$new_data = array (
+				'agreement' => $agreement +1
+				);
+			$this->db->where('id_user',$this->session->userdata('id'));
+			$this->db->where('id_friend',$id_friend);
+			$this->db->update('friendship', $new_data);
+		}
+
+	}
+		
+	function dislike_reco($id_friend){
+		//actualizo el rank de usuario
+		$this->db->where('id',$id_friend);
+		$query = $this->db->get('user');
+		foreach($query->result() as $row){
+			$dislikes = $row->dislikes;
+		}
+		$new_data = array (
+			'dislikes' => $dislikes +1
+		);
+		$this->db->where('id', $id_friend);
+		$this->db->update('user', $new_data);
+		
+		//actualizo el acuerdo de la amistad
+		$this->db->where('id_user',$this->session->userdata('id'));
+		$this->db->where('id_friend',$id_friend);
+		$query = $this->db->get('friendship');
+		foreach($query->result() as $row){
+			$agreement = $row->agreement;
+		}
+		if($agreement>1){
+			$new_data = array (
+				'agreement' => $agreement -1
+				);
+			$this->db->where('id_user',$this->session->userdata('id'));
+			$this->db->where('id_friend',$id_friend);
+			$this->db->update('friendship', $new_data);
+		}
+	}
 
 }
 

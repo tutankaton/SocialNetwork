@@ -133,29 +133,21 @@
 					</ul>
 				</div>
 				<!-- ENDS Social -->
-				
 				<!-- Navigation -->
-				<ul id="nav" class="sf-menu">
-					<li class="current-menu-item"><a href="/socialNetwork/">HOME</a></li>
-					<li><a href="gallery.html">GALLERY</a>
-						<ul>
-							<li><a href="gallery.html"><span> Four columns </span></a></li>
-							<li><a href="gallery-3.html"><span> Three columns </span></a></li>
-							<li><a href="gallery-2.html"><span> Two columns </span></a></li>
-							<li><a href="video-gallery.html"><span> Video gallery </span></a></li>
-						</ul>
-					</li>					
 					<?php 
-						$this->load->model('User_model');
-						if(get_cookie('cinefilos') && !$this->User_model->is_logged_in()){
-							$this->User_model->get_sess_from_cookie();
-						}
-						if($this->User_model->is_logged_in()){
-							if(!$this->User_model->check_user_level()){
-								redirect('verify');
-							}else{
+					$this->load->model('User_model');
+					if(get_cookie('cinefilos') && !$this->User_model->is_logged_in()){
+						$this->User_model->get_sess_from_cookie();
+					}
+					if($this->User_model->is_logged_in()){
+						if(!$this->User_model->check_user_level()){
+							redirect('verify');
+						}else{						
+								echo '<ul id="nav" class="sf-menu">';
+								echo '<li class="current-menu-item"><a href="/socialNetwork/">HOME</a></li>';
 								echo '<li><a href="/socialNetwork/index.php/user/friends">MY FRIENDS</a></li>';
 								echo '<li><a href="/socialNetwork/index.php/user/account">MY ACCOUNT</a></li>';
+								echo '<li><a href="/socialNetwork/index.php/user/recommendations">RECOMMENDATIONS'.nbs(3).'<li class="current-menu-item" style="left:-20px;">('.$this->User_model->search_new_recommendations_count().')</a></li></li>';
 								}
 						}
 						  ?>
@@ -164,14 +156,17 @@
 				
 				
 				<!-- search movies-->
-				<div class="top-search">
+				<?php if($this->User_model->is_logged_in()){
+				echo '<div class="top-search">
 					<form  method="get" id="searchform" action="/socialNetwork/index.php/movie/search_movies">
 						<div>
 							<input type="text" value="Search movies..." name="s" id="s" onfocus="defaultInputm(this)" onblur="clearInputm(this)" />
 							<input type="submit" id="searchsubmit" value=" " />
 						</div>
 					</form>
-				</div>
+				</div>';
+				}
+				?>
 				<!-- ENDS search movies-->
 				<!-- search friends-->
 				<?php 
@@ -197,7 +192,7 @@
 				
 			<!-- headline -->
 						<?php if(!$this->User_model->is_logged_in()){
-							echo '<div id="headline" style="margin-top:30px;">
+							echo '<div id="headline" style="margin-top:-20px;">
 								Cinephile Comunity is a social network where you can connect with people who share your same taste in films...     <a href="/socialNetwork/index.php/user/registration">  Join us!</a>
 							</div>';
 						}?>
@@ -213,14 +208,14 @@
 						if($this->User_model->is_logged_in()){
 							$list = $this->Movie_model->recomends_movies_general($this->session->userdata('id')); 
 							$i = 0;
-							while ($i<5){
+							while (($i<5)&&(count($list)>$i)){
 								echo '<a href="/socialNetwork/index.php/movie/view/'.$list[$i]['id'].'"><img src="'.$list[$i]['image'].'" height="400px" title="'.$list[$i]['title'].'<br /><br />'.$list[$i]['sinopsis'].'" alt="" /></a>';
 								$i++;
 							}
 						}else{
 							$list = $this->Movie_model->recomends_movies_general(NULL); 
 							$i = 0;
-							while ($i<5){
+							while (($i<5)&&(count($list)>$i)){
 								echo '<a href="/socialNetwork/index.php/movie/view/'.$list[$i]['id'].'"><img src="'.$list[$i]['image'].'" height="400px" title="'.$list[$i]['title'].'<br /><br />'.$list[$i]['sinopsis'].'" alt="" /></a>';
 								$i++;
 							}

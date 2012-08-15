@@ -519,6 +519,62 @@ class User extends CI_Controller {
 		$data['main_content'] = 'user/recommend';
 		$this->load->view('includes/template',$data);
     }
+
+	function recommendations()
+    {
+    	$this->load->model('Movie_model');		
+		//paginado
+        $config = array();
+        $config["base_url"] = base_url() . "/index.php/user/recommendations";
+        $config["total_rows"] = $this->User_model->search_recommendations_count();
+		$config['use_page_numbers'] = FALSE;
+        $config["per_page"] = 3;
+        $config["uri_segment"] = 3;
+		$config['full_tag_open'] = '<ul class="pager">';
+		$config['full_tag_close'] = '</ul>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last Link';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = '&raquo;';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = '&laquo;';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '<a></li>';
+        $this->pagination->initialize($config);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+ 		$data["results"] = $this->User_model->search_recommendations($config["per_page"], $page);
+        $data["links"] = $this->pagination->create_links();
+
+		$data['title'] = 'Recommendations';
+		$data['discription'] = '';
+		$data['keyword'] = '';
+		$data['main_content'] = 'user/recommendations';
+		$this->load->view('includes/template',$data);
+    }
+
+	function ignore_reco($id){
+		$this->User_model->delete_reco($id);
+		$this->recommendations();
+	}	
+	
+	function like_reco($id, $id_movie, $id_friend){
+		$this->User_model->delete_reco($id);
+		$this->User_model->like_reco($id_friend);
+		$this->already_saw($id_movie);
+	}	
+		
+	function dislike_reco($id, $id_movie, $id_friend){
+		$this->User_model->delete_reco($id);
+		$this->User_model->dislike_reco($id_friend);
+		$this->already_saw($id_movie);
+	}	
 	
 }
 

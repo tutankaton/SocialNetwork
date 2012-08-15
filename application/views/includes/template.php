@@ -137,14 +137,6 @@
 				<!-- Navigation -->
 				<ul id="nav" class="sf-menu">
 					<li class="current-menu-item"><a href="/socialNetwork/">HOME</a></li>
-					<li><a href="gallery.html">GALLERY</a>
-						<ul>
-							<li><a href="gallery.html"><span> Four columns </span></a></li>
-							<li><a href="gallery-3.html"><span> Three columns </span></a></li>
-							<li><a href="gallery-2.html"><span> Two columns </span></a></li>
-							<li><a href="video-gallery.html"><span> Video gallery </span></a></li>
-						</ul>
-					</li>
 					<?php 
 						$this->load->model('User_model');
 						if(get_cookie('cinefilos') && !$this->User_model->is_logged_in()){
@@ -156,6 +148,7 @@
 							}else{
 								echo '<li><a href="/socialNetwork/index.php/user/friends">MY FRIENDS</a></li>';
 								echo '<li><a href="/socialNetwork/index.php/user/account">MY ACCOUNT</a></li>';
+								echo '<li><a href="/socialNetwork/index.php/user/recommendations">RECOMMENDATIONS'.nbs(3).'<li class="current-menu-item" style="left:-20px;">('.$this->User_model->search_new_recommendations_count().')</a></li></li>';
 								}
 						}
 						  ?>
