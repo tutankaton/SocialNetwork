@@ -1,4 +1,3 @@
-<h1>Lasted reviews:</h1>
 <?php $califications = $this->User_model->get_last_califications_recomendations($this->session->userdata('id'));
 //por cada columna
 for ($i=0; $i < 3; $i++) { 
@@ -11,19 +10,19 @@ for ($i=0; $i < 3; $i++) {
 						echo '<div class="post">
 								
 								<div style="float:right; width: 87px;">
-								<a href="/socialNetwork/index.php/movie/view/'.$califications[$indice]['id_movie'].'" style="cursor:pointer;"><img class="minifotomovie" id='.$califications[$indice]['id_movie'].' src="'.$califications[$indice]['thumbnail'].'"></img></a>
-									<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="1" disabled="disabled"/>
+								<a href="/socialNetwork/index.php/movie/view/'.$califications[$indice]['id_movie'].'" style="cursor:pointer;"><img class="minifotomovie" id='.$califications[$indice]['id_movie'].' src="'.$califications[$indice]['thumbnail'].'"></img></a>';
+									/*echo '<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="1" disabled="disabled"/>
 									<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="2" disabled="disabled"/>
 									<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="3" disabled="disabled"/>
 									<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="4" disabled="disabled"/>
-									<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="5" disabled="disabled"/></br>
-								</div>
-								<ul class="meta" style="padding: 5px;min-height: 145px;">';
-									if($califications[$indice]['calification']>0)
-										echo '<script>$("[name=star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'][value='.$califications[$indice]['calification'].']").attr("checked","checked");</script>';
-							echo '<img class="minifoto" id='.$califications[$indice]['id_friend'].' style="margin-top: -3px; float:left" src="'.$califications[$indice]['photo'].'"></img>';
+									<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="5" disabled="disabled"/></br>';*/
+								echo '</div>
+								<ul class="meta" style="padding: 5px;min-height: 85px;">';
+									//if($califications[$indice]['calification']>0)
+									//	echo '<script>$("[name=star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'][value='.$califications[$indice]['calification'].']").attr("checked","checked");</script>';
+							echo '<img class="minifotoindex" id='.$califications[$indice]['id_friend'].' style="margin-top: -3px; float:left" src="'.$califications[$indice]['photo'].'"></img>';
 							echo '<li> <strong><a style="font-weight:bold; color:#666666;" href="/socialNetwork/index.php/user/profile/'.$califications[$indice]['id_friend'].'">'.$califications[$indice]['username'].'</a> said: </strong></li>	
-								  <li> '.$califications[$indice]['critica'].'</li>
+								  <li style="font-size:12px;"> '.$califications[$indice]['critica'].'</li>
 							  </ul>
 						  </div>';
 					}
@@ -33,10 +32,10 @@ for ($i=0; $i < 3; $i++) {
 								<div style="float:right; width: 87px;">
 									<a href="/socialNetwork/index.php/movie/view/'.$califications[$indice]['id_movie'].'" style="cursor:pointer;"><img class="minifotomovie" id='.$califications[$indice]['id_movie'].' src="'.$califications[$indice]['thumbnail'].'"></img></a>
 								</div>
-								<ul class="meta2" style="padding: 5px;min-height: 145px;">';
+								<ul class="meta2" style="padding: 5px;min-height: 85px;">';
 							echo '<img class="minifotoreco" id='.$califications[$indice]['from'].' style="margin-top: -3px; float:left" src="'.$califications[$indice]['photo'].'"></img>';
 							echo '<li> <strong><a style="font-weight:bold; color:#666666;" href="/socialNetwork/index.php/user/profile/'.$califications[$indice]['id_from'].'">'.$califications[$indice]['from'].'</a></strong> said to <a style="font-weight:bold; color:#888888;" href="/socialNetwork/index.php/user/profile/'.$califications[$indice]['id_to'].'">'.$califications[$indice]['to'].'</a>:</li>	
-								  <li> '.$califications[$indice]['msg'].'</li>
+								  <li style="font-size:12px;"> '.$califications[$indice]['msg'].'</li>
 							  </ul>
 						  </div>';
 					}

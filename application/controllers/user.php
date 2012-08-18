@@ -528,7 +528,7 @@ class User extends CI_Controller {
         $config["base_url"] = base_url() . "/index.php/user/recommendations";
         $config["total_rows"] = $this->User_model->search_recommendations_count();
 		$config['use_page_numbers'] = FALSE;
-        $config["per_page"] = 3;
+        $config["per_page"] = 5;
         $config["uri_segment"] = 3;
 		$config['full_tag_open'] = '<ul class="pager">';
 		$config['full_tag_close'] = '</ul>';

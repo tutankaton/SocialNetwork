@@ -1,4 +1,3 @@
-<h1>Lasted reviews:</h1>
 <?php $califications = $this->User_model->get_last_califications(NULL);
 //por cada columna
 for ($i=0; $i < 3; $i++) { 
@@ -12,13 +11,13 @@ for ($i=0; $i < 3; $i++) {
 							<div style="float:right; width: 87px;">
 							<a href="/socialNetwork/index.php/movie/view/'.$califications[$indice]['id_movie'].'" title="'.$califications[$indice]['title'].'" style="cursor:pointer;">
 								<img class="minifotomovie" src="'.$califications[$indice]['thumbnail'].'"></img>
-							</a>
-								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="1" disabled="disabled"/>
+							</a>';
+								echo '<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="1" disabled="disabled"/>
 								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="2" disabled="disabled"/>
 								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="3" disabled="disabled"/>
 								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="4" disabled="disabled"/>
-								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="5" disabled="disabled"/></br>
-							</div>
+								<input class="star" type="radio" name="star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'" value="5" disabled="disabled"/></br>';
+							echo '</div>
 							<ul class="meta" style="padding: 5px;min-height: 145px;">';
 								if($califications[$indice]['calification']>0)
 									echo '<script>$("[name=star'.$califications[$indice]['id_friend'].$califications[$indice]['id_movie'].'][value='.$califications[$indice]['calification'].']").attr("checked","checked");</script>';

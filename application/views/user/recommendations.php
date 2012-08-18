@@ -3,7 +3,12 @@
 <?php 
 	if(count($results)>0){
 		foreach ($results as $result):
-			echo '<div class="line-divider" style="padding-left:10px;padding-top: 7px; min-height: 75px;">
+			echo '<div ';
+			if($result['new']==1)
+				echo 'class="line-divider nueva" ';
+			else 
+				echo 'class="line-divider" ';
+			echo 'style="padding-left:10px;padding-top: 7px; min-height: 75px;">
 				<a href="/socialNetwork/index.php/movie/view/'.$result['id_movie'].'" style="cursor:pointer;"><img class="microfotomoviereco" id='.$result['id_movie'].' src="'.$result['thumbnail'].'"></img></a>
 				<b><a style="text-decoration:none;" href="/socialNetwork/index.php/user/profile/'.$result["id_friend"].'">'.$result["username"].'</a></b> recommend you <b><a style="text-decoration:none;" href="/socialNetwork/index.php/movie/view/'.$result["id_movie"].'">'.$result["title"].'</a></b>
 				<div  class="message_reco"><i><hr><span>'.$result["message"].'</span></i></div>

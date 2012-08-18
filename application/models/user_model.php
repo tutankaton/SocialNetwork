@@ -370,12 +370,14 @@ class User_model extends CI_Model{
 				$from = $row->from;
 				$language = $row->language;
 				$relationship_status = $row->relationship_status;
+				$likes = $row->likes;
+				$dislikes = $row->likes;
 			}
 		}else{
 			redirect('user');
 		}
 		return array ('id' => $id, 'username' => $username,'sex' => $sex,'month' => $month,'day' =>  $day,'year' =>  $year,'created_on' =>  $created_on,'last_active' =>  $last_active,	'photo' => $photo,'ocupation' => $ocupation,
-					'about' => $about,'from' => $from,'language' => $language,'relationship_status' => $relationship_status);
+					'about' => $about,'from' => $from,'language' => $language,'relationship_status' => $relationship_status, 'likes'=> $likes, 'dislikes' => $dislikes);
 	}
 	
 	function movies_to_view($id_profile){
@@ -777,12 +779,13 @@ class User_model extends CI_Model{
 	}
 
 	function update_online_status(){
-		$cookie = get_cookie('cinefilos');
-		$value = unserialize($cookie);
-		$id = $value['id'];
+		$id = $this->session->userdata('id');
 		$this->load->helper('date');
+		$datestring = "%Y-%m-%d %h:%i:%a";
+		$time = time();
+		
 		$data = array(
-					'last_active' => now()
+					'last_active' => mdate($datestring, $time)
 					);
 		$this->db->where('id', $id)->update('user', $data);
 	}
@@ -1476,11 +1479,14 @@ class User_model extends CI_Model{
 		return $query->num_rows;
 	}
 	
-	function search_recommendations(){
+	function search_recommendations($limit, $start){
+		$this->db->limit($limit, $start);
 		$results = array();
 		$indice = 0;
 		$id_user = $this->session->userdata('id');
 		$this->db->where('id_friend',$id_user);
+		$this->db->order_by("new", "desc"); 
+		$this->db->order_by("created_on", "desc"); 
 		$query = $this->db->get('recommendation');
 		foreach($query->result() as $row){
 			$id_friend = $row->id_user;
@@ -1490,9 +1496,9 @@ class User_model extends CI_Model{
 			$created_on = $row->created_on;
 			$id = $row->id;
 			if($new==1){
-			//	$new_data = array ('new' => 0);
-			//	$this->db->where('id', $id);
-			//	$this->db->update('recommendation', $new_data);	
+				$new_data = array ('new' => 0);
+				$this->db->where('id', $id);
+				$this->db->update('recommendation', $new_data);	
 			}
 			$this->db->where('id',$id_friend);
 			$q = $this->db->get('user');
@@ -1506,9 +1512,11 @@ class User_model extends CI_Model{
 				$title = $r->title;
 				$thumbnail = $r->thumbnail;			
 			}
-			$results[$indice] = array('created_on' => $created_on, 'id_friend' => $id_friend,'id_movie' => $id_movie,'message' => $message,'new' => $new,'id' => $id,'username' => $username,'photo' => $photo,'title' => $title, 'thumbnail' => $thumbnail);
+			$results[$indice] = array('new' => $new,'created_on' => $created_on, 'id_friend' => $id_friend,'id_movie' => $id_movie,'message' => $message,'id' => $id,'username' => $username,'photo' => $photo,'title' => $title, 'thumbnail' => $thumbnail);
 			$indice++;
 		}
+		//primero las nuevas
+		array_multisort($results, SORT_DESC);
 		return $results;
 	}
 	

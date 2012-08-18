@@ -25,8 +25,9 @@ if($this->User_model->is_logged_in()){
 					<div style="float:left; padding-top:15px; padding-left:-5px;"><a style="text-decoration:none;display:inline;" href="/socialNetwork/index.php/user/edit_profile" title="Edit Profile"><img width="15px" src="/socialNetwork/img/mono-icons/pencil32.png"></img><span style="display:inline;">edit profile</span></a></div>
 			</div>
 			<div style="float:right;padding-right:20px;padding-top:0px;display:inline; ">
-				<img width="20px" src="/socialNetwork/img/mono-icons/clock32.png"></img>
-				<span style="display:inline;"> last active: <span style="color:#666666;"><?php echo $info['last_active']; ?>
+				<span class="rank">Rank: <span style="color:#00FF00;"><?php echo $info['likes']; ?></span>/<span style="color:#FF0000;"><?php echo $info['dislikes']; ?></span></span>
+				<img  width="20px" src="/socialNetwork/img/mono-icons/clock32.png"></img>
+				<span> last active: <span style="color:#666666;"><?php echo $info['last_active']; ?>
 					
 				</span></span>
 				<span style="display:block;"><img width="20px" src="/socialNetwork/img/mono-icons/smile32.png"></img> in the community since: <span style="color:#666666;"><?php echo $info['created_on']; ?>

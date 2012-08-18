@@ -23,9 +23,14 @@
 		<?php if($info['about']!=null) echo '<span style="display:block;">about me: <span style="color:#666666;">'.$info['about'].'</span></span>';?>
 	</div>
 	<div style="float:right;padding-right:20px;padding-top:0px;display:inline; ">
-		<img width="20px" src="/socialNetwork/img/mono-icons/clock32.png"></img>
-		<span style="display:inline;"> last active: <span style="color:#666666;"><?php echo $info['last_active']; ?></span></span>
-		<span style="display:block;"><img width="20px" src="/socialNetwork/img/mono-icons/smile32.png"></img> in the community since: <span style="color:#666666;"><?php echo $info['created_on']; ?></span></span>
+		<span class="rank">Rank: <span style="color:#00FF00;"><?php echo $info['likes']; ?></span>/<span style="color:#FF0000;"><?php echo $info['dislikes']; ?></span></span>
+		<img  width="20px" src="/socialNetwork/img/mono-icons/clock32.png"></img>
+		<span> last active: <span style="color:#666666;"><?php echo $info['last_active']; ?>
+			
+		</span></span>
+		<span style="display:block;"><img width="20px" src="/socialNetwork/img/mono-icons/smile32.png"></img> in the community since: <span style="color:#666666;"><?php echo $info['created_on']; ?>
+			
+		</span></span>
 
 	</div>
 		<?php if($this->User_model->is_friend($info['id'])){

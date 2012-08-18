@@ -97,7 +97,13 @@ body {
 	padding-bottom: 20px;
 }
 #content .line-divider:hover{
-	background-color:#EEEEEE;
+	background-color:#F4F6F9;
+}
+.nueva{
+	background-color:#ECEEF4;
+}
+.nueva:hover{
+	background-color:#ECEEF4!important;
 }
 
 /* breadcrumbs --------------------------------------------------------*/
@@ -789,8 +795,8 @@ h6{ font-size: 20px; }
 
 #posts .post{
 	position: relative;
-	margin-left: 30px;
-	margin-bottom: 30px;
+	margin-left: 5px;
+	margin-bottom: 5px;
 }
 
 #comments-block{
@@ -2071,10 +2077,21 @@ overflow: auto;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
+.minifotoindex{
+	float:right;
+	max-height: 60px; 
+	max-width: 40px;
+	overflow: hidden; 
+	margin-top:5px; 
+	margin-right:5px;	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
 .minifotoreco{
 	float:right;
-	max-height: 70px; 
-	max-width: 50px;
+	max-height: 60px; 
+	max-width: 40px;
 	overflow: hidden; 
 	margin-top:5px; 
 	margin-right:5px;	
@@ -2083,7 +2100,7 @@ overflow: auto;
 	-webkit-border-radius: 5px;
 }
 .columna{
-	width:32%;
+	width:33%;
 	float:left;
 }
 .cast_director{
@@ -2095,8 +2112,8 @@ overflow: auto;
 .minifotomovie{
 	margin-bottom:2px;
 	float:right;
-	max-height: 120px; 
-	max-width: 80px;
+	max-height: 90px; 
+	max-width: 60px;
 	overflow: hidden; 
 	margin-top:5px; 
 	margin-right:5px;	
@@ -2215,4 +2232,13 @@ font: bold;
 .message_reco{
 	width:50%;
 	margin-left:8%;
+}
+.rank{
+	margin-left:20%;
+	margin-bottom:20px;
+	color: #444444;
+	display:block;
+	font-size: 28px;
+	font: bold;
+	font-weight: 900;
 }

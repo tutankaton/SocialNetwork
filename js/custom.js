@@ -2,7 +2,7 @@
 jQuery(document).ready(function($) {
 
 	//info de amigo
-	$('.minifoto').hover(function(eventObject){
+	$('.minifotoindex').hover(function(eventObject){
 		$('#blobmovie').attr('style', 'top:0px; left:0px;display:none;');
 		var friend = this.id;
 	    $.ajax({
@@ -28,7 +28,7 @@ jQuery(document).ready(function($) {
                    for (var i=0; i < data.por_ver.length; i++) {
                    		$('#blob .to_view').append('<img class="microfotomovie" src="'+data.por_ver[i].thumbnail+'" title="'+data.por_ver[i].title+'"></img>');
                    };                   
-                   $('#blob').attr('style', 'top:'+eventObject.fromElement.offsetParent.offsetTop+'px; left:'+(eventObject.fromElement.offsetParent.offsetLeft+50)+'px;display:block;');
+                   $('#blob').attr('style', 'top:'+(eventObject.fromElement.offsetParent.offsetTop+4)+'px; left:'+(eventObject.fromElement.offsetParent.offsetLeft+40)+'px;display:block;');
                }
         });
 
@@ -69,7 +69,7 @@ jQuery(document).ready(function($) {
                     for (var i=0; i < data.directores.length; i++) {
                     		$('#blobmovie .director').append('<span>'+data.directores[i].name+' </span>');
                     };                
-					$('#blobmovie').attr('style', 'top:'+eventObject.fromElement.offsetParent.offsetTop+'px; left:'+(eventObject.fromElement.offsetParent.offsetLeft+270)+'px;display:block;width:290px;');
+					$('#blobmovie').attr('style', 'top:'+(eventObject.fromElement.offsetParent.offsetTop+4)+'px; left:'+(eventObject.fromElement.offsetParent.offsetLeft-5)+'px;display:block;width:290px;');
 	           }
 	    });		
                //eventObject.fromElement.offsetParent.offsetLeft
