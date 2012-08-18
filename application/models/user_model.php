@@ -389,7 +389,7 @@ class User_model extends CI_Model{
 				$this->db->where('id',$row->id_movie);
 				$q = $this->db->get('movie');
 				foreach($q->result() as $row){
-					$list[$i] = array('id' => $row->id, 'title' => $row->title, 'year' => $row->year, 'thumbnail' => $row->thumbnail, 'calification' => $row->calification);
+					$list[$i] = array('id' => $row->id, 'title' => $row->title, 'year' => $row->year, 'thumbnail' => $row->thumbnail, 'calification' => $row->calification, 'id_genre' => $row->id_genre, 'sinopsis' => $row->sinopsis);
 				}
 				$i++;
 				if($i>4)
@@ -1110,7 +1110,8 @@ class User_model extends CI_Model{
 			$photo[$key] = $row['photo'];
 			$created_on[$key] = $row['created_on'];
 		}
-		array_multisort($agreement, SORT_DESC,$califications);
+		if(count($califications)>0)
+			array_multisort($agreement, SORT_DESC,$califications);
 		return $califications;
 	}
 

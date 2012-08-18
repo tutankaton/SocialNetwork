@@ -2242,3 +2242,10 @@ font: bold;
 	font: bold;
 	font-weight: 900;
 }
+.recommend-index{
+	padding-top:10px;
+	padding-left:15px;
+	float:left;
+	width:65%;
+	height:400px; 
+}

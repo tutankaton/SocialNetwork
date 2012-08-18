@@ -1,9 +1,10 @@
-<?php $califications = $this->User_model->get_last_califications_recomendations($this->session->userdata('id'));
-//por cada columna
-for ($i=0; $i < 3; $i++) { 
-	$indice = $i;
-	echo '<div class="columna">';
-	while ($indice < count($califications)) {
+<?php 
+$califications = $this->User_model->get_last_califications_recomendations($this->session->userdata('id'));
+$recommendations = $this->User_model->recomends_movies_to_view();
+$to_view = $this->User_model->movies_to_view($this->session->userdata('id'));
+	$indice = 0;
+	echo '<div class="columna" style="background:#333333;float:right; padding-top:5px; padding-right:3px;">';
+	while (($indice < count($califications))&&($indice < 8) ) {
 		echo '<div class:"review">
 				<div id="posts" class="single" style="float:left;">';
 					if($califications[$indice]['type']=='crit'){
@@ -41,10 +42,66 @@ for ($i=0; $i < 3; $i++) {
 					}
 				  echo '</div>
 			  </div>';
-		$indice = $indice + 3;
+		$indice++;
 	}
 	echo '</div>';
-}?>
+	$indice = 0;
+	if(count($recommendations)>0){
+		echo'<div class="recommend-index">
+		<h3>Cinephile Community recommend you:</h3></br>
+		<div class="photo sample66" style="float:left; height:300px; width:214px">
+			<a href="/socialNetwork/index.php/movie/view/'.$recommendations[$indice]['id'].'"><img width="214px"  height="317px"  src="'.$recommendations[0]['thumbnail'].'"></img></a>
+		</div>
+		<div style="float:left; height:300px; width:330px;  style="font-size: 14px;"">
+		<h3 style="color:#333333; display:inline; font-size: 16px;">'.$recommendations[$indice]['title'].' ('.$recommendations[$indice]['year'].')</h3>	</br></br>
+		'.$recommendations[$indice]['sinopsis'].'
+			</br></br><strong>Genre: </strong> 
+			<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_genre/'.$recommendations[$indice]['id_genre'].'">'.$this->Movie_model->get_genre_name($recommendations[$indice]['id_genre']).'</a> 
+			<br/><br/>
+			<strong>Cast: </strong>';
+			$cast =  $this->Movie_model->get_cast($recommendations[$indice]['id']);
+				foreach ($cast as $actor) {
+					echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_actor/'.$actor['id_actor'].'">'.$actor['name'].'</a>, ';
+				}
+			echo '<br/><br/>
+			<strong>Director: </strong>';
+			$directors =  $this->Movie_model->get_directors($recommendations[$indice]['id']);
+			foreach ($directors as $director) {
+				echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_director/'.$director['id_director'].'">'.$director['name'].'</a> ';
+			}
+		echo '</div>
+		</div>';
+	}
+	if(count($to_view)>0){
+		if($recommendations[$indice]['id']==$to_view[$indice]['id'])
+		$indice++;
+		echo'<div class="recommend-index">
+			<h3>The next movie you want to see:</h3></br>
+			<div class="photo sample66" style="float:left; height:300px; width:214px">
+				<a href="/socialNetwork/index.php/movie/view/'.$to_view[$indice]['id'].'"><img width="214px"  height="317px"  src="'.$to_view[$indice]['thumbnail'].'"></img></a>
+			</div>
+			<div style="float:left; height:300px; width:330px;  style="font-size: 14px;"">
+			<h3 style="color:#333333; display:inline; font-size: 16px;">'.$to_view[$indice]['title'].' ('.$to_view[$indice]['year'].')</h3>	</br></br>
+			'.$to_view[$indice]['sinopsis'].'
+				</br></br><strong>Genre: </strong> 
+				<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_genre/'.$to_view[$indice]['id_genre'].'">'.$this->Movie_model->get_genre_name($to_view[$indice]['id_genre']).'</a> 
+				<br/><br/>
+				<strong>Cast: </strong>';
+				$cast =  $this->Movie_model->get_cast($to_view[$indice]['id']);
+					foreach ($cast as $actor) {
+						echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_actor/'.$actor['id_actor'].'">'.$actor['name'].'</a>, ';
+					}
+				echo '<br/><br/>
+				<strong>Director: </strong>';
+				$directors =  $this->Movie_model->get_directors($to_view[$indice]['id']);
+				foreach ($directors as $director) {
+					echo '<a style="text-decoration:none;" href="/socialNetwork/index.php/movie/search_director/'.$director['id_director'].'">'.$director['name'].'</a> ';
+				}
+			echo '</div>
+		</div>';	
+	}
+	
+?>
 <div id="blob" class="blob r" style="display: none;">
 	<b><div class="name"></div></b>
 	<div class="friends"></div>

@@ -1,6 +1,6 @@
 <?php list ($title, $sinopsis, $year, $calification, $image, $thumbnail, $id_genre) = $this->Movie_model->get_movie_info($id);	?>
 <div style="min-height: 400px;margin-left:30px;">
-		<div class="photo sample66" style="float:right; height:300px; padding-right: 50px;">
+	<div class="photo sample66" style="float:right; height:300px; padding-right: 50px;">
 		<span></span><img width="214px"  height="317px"  src="<?php echo $thumbnail?>"></img>
 	</div>
 	<h1 style="color:#333333; display:inline;"><?php echo $title?> (<?php echo $year?>)</h1>	

@@ -561,7 +561,7 @@ class User extends CI_Controller {
 
 	function ignore_reco($id){
 		$this->User_model->delete_reco($id);
-		$this->recommendations();
+		redirect($_SERVER['HTTP_REFERER']);
 	}	
 	
 	function like_reco($id, $id_movie, $id_friend){
