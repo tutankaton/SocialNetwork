@@ -157,7 +157,7 @@ class Movie_model extends CI_Model{
 			}//created_on para valorar las actualmente populares y dar dinámica
 		}// esta calificación no depende de las amistades!
 		//recupero ya vistas si es que el usuario esta logueado
-		
+		$already_view = array();
 		if($id_user!=NULL){
 			$this->db->where('id_user',$id_user);
 			$query = $this->db->get('already_view');

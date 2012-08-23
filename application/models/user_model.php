@@ -397,7 +397,7 @@ class User_model extends CI_Model{
 			}
 		}
 		while ($i<5){
-			$list[$i] = array('id' => '0', 'title' => 'No selected', 'year' => '', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '');
+			$list[$i] = array('id' => '0', 'title' => 'No selected', 'year' => ' - ', 'thumbnail' => '/socialNetwork/img/dummies/nothing.jpg', 'calification' => '', 'id_genre' => -1, 'sinopsis' => 'No movie selected');
 			$i++;
 		}
 		return $list;
@@ -879,6 +879,7 @@ class User_model extends CI_Model{
 				}
 			}
 		}
+		$already_view = array();
 		//recupero ya vistas
 		$this->db->where('id_user',$id_user);
 		$query = $this->db->get('already_view');
@@ -1010,6 +1011,7 @@ class User_model extends CI_Model{
 	function recomends_movies_to_top(){
 		$id_user = $this->session->userdata('id');
 		
+		$recomends_movies_to_top = array ();
 		//recupero ya vistas
 		$this->db->where('id_user',$id_user);
 		$query = $this->db->get('already_view');
@@ -1029,9 +1031,10 @@ class User_model extends CI_Model{
 				$i++;
 			}
 		}
-
-		array_multisort($recomends_movies_to_top, SORT_DESC);
+		if(count($recomends_movies_to_top)>0)
+			array_multisort($recomends_movies_to_top, SORT_DESC);
 		$i = 0;
+		$result = array ();
 		foreach ($recomends_movies_to_top as $reco) {
 			$this->db->where('id',$reco['id_movie']);
 			$query = $this->db->get('movie');
@@ -1269,7 +1272,7 @@ class User_model extends CI_Model{
 			$califications = array();
 			$indice = 0;
 			$cant_criticas = $this->db->count_all('critica_movie');
-			$this->db->limit(7, $cant_criticas - 7);
+			$this->db->limit(10, $cant_criticas - 10);
 			$query = $this->db->get('critica_movie');
 			foreach($query->result() as $row){
 				$critica = $row->critica;

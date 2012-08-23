@@ -131,7 +131,7 @@ jQuery.fn = jQuery.prototype = {
 				match = quickExpr.exec( selector );
 			}
 
-			// verify a match, and that no context was specified for #id
+			// Verify a match, and that no context was specified for #id
 			if ( match && (match[1] || !context) ) {
 
 				// HANDLE: $(html) -> $(array)
@@ -1416,7 +1416,7 @@ jQuery.support = (function() {
 		// Use a regex to work around a WebKit issue. See #5145
 		opacity: /^0.55/.test( a.style.opacity ),
 
-		// verify style float existence
+		// Verify style float existence
 		// (IE uses styleFloat instead of cssFloat)
 		cssFloat: !!a.style.cssFloat,
 

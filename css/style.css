@@ -2121,6 +2121,18 @@ overflow: auto;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
+.minifotomoviesite{
+	margin-bottom:2px;
+	float:right;
+	max-height: 120px; 
+	max-width: 80px;
+	overflow: hidden; 
+	margin-top:5px; 
+	margin-right:5px;	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
 .microfotomovie{
 	margin-bottom:2px;
 	max-height: 90px; 

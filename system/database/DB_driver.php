@@ -259,7 +259,7 @@ class CI_DB_driver {
 			return FALSE;
 		}
 
-		// Verify table prefix and replace if necessary
+		// verify table prefix and replace if necessary
 		if ( ($this->dbprefix != '' AND $this->swap_pre != '') AND ($this->dbprefix != $this->swap_pre) )
 		{
 			$sql = preg_replace("/(\W)".$this->swap_pre."(\S+?)/", "\\1".$this->dbprefix."\\2", $sql);
@@ -1343,7 +1343,7 @@ class CI_DB_driver {
 					$i++;
 				}
 
-				// Verify table prefix and replace if necessary
+				// verify table prefix and replace if necessary
 				if ($this->swap_pre != '' && strncmp($parts[$i], $this->swap_pre, strlen($this->swap_pre)) === 0)
 				{
 					$parts[$i] = preg_replace("/^".$this->swap_pre."(\S+?)/", $this->dbprefix."\\1", $parts[$i]);
@@ -1370,7 +1370,7 @@ class CI_DB_driver {
 		// Is there a table prefix?  If not, no need to insert it
 		if ($this->dbprefix != '')
 		{
-			// Verify table prefix and replace if necessary
+			// verify table prefix and replace if necessary
 			if ($this->swap_pre != '' && strncmp($item, $this->swap_pre, strlen($this->swap_pre)) === 0)
 			{
 				$item = preg_replace("/^".$this->swap_pre."(\S+?)/", $this->dbprefix."\\1", $item);

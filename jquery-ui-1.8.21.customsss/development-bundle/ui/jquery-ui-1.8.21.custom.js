@@ -10082,7 +10082,7 @@ function isArray(a) {
    @return  jQuery object */
 $.fn.datepicker = function(options){
 	
-	/* verify an empty collection wasn't passed - Fixes #6976 */
+	/* Verify an empty collection wasn't passed - Fixes #6976 */
 	if ( !this.length ) {
 		return this;
 	}

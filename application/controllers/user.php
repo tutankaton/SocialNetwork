@@ -267,7 +267,7 @@ class User extends CI_Controller {
 			$from = 'no_replay@cinefilos.com.ar';
 			$name = $this->input->post('first_name').' '.$this->input->post('last_name');
 			$subject = 'Registration Cinéfilos';
-			$message = 'Test a link <a href="http://localhost/socialNetwork/users/account_activation/'.$activationkey.'/">Click here</a>';
+			$message = 'Test a link http://localhost/socialNetwork/index.php/user/account_activation/'.$activationkey;
 			$mail_sent = $this->User_model->email_send($to,$from,$name,$subject,$message);
 			if($mail_sent){
 				$this->User_model->create_member($activationkey);
@@ -284,7 +284,7 @@ class User extends CI_Controller {
 		$data['id'] = $id;
 		$data['name'] = $name;
 		$data['username'] = $username;
-		$data['user_pic'] = $this->User_model->check_user_pic($id);
+		//$data['user_level'] = $this->User_model->check_user_level($id);
 		$data['title'] = 'No Access';
 		$data['discription'] = '';
 		$data['keyword'] = '';

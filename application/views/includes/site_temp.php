@@ -16,11 +16,6 @@
 		<link rel="stylesheet" href="/socialNetwork/css/style.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/socialNetwork/css/social-icons.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="/socialNetwork/jquery-ui-1.8.21.custom/css/ui-lightness/jquery-ui-1.8.21.custom.css">
-		
-		<!--[if IE 8]>
-			<link rel="stylesheet" type="text/css" media="screen" href="/css/ie8-hacks.css" />
-		<![endif]-->
-		<!-- ENDS CSS -->	
 				
 		<!-- GOOGLE FONTS -->
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>		
@@ -36,19 +31,7 @@
 		<script type="text/javascript" src="/socialNetwork/js/custom.js"></script>
 		<script type="text/javascript" src="/socialNetwork/js/jquery.confirm/jquery.confirm.js"></script>
 		<script type="text/javascript" src="/socialNetwork/js/jquery.rating.js"></script>
-		<!--[if IE]>
-			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		
-		<!--[if IE 6]>
-			<script type="text/javascript" src="js/DD_belatedPNG.js"></script>
-			<script>
-	      		/* EXAMPLE */
-	      		//DD_belatedPNG.fix('*');
-	    	</script>
-		<![endif]-->
-		<!-- ENDS JS -->
-		
+
 		<link rel="stylesheet" href="/socialNetwork/css/jquery.rating.css" type="text/css" media="screen" />
 		
 		<!-- Nivo slider -->
@@ -78,10 +61,6 @@
 		<link rel="stylesheet" href="/socialNetwork/js/poshytip-1.0/src/tip-yellowsimple/tip-yellowsimple.css" type="text/css" />
 		<script type="text/javascript" src="/socialNetwork/js/poshytip-1.0/src/jquery.poshytip.min.js"></script>
 		<!-- ENDS poshytip -->
-		
-		<!-- Tweet -->
-		<script src="/socialNetwork/js/tweet/jquery.tweet.js" type="text/javascript"></script> 
-		<!-- ENDS Tweet -->
 		
 		<!-- Fancybox -->
 		<link rel="stylesheet" href="/socialNetwork/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />

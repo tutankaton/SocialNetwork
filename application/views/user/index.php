@@ -73,8 +73,11 @@ $to_view = $this->User_model->movies_to_view($this->session->userdata('id'));
 		</div>';
 	}
 	if(count($to_view)>0){
-		if($recommendations[$indice]['id']==$to_view[$indice]['id'])
-		$indice++;
+		if(count($recommendations)>0){
+			if($recommendations[$indice]['id']==$to_view[$indice]['id'])
+			$indice++;
+		}
+
 		echo'<div class="recommend-index">
 			<h3>The next movie you want to see:</h3></br>
 			<div class="photo sample66" style="float:left; height:300px; width:214px">

@@ -577,7 +577,7 @@ class CI_Upload {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Verify that the filetype is allowed
+	 * verify that the filetype is allowed
 	 *
 	 * @return	bool
 	 */
@@ -637,7 +637,7 @@ class CI_Upload {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Verify that the file is within the allowed size
+	 * verify that the file is within the allowed size
 	 *
 	 * @return	bool
 	 */
@@ -656,7 +656,7 @@ class CI_Upload {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Verify that the image is within the allowed width/height
+	 * verify that the image is within the allowed width/height
 	 *
 	 * @return	bool
 	 */

@@ -125,7 +125,7 @@ class CI_Security {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Verify Cross Site Request Forgery Protection
+	 * verify Cross Site Request Forgery Protection
 	 *
 	 * @return	object
 	 */
